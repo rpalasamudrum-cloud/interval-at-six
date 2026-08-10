@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comic Gyaan — Sunday, 9 August 2026</title>
+<meta name="description" content="The day in Hindi cinema, drawn in panels. Every panel carries its source.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@500;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe6d4;
+  --card:#f7f1e4;
+  --ink:#17130f;
+  --red:#b3321a;
+  --blue:#28486d;
+  --mustard:#e6d5a5;
+  --rule:#17130f;
+  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --letter:'Archivo Narrow','Arial Narrow',Arial,sans-serif;
+  --body:'Spectral',Georgia,'Times New Roman',serif;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+}
+
+.sheet{max-width:1080px;margin:0 auto;padding:28px 20px 64px}
+
+/* ---------- masthead ---------- */
+
+.masthead{border-bottom:4px solid var(--rule);padding-bottom:14px;margin-bottom:6px}
+.masthead h1{
+  font-family:var(--display);
+  font-size:clamp(46px,11vw,104px);
+  line-height:.86;
+  letter-spacing:.01em;
+  margin:0;
+  text-transform:uppercase;
+}
+.masthead h1 .g{color:var(--red)}
+.strap{
+  font-family:var(--letter);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  font-weight:700;
+  margin-top:10px;
+}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+  font-family:var(--letter);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:11px;
+  font-weight:500;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:6px 0;
+  margin:14px 0 26px;
+}
+.dateline span:not(:last-child)::after{content:' /';opacity:.45;margin-left:18px}
+
+/* ---------- the strip ---------- */
+
+.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.panel{border:3px solid var(--ink);background:var(--card);display:flex;flex-direction:column}
+.panel.lead{grid-column:1 / -1}
+
+.art{position:relative;border-bottom:3px solid var(--ink);background:var(--paper)}
+.art svg{display:block;width:100%;height:auto}
+
+.cap{
+  position:absolute;top:0;left:0;
+  background:var(--mustard);
+  border-right:3px solid var(--ink);
+  border-bottom:3px solid var(--ink);
+  font-family:var(--letter);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  padding:7px 12px 6px;
+  max-width:74%;
+}
+.num{
+  position:absolute;top:0;right:0;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--display);
+  font-size:15px;
+  padding:5px 10px 4px;
+  letter-spacing:.06em;
+}
+
+.balloon{
+  position:absolute;left:16px;bottom:34px;
+  max-width:62%;
+  background:#fffdf7;
+  border:3px solid var(--ink);
+  border-radius:16px;
+  padding:11px 14px 10px;
+  font-family:var(--letter);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:14px;
+  line-height:1.28;
+  letter-spacing:.02em;
+}
+.balloon::after{
+  content:'';position:absolute;bottom:-19px;left:34px;
+  width:0;height:0;
+  border-left:12px solid transparent;
+  border-right:12px solid transparent;
+  border-top:19px solid var(--ink);
+}
+.balloon::before{
+  content:'';position:absolute;bottom:-13px;left:38px;z-index:1;
+  width:0;height:0;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-top:14px solid #fffdf7;
+}
+.balloon.right{left:auto;right:16px}
+.balloon.right::after{left:auto;right:34px}
+.balloon.right::before{left:auto;right:38px}
+
+.sfx{
+  position:absolute;
+  font-family:var(--display);
+  color:var(--red);
+  -webkit-text-stroke:2px var(--ink);
+  text-transform:uppercase;
+  line-height:.8;
+  transform:rotate(-7deg);
+  pointer-events:none;
+}
+
+.text{padding:16px 18px 6px}
+.text p{margin:0 0 11px}
+.text .lede{font-size:19px}
+.text .lede::first-letter{
+  font-family:var(--display);
+  font-size:44px;
+  line-height:.8;
+  float:left;
+  margin:5px 8px 0 0;
+  color:var(--red);
+}
+
+.cite{
+  margin-top:auto;
+  border-top:1px solid var(--rule);
+  padding:8px 18px 10px;
+  font-family:var(--letter);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-size:10px;
+  font-weight:500;
+}
+.cite a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.cite a:hover{color:var(--red)}
+.cite .tag{
+  display:inline-block;
+  border:1px solid var(--ink);
+  padding:1px 5px;
+  margin-right:7px;
+  letter-spacing:.1em;
+}
+.cite .tag.projection{background:var(--mustard)}
+
+.quiet .sfx{display:none}
+
+/* ---------- desk notes ---------- */
+
+.desk{
+  margin-top:34px;
+  border:3px solid var(--ink);
+  background:var(--card);
+}
+.desk h2{
+  font-family:var(--display);
+  text-transform:uppercase;
+  font-size:22px;
+  letter-spacing:.04em;
+  margin:0;
+  padding:11px 18px 9px;
+  background:var(--ink);
+  color:var(--paper);
+}
+.desk .inner{padding:16px 18px 18px}
+.desk ul{margin:0;padding-left:20px}
+.desk li{margin-bottom:9px}
+.desk .head{
+  font-family:var(--letter);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-weight:700;
+  font-size:11px;
+  margin:0 0 8px;
+}
+.desk .head + p{margin-top:0}
+
+footer{
+  margin-top:34px;
+  border-top:4px solid var(--rule);
+  padding-top:12px;
+  font-family:var(--letter);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 20px;
+  justify-content:space-between;
+}
+footer a{color:var(--ink)}
+
+@media (max-width:760px){
+  .strip{grid-template-columns:1fr}
+  .balloon{max-width:76%;font-size:13px}
+}
+</style>
+</head>
+<body>
+<!-- Halftone patterns live here once, not inside a panel, so that reordering
+     or dropping a panel can never take the fill out from under the others. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <pattern id="dotsRed" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.8" cy="1.8" r="1.5" fill="#b3321a"></circle>
+    </pattern>
+    <pattern id="dotsBlue" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.8" cy="1.8" r="1.5" fill="#28486d"></circle>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="sheet">
+
+<header class="masthead">
+  <h1>Comic <span class="g">Gyaan</span></h1>
+  <p class="strap">The day in Hindi cinema, drawn in panels</p>
+</header>
+
+<div class="dateline">
+  <span>Edition No. 1</span>
+  <span>Sunday, 9 August 2026</span>
+  <span>Six panels</span>
+  <span>Every panel carries its source</span>
+</div>
+
+<main class="strip">
+
+  <!-- ---------- PANEL 1 ---------- -->
+  <article class="panel lead">
+    <div class="art">
+      <svg viewBox="0 0 900 300" role="img" aria-label="A drawn bow with an arrow on the string, and a lit lamp">
+        <rect x="0" y="0" width="900" height="300" fill="url(#dotsRed)" opacity="0.34"></rect>
+        <path d="M700 34 Q 806 150 700 266" fill="none" stroke="#17130f" stroke-width="9"></path>
+        <path d="M700 34 L 700 266" fill="none" stroke="#17130f" stroke-width="4"></path>
+        <path d="M470 150 L 690 150" stroke="#17130f" stroke-width="7"></path>
+        <path d="M470 150 L 512 132 L 512 168 Z" fill="#17130f"></path>
+        <path d="M700 150 l 26 -16 M700 150 l 26 16" stroke="#17130f" stroke-width="5" fill="none"></path>
+        <g transform="translate(0,-62)">
+          <path d="M262 236 c -46 -34 -22 -74 6 -100 c 10 34 44 40 30 74 z" fill="#b3321a" stroke="#17130f" stroke-width="6"></path>
+          <path d="M198 240 q 70 42 140 0 z" fill="#17130f"></path>
+          <path d="M186 240 h 164" stroke="#17130f" stroke-width="7"></path>
+        </g>
+      </svg>
+      <div class="cap">Panel one &mdash; the epic picks its day</div>
+      <div class="num">01</div>
+      <div class="balloon">Out to the world on 6 November. Home for Diwali on 8 November.</div>
+    </div>
+    <div class="text">
+      <p class="lede">Producer Namit Malhotra has confirmed a split release for <i>Ramayana</i>: international territories on 6 November, India two days later, on Diwali.</p>
+      <p>It reverses the usual order. Ordinarily India goes first and the diaspora waits; here the overseas run opens the film and the home release is timed to land on the festival itself. For a film adapting the Ramayana, that is the whole argument for the date.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> Bollywood Hungama, 8 August 2026 &mdash; <a href="https://www.bollywoodhungama.com/news/bollywood/breaking-ramayanas-unique-release-strategy-revealed-namit-malhotra-confirms-international-release-on-november-6-india-to-witness-the-epic-on-diwali-november-8/">Ramayana&rsquo;s release strategy revealed</a></p>
+  </article>
+
+  <!-- ---------- PANEL 2 ---------- -->
+  <article class="panel">
+    <div class="art">
+      <svg viewBox="0 0 440 300" role="img" aria-label="A rising bar chart beside a torn cinema ticket">
+        <rect x="0" y="0" width="440" height="300" fill="url(#dotsBlue)" opacity="0.3"></rect>
+        <rect x="196" y="212" width="34" height="58" fill="#f7f1e4" stroke="#17130f" stroke-width="5"></rect>
+        <rect x="240" y="178" width="34" height="92" fill="#f7f1e4" stroke="#17130f" stroke-width="5"></rect>
+        <rect x="284" y="130" width="34" height="140" fill="#f7f1e4" stroke="#17130f" stroke-width="5"></rect>
+        <rect x="328" y="70" width="34" height="200" fill="#b3321a" stroke="#17130f" stroke-width="5"></rect>
+        <path d="M180 272 L 386 272" stroke="#17130f" stroke-width="6"></path>
+        <path d="M62 150 h 96 v 74 h -96 z" fill="#f7f1e4" stroke="#17130f" stroke-width="5"></path>
+        <path d="M62 172 h 96 M62 194 h 96" stroke="#17130f" stroke-width="3"></path>
+        <path d="M110 150 v 74" stroke="#17130f" stroke-width="3" stroke-dasharray="7 7"></path>
+      </svg>
+      <div class="cap">Panel two &mdash; a record falls</div>
+      <div class="num">02</div>
+      <div class="sfx" style="left:22px;top:52px;font-size:52px">400 CR</div>
+    </div>
+    <div class="text">
+      <p><i>Spider-Man: Brand New Day</i> has crossed &#8377;400 crore in India and become the highest-grossing Hollywood release the country has had, passing the lifetime net of <i>Avatar: The Way of Water</i>.</p>
+      <p>It opened here on 30 July, a day ahead of the global date &mdash; and by the close of week one the India gross was being reported at roughly &#8377;462 crore. Box-office numbers move; read that one as of the date on this edition.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> Deccan Herald &mdash; <a href="https://www.deccanherald.com/entertainment/spider-man-brand-new-day-turns-highest-hollywood-grossing-film-in-india-crosses-rs-400-crore-4104814">Highest Hollywood grosser in India</a></p>
+  </article>
+
+  <!-- ---------- PANEL 3 ---------- -->
+  <article class="panel">
+    <div class="art">
+      <svg viewBox="0 0 440 300" role="img" aria-label="A calendar page with the fourteenth ringed">
+        <rect x="0" y="0" width="440" height="300" fill="url(#dotsRed)" opacity="0.24"></rect>
+        <rect x="88" y="52" width="264" height="204" fill="#f7f1e4" stroke="#17130f" stroke-width="6"></rect>
+        <rect x="88" y="52" width="264" height="40" fill="#17130f"></rect>
+        <circle cx="150" cy="52" r="11" fill="none" stroke="#17130f" stroke-width="6"></circle>
+        <circle cx="290" cy="52" r="11" fill="none" stroke="#17130f" stroke-width="6"></circle>
+        <g fill="#17130f">
+          <rect x="112" y="112" width="22" height="8"></rect><rect x="156" y="112" width="22" height="8"></rect>
+          <rect x="200" y="112" width="22" height="8"></rect><rect x="244" y="112" width="22" height="8"></rect>
+          <rect x="288" y="112" width="22" height="8"></rect>
+          <rect x="112" y="150" width="22" height="8"></rect><rect x="156" y="150" width="22" height="8"></rect>
+          <rect x="200" y="150" width="22" height="8"></rect>
+          <rect x="288" y="150" width="22" height="8"></rect>
+          <rect x="112" y="192" width="22" height="8"></rect><rect x="156" y="192" width="22" height="8"></rect>
+          <rect x="200" y="192" width="22" height="8"></rect><rect x="244" y="192" width="22" height="8"></rect>
+        </g>
+        <circle cx="255" cy="154" r="30" fill="none" stroke="#b3321a" stroke-width="7"></circle>
+      </svg>
+      <div class="cap">Panel three &mdash; five days to the comeback</div>
+      <div class="num">03</div>
+      <div class="balloon right">14 August. Censor cleared. Two hours twenty.</div>
+    </div>
+    <div class="text">
+      <p><i>Awarapan 2</i> has completed its censor formalities for a 14 August release. Emraan Hashmi returns to the role nineteen years on, with a locked runtime of two hours twenty and the trailer out since 6 August.</p>
+      <p>Trade sites are calling an opening north of &#8377;11 crore. That is a <b>projection</b>, not a result &mdash; the film has not released.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span><span class="tag projection">Projection</span> Pinkvilla; opening estimate, Koimoi &mdash; <a href="https://www.pinkvilla.com/cinema/awarapan-2-emraan-hashmi-starrer-locks-runtime-of-2-hours-20-minutes-trailer-out-on-august-6-1404740">runtime and trailer</a></p>
+  </article>
+
+  <!-- ---------- PANEL 4 ---------- -->
+  <article class="panel quiet">
+    <div class="art">
+      <svg viewBox="0 0 440 300" role="img" aria-label="Railway tracks running to the horizon beneath an open doorway">
+        <rect x="0" y="0" width="440" height="300" fill="url(#dotsBlue)" opacity="0.4"></rect>
+        <path d="M120 300 L 200 128 M320 300 L 240 128" stroke="#17130f" stroke-width="6" fill="none"></path>
+        <path d="M104 288 h 232 M126 246 h 188 M146 208 h 148 M166 172 h 108 M184 142 h 72" stroke="#17130f" stroke-width="5"></path>
+        <path d="M176 128 v -60 a 44 44 0 0 1 88 0 v 60" fill="#f7f1e4" stroke="#17130f" stroke-width="6"></path>
+        <path d="M220 24 v 104" stroke="#17130f" stroke-width="4"></path>
+      </svg>
+      <div class="cap">Panel four &mdash; a promotion that goes to the source</div>
+      <div class="num">04</div>
+    </div>
+    <div class="text">
+      <p>Sunny Deol, Karan Deol and Preity G Zinta will meet Partition survivors and visit the Partition Museum on the Punjab leg of the promotional tour for <i>Batwara 1947</i>.</p>
+      <p>House rule, stated once and kept: a panel about something that happened to real people gets no sound effect and no joke. It gets a frame and the facts.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> Bollywood Hungama, exclusive &mdash; <a href="https://www.bollywoodhungama.com/news/bollywood/exclusive-sunny-deol-karan-deol-and-preity-g-zinta-to-meet-partition-survivors-and-visit-the-partition-museum-on-their-punjab-promotional-journey-for-batwara-1947/">Punjab promotional journey</a></p>
+  </article>
+
+  <!-- ---------- PANEL 5 ---------- -->
+  <article class="panel">
+    <div class="art">
+      <svg viewBox="0 0 440 300" role="img" aria-label="Concentric rings like the growth rings of a tree">
+        <rect x="0" y="0" width="440" height="300" fill="url(#dotsRed)" opacity="0.24"></rect>
+        <g fill="none" stroke="#17130f" stroke-width="5">
+          <circle cx="220" cy="150" r="26"></circle>
+          <circle cx="220" cy="150" r="50"></circle>
+          <circle cx="220" cy="150" r="74"></circle>
+          <circle cx="220" cy="150" r="98"></circle>
+        </g>
+        <circle cx="220" cy="150" r="122" fill="none" stroke="#b3321a" stroke-width="6"></circle>
+        <circle cx="220" cy="150" r="9" fill="#17130f"></circle>
+      </svg>
+      <div class="cap">Panel five &mdash; forty-three years later</div>
+      <div class="num">05</div>
+      <div class="balloon">Like life coming full circle.</div>
+    </div>
+    <div class="text">
+      <p>Jugal Hansraj, the child at the centre of Shekhar Kapur&rsquo;s <i>Masoom</i> in 1983, has joined <i>Masoom: The Next Generation</i> &mdash; forty-three years on from the film that introduced him.</p>
+      <p>His own words for it are in the balloon above, and they are the reason this one gets a panel rather than a line.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> Bollywood Hungama, 7 August 2026 &mdash; <a href="https://www.bollywoodhungama.com/news/bollywood/jugal-hansraj-joins-masoom-the-next-generation-says-returning-to-the-film-after-43-years-feels-like-life-coming-full-circle/">Jugal Hansraj joins Masoom</a></p>
+  </article>
+
+  <!-- ---------- PANEL 6 ---------- -->
+  <article class="panel">
+    <div class="art">
+      <svg viewBox="0 0 440 300" role="img" aria-label="A screen showing a play symbol, beside a ranked list">
+        <rect x="0" y="0" width="440" height="300" fill="url(#dotsBlue)" opacity="0.3"></rect>
+        <rect x="56" y="82" width="192" height="132" fill="#f7f1e4" stroke="#17130f" stroke-width="6"></rect>
+        <path d="M132 118 L 192 148 L 132 178 Z" fill="#b3321a" stroke="#17130f" stroke-width="5" stroke-linejoin="round"></path>
+        <path d="M152 214 v 24 M118 240 h 68" stroke="#17130f" stroke-width="6"></path>
+        <g fill="#f7f1e4" stroke="#17130f" stroke-width="5">
+          <rect x="288" y="92" width="104" height="26"></rect>
+          <rect x="288" y="134" width="80" height="26"></rect>
+          <rect x="288" y="176" width="58" height="26"></rect>
+        </g>
+        <rect x="288" y="92" width="104" height="26" fill="#b3321a" stroke="#17130f" stroke-width="5"></rect>
+      </svg>
+      <div class="cap">Panel six &mdash; at home, on the small screen</div>
+      <div class="num">06</div>
+    </div>
+    <div class="text">
+      <p>Manoj Bajpayee&rsquo;s <i>Governor</i> has gone to the top of Prime Video India&rsquo;s charts, after first leading the platform&rsquo;s rental rankings.</p>
+      <p>And a note from the other side of the industry: TVF has announced its first Marathi feature, <i>Bayangi: Palaychi Nahi, Talaychi</i>.</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> Bollywood Hungama &mdash; <a href="https://www.bollywoodhungama.com/news/bollywood/manoj-bajpayees-governor-tops-prime-video-india-charts-after-leading-rental-rankings/">Governor tops Prime Video</a>, <a href="https://www.bollywoodhungama.com/news/bollywood/tvf-announces-first-marathi-film-bayangi-palaychi-nahi-talaychi/">TVF&rsquo;s first Marathi film</a></p>
+  </article>
+
+</main>
+
+<section class="desk">
+  <h2>Desk notes</h2>
+  <div class="inner">
+    <p class="head">What is confirmed</p>
+    <p>The <i>Ramayana</i> dates, the <i>Spider-Man</i> record, the <i>Awarapan 2</i> release date and runtime, the <i>Batwara 1947</i> promotional plan, the <i>Masoom</i> casting, the <i>Governor</i> chart position and the TVF announcement are each carried by the outlet linked under their panel, on or before the date of this edition.</p>
+    <p class="head">What is not a fact yet</p>
+    <ul>
+      <li><b>The &#8377;11 crore opening for <i>Awarapan 2</i>.</b> It is a trade projection for a film that releases on 14 August. It is marked as a projection on the panel and it will not be repeated as a result.</li>
+      <li><b>Box-office totals move.</b> The &#8377;462 crore India gross for <i>Spider-Man: Brand New Day</i> is week-one reporting, not a closing figure.</li>
+    </ul>
+    <p class="head">The standing rule</p>
+    <p>No panel ships without a source link. Nothing goes in from memory, and nothing goes in because it would make a good panel. If a story cannot be sourced by the time the edition is drawn, it waits for tomorrow or it is dropped.</p>
+  </div>
+</section>
+
+<footer>
+  <span><a href="../index.html">All editions</a></span>
+  <span>Comic Gyaan &mdash; Edition No. 1</span>
+  <span>&copy; 2026 Raj Palasamudrum</span>
+</footer>
+
+</div>
+</body>
+</html>

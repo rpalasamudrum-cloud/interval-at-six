@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<!--
+  Comic Gyaan — edition template.
+
+  To make tomorrow's edition:
+    1. cp template.html editions/YYYY-MM-DD.html
+    2. Replace every __TOKEN__ below. There are no optional ones; verify.js
+       fails the file if a single __ pair survives.
+    3. Drop the art into each <!-- ART n --> slot. Art blocks to start from are
+       in STYLE.md; the fills url(#dotsRed) and url(#dotsBlue) are defined once
+       at the top of this file and are available to every panel.
+    4. Add the edition to index.html — the "Latest" card and the archive list.
+    5. jsc verify.js
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comic Gyaan — __DATE_LONG__</title>
+<meta name="description" content="The day in Hindi cinema, drawn in panels. Every panel carries its source.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@500;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe6d4;
+  --card:#f7f1e4;
+  --ink:#17130f;
+  --red:#b3321a;
+  --blue:#28486d;
+  --mustard:#e6d5a5;
+  --rule:#17130f;
+  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
+  --letter:'Archivo Narrow','Arial Narrow',Arial,sans-serif;
+  --body:'Spectral',Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.sheet{max-width:1080px;margin:0 auto;padding:28px 20px 64px}
+
+.masthead{border-bottom:4px solid var(--rule);padding-bottom:14px;margin-bottom:6px}
+.masthead h1{font-family:var(--display);font-size:clamp(46px,11vw,104px);line-height:.86;letter-spacing:.01em;margin:0;text-transform:uppercase}
+.masthead h1 .g{color:var(--red)}
+.strap{font-family:var(--letter);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;margin-top:10px}
+.dateline{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:500;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:6px 0;margin:14px 0 26px}
+.dateline span:not(:last-child)::after{content:' /';opacity:.45;margin-left:18px}
+
+.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.panel{border:3px solid var(--ink);background:var(--card);display:flex;flex-direction:column}
+.panel.lead{grid-column:1 / -1}
+
+.art{position:relative;border-bottom:3px solid var(--ink);background:var(--paper)}
+.art svg{display:block;width:100%;height:auto}
+
+.cap{position:absolute;top:0;left:0;background:var(--mustard);border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);font-family:var(--letter);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:7px 12px 6px;max-width:74%}
+.num{position:absolute;top:0;right:0;background:var(--ink);color:var(--paper);font-family:var(--display);font-size:15px;padding:5px 10px 4px;letter-spacing:.06em}
+
+.balloon{position:absolute;left:16px;bottom:34px;max-width:62%;background:#fffdf7;border:3px solid var(--ink);border-radius:16px;padding:11px 14px 10px;font-family:var(--letter);font-weight:700;text-transform:uppercase;font-size:14px;line-height:1.28;letter-spacing:.02em}
+.balloon::after{content:'';position:absolute;bottom:-19px;left:34px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:19px solid var(--ink)}
+.balloon::before{content:'';position:absolute;bottom:-13px;left:38px;z-index:1;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid #fffdf7}
+.balloon.right{left:auto;right:16px}
+.balloon.right::after{left:auto;right:34px}
+.balloon.right::before{left:auto;right:38px}
+
+.sfx{position:absolute;font-family:var(--display);color:var(--red);-webkit-text-stroke:2px var(--ink);text-transform:uppercase;line-height:.8;transform:rotate(-7deg);pointer-events:none}
+
+.text{padding:16px 18px 6px}
+.text p{margin:0 0 11px}
+.text .lede{font-size:19px}
+.text .lede::first-letter{font-family:var(--display);font-size:44px;line-height:.8;float:left;margin:5px 8px 0 0;color:var(--red)}
+
+.cite{margin-top:auto;border-top:1px solid var(--rule);padding:8px 18px 10px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:500}
+.cite a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.cite a:hover{color:var(--red)}
+.cite .tag{display:inline-block;border:1px solid var(--ink);padding:1px 5px;margin-right:7px;letter-spacing:.1em}
+.cite .tag.projection{background:var(--mustard)}
+
+.quiet .sfx{display:none}
+
+.desk{margin-top:34px;border:3px solid var(--ink);background:var(--card)}
+.desk h2{font-family:var(--display);text-transform:uppercase;font-size:22px;letter-spacing:.04em;margin:0;padding:11px 18px 9px;background:var(--ink);color:var(--paper)}
+.desk .inner{padding:16px 18px 18px}
+.desk ul{margin:0;padding-left:20px}
+.desk li{margin-bottom:9px}
+.desk .head{font-family:var(--letter);text-transform:uppercase;letter-spacing:.09em;font-weight:700;font-size:11px;margin:0 0 8px}
+.desk .head + p{margin-top:0}
+
+footer{margin-top:34px;border-top:4px solid var(--rule);padding-top:12px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:10px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+footer a{color:var(--ink)}
+
+@media (max-width:760px){
+  .strip{grid-template-columns:1fr}
+  .balloon{max-width:76%;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <pattern id="dotsRed" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.8" cy="1.8" r="1.5" fill="#b3321a"></circle>
+    </pattern>
+    <pattern id="dotsBlue" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.8" cy="1.8" r="1.5" fill="#28486d"></circle>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="sheet">
+
+<header class="masthead">
+  <h1>Comic <span class="g">Gyaan</span></h1>
+  <p class="strap">The day in Hindi cinema, drawn in panels</p>
+</header>
+
+<div class="dateline">
+  <span>Edition No. __EDITION_NO__</span>
+  <span>__DATE_LONG__</span>
+  <span>Six panels</span>
+  <span>Every panel carries its source</span>
+</div>
+
+<main class="strip">
+
+  <article class="panel lead">
+    <div class="art">
+      <!-- ART 1 — viewBox "0 0 900 300", the lead is double width -->
+      <div class="cap">Panel one &mdash; __CAP_1__</div>
+      <div class="num">01</div>
+      <div class="balloon">__BALLOON_1__</div>
+    </div>
+    <div class="text">
+      <p class="lede">__LEDE_1__</p>
+      <p>__BODY_1__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_1__ &mdash; <a href="__URL_1__">__LINKTEXT_1__</a></p>
+  </article>
+
+  <article class="panel">
+    <div class="art">
+      <!-- ART 2 — viewBox "0 0 440 300" -->
+      <div class="cap">Panel two &mdash; __CAP_2__</div>
+      <div class="num">02</div>
+      <div class="sfx" style="left:22px;top:52px;font-size:52px">__SFX_2__</div>
+    </div>
+    <div class="text">
+      <p>__BODY_2__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_2__ &mdash; <a href="__URL_2__">__LINKTEXT_2__</a></p>
+  </article>
+
+  <article class="panel">
+    <div class="art">
+      <!-- ART 3 — viewBox "0 0 440 300" -->
+      <div class="cap">Panel three &mdash; __CAP_3__</div>
+      <div class="num">03</div>
+      <div class="balloon right">__BALLOON_3__</div>
+    </div>
+    <div class="text">
+      <p>__BODY_3__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_3__ &mdash; <a href="__URL_3__">__LINKTEXT_3__</a></p>
+  </article>
+
+  <!-- Panel four is the quiet slot. Keep class="panel quiet" whenever the story
+       touches something that happened to real people: no sfx, no punchline. -->
+  <article class="panel quiet">
+    <div class="art">
+      <!-- ART 4 — viewBox "0 0 440 300" -->
+      <div class="cap">Panel four &mdash; __CAP_4__</div>
+      <div class="num">04</div>
+    </div>
+    <div class="text">
+      <p>__BODY_4__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_4__ &mdash; <a href="__URL_4__">__LINKTEXT_4__</a></p>
+  </article>
+
+  <article class="panel">
+    <div class="art">
+      <!-- ART 5 — viewBox "0 0 440 300" -->
+      <div class="cap">Panel five &mdash; __CAP_5__</div>
+      <div class="num">05</div>
+      <div class="balloon">__BALLOON_5__</div>
+    </div>
+    <div class="text">
+      <p>__BODY_5__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_5__ &mdash; <a href="__URL_5__">__LINKTEXT_5__</a></p>
+  </article>
+
+  <article class="panel">
+    <div class="art">
+      <!-- ART 6 — viewBox "0 0 440 300" -->
+      <div class="cap">Panel six &mdash; __CAP_6__</div>
+      <div class="num">06</div>
+    </div>
+    <div class="text">
+      <p>__BODY_6__</p>
+    </div>
+    <p class="cite"><span class="tag">Reported</span> __OUTLET_6__ &mdash; <a href="__URL_6__">__LINKTEXT_6__</a></p>
+  </article>
+
+</main>
+
+<section class="desk">
+  <h2>Desk notes</h2>
+  <div class="inner">
+    <p class="head">What is confirmed</p>
+    <p>__CONFIRMED__</p>
+    <p class="head">What is not a fact yet</p>
+    <ul>
+      <li>__CAVEAT__</li>
+    </ul>
+    <p class="head">The standing rule</p>
+    <p>No panel ships without a source link. Nothing goes in from memory, and nothing goes in because it would make a good panel. If a story cannot be sourced by the time the edition is drawn, it waits for tomorrow or it is dropped.</p>
+  </div>
+</section>
+
+<footer>
+  <span><a href="../index.html">All editions</a></span>
+  <span>Comic Gyaan &mdash; Edition No. __EDITION_NO__</span>
+  <span>&copy; 2026 Raj Palasamudrum</span>
+</footer>
+
+</div>
+</body>
+</html>
