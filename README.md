@@ -24,6 +24,8 @@ top, swipe or arrow keys to move. It reads the same on a laptop.
 | `editions/YYYY-MM-DD.html` | one edition — eight cards, self-contained |
 | `template.html` | the shell to copy for a new edition, with `__TOKENS__` to fill |
 | `scripts/YYYY-MM-DD.md` | the five-minute video script, with timecodes and metadata |
+| `scripts/YYYY-MM-DD.voice.txt` | the same voiceover, stage directions stripped and names respelled, ready to paste into a voice clone |
+| `scripts/PRONUNCIATION.md` | the running respelling list — the thing that stops TTS mangling names |
 | `record/YYYY-MM-DD.html` | the recording cut — 1080×1920, plays itself for 5:08, for screen capture |
 | `youtube/CHANNEL.md` | channel setup, upload defaults, the daily loop |
 | `youtube/avatar.svg`, `youtube/banner.svg` | channel artwork masters, export to PNG |

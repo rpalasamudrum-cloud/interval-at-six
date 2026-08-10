@@ -164,13 +164,48 @@ Cloning the whole script is a mistake even once the clone is good.
 That is about a minute of real reading a day against four minutes generated —
 which is the whole saving, without giving up the two places delivery matters.
 
+### The daily loop, once the clone exists
+
+This is yours to run — the cloning service and the upload both need an account
+signed in as you, so neither is something that can be handed off. It is about
+ten minutes a day against four minutes of reading, and unlike the reading it
+does not need you to sound awake.
+
+1. Open the clone in ElevenLabs.
+2. Paste **`scripts/YYYY-MM-DD.voice.txt`** — the voiceover with the stage
+   directions stripped out and the names already respelled. It is built to be
+   pasted whole, with nothing to edit first.
+3. Generate, listen once end to end, download the MP3.
+4. Anything mispronounced: fix it in the text, regenerate, and **add the row to
+   [`../scripts/PRONUNCIATION.md`](../scripts/PRONUNCIATION.md)** so it is a
+   one-time cost rather than a daily one.
+5. Drop the MP3 and the screen recording into iMovie, snap the audio to the
+   white flash frame, trim the slate, export.
+
+**Expect to add silence.** The script is 635 spoken words — 4:14 at 150wpm
+inside a 5:08 picture. The missing ~54 seconds is breathing room at the eight
+card transitions, roughly seven seconds each, which a person takes without being
+told and a generated read does not. Cut the audio at each transition and pad it,
+or the voice lands a minute early and the last card plays to silence.
+
+If you record the cold open and the quiet card yourself, they are the **first**
+and **fifth** blocks of the voice file in script order — delete those two before
+pasting and splice your own takes in. See the section above for why that is
+worth the extra minute.
+
 ### The hidden cost: proper nouns
 
 Text-to-speech falls over on exactly the words this show is made of. *Batwara*,
-*Bayangi: Palaychi Nahi, Talaychi*, *Jugal Hansraj*, *Namit Malhotra* — expect
-to check every name and film title in every script and hand-correct with
-phonetic spelling. Keep a running pronunciation list as you go; the same names
-recur, and after a month the list does most of the work.
+*Bayangi: Palaychi Nahi, Talaychi*, *Jugal Hansraj*, *Namit Malhotra*.
+
+The running list is [`../scripts/PRONUNCIATION.md`](../scripts/PRONUNCIATION.md),
+already seeded from edition one along with the rules that apply every time —
+spell numbers out, put full stops in initialisms, strip quotation marks. Every
+`.voice.txt` is respelled from it before it ships.
+
+The entries there were written **without hearing the output**, so treat them as
+first guesses. Listen to the first generation properly, correct the rows, and
+the list stops costing you anything by about week three.
 
 Getting a name wrong on a Hindi film channel is not a small error to the
 audience. Budget the ten minutes.
