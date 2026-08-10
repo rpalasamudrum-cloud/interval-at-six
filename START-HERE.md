@@ -194,26 +194,29 @@ Title, chapters, description and tags are all in
 [`scripts/2026-08-09.md`](scripts/2026-08-09.md) under *Metadata for this
 upload*, ready to paste.
 
-**One thing to decide first:** the description links to the written edition at
-`https://<your-pages-url>/editions/2026-08-09.html`, and that page is not
-published anywhere yet. Either publish the site first (see below) or delete that
-line before uploading. Do not upload a description with a dead link in it.
+The description's link to the written edition is live and checked:
+<https://rpalasamudrum-cloud.github.io/interval-at-six/editions/2026-08-09.html>
 
 ---
 
-## The website decision
+## The website — published
 
-The repo is a working git repo with three commits and **no remote**. Nothing is
-published. The sibling `smartrama` and `panchamrutha` sites are on GitHub Pages
-under the account `rpalasamudrum-cloud`, and this would sit alongside them at
-`https://rpalasamudrum-cloud.github.io/interval-at-six/`.
+Live since 9 August 2026, alongside the sibling quiz sites:
 
-Blocking that: **`gh` is not on PATH in this shell**, despite the smartrama
-handoff saying it was installed to `~/.local/bin`. That needs sorting before
-anything can be pushed from a session.
+- <https://rpalasamudrum-cloud.github.io/interval-at-six/>
+- <https://rpalasamudrum-cloud.github.io/interval-at-six/editions/2026-08-09.html>
 
-You can also just create the repo in a browser and push manually. Either way it
-is a ten-minute job, and the video description wants it done.
+Repo: <https://github.com/rpalasamudrum-cloud/interval-at-six>, public, Pages
+serving `main` from the root. To publish a change: edit, run the verifier,
+`git add -A && git commit && git push`. Pages redeploys within a minute or two.
+
+Commits are authored **Guru Gyaan** with the GitHub `noreply` address, so the
+real name is in neither the pages nor the history.
+
+The account name stays `rpalasamudrum-cloud`. A `gurugyaan` namespace was
+considered and dropped: renaming a GitHub account does **not** redirect its
+Pages URLs, so it would have silently killed the existing smartrama and
+panchamrutha links with no way to repair them afterwards.
 
 ---
 
