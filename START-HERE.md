@@ -71,19 +71,25 @@ Regenerate it any time with:
 ./scripts/make-voice.sh 2026-08-09
 ```
 
-**Listen to it before you commit to it.** If Tara is not good enough, the two
-upgrades are below and neither blocks edition one. Getting a first video out
-matters more than the voice being right, because nobody is watching yet — which
-makes now the free moment to have an imperfect one.
+**Tara is the voice of this show.** Decided 9 August 2026. Not a stopgap — the
+daily loop is built around it, and the reason is that it costs nothing and takes
+no time, which is what a daily actually dies of.
 
-Whatever you use, **turn YouTube's altered-content disclosure on while the voice
-is synthetic**. It is a small label, and for a channel whose whole pitch is
-labelling forecasts as forecasts, labelling a synthetic voice is the consistent
-thing to do. It comes back off when the voice is your own.
+Two things follow, and they are not optional:
 
-The rest of this section is the upgrade path. Skip it today.
+1. **YouTube's altered-content disclosure stays ON.** Tara is a synthetic
+   narrator, so it is disclosed, permanently, not just for the first few. A
+   channel that labels forecasts as forecasts labels a synthetic voice as
+   synthetic. It is a small label and it costs nothing.
+2. **The channel has no host.** That is the real price — people subscribe to a
+   person, and a system voice is nobody. What replaces it is the sourcing: the
+   promise has to do the work the presenter would have done, which means rules 1
+   to 4 in `STYLE.md` matter more here, not less.
 
-### 5a. Record one minute of your voice
+The own-voice route below is now optional. It stays written down because the
+decision is worth being able to revisit, not because it is pending.
+
+### 5a. Optional — record one minute of your voice
 
 **What to record with.** Either is fine and both are already on the Mac:
 
@@ -108,7 +114,7 @@ One continuous take. No music, no traffic, no fan. Mouth about a hand's width
 from the mic. If you fluff a line, start the take again rather than editing —
 one clean minute is worth more than two patched ones.
 
-### 5b. Make the clone
+### 5b. Optional — make the clone
 
 **This costs money, and the free tier will not do it.** Instant Voice Cloning
 needs the **Starter plan, about $5 a month**. Starter is also the tier that
