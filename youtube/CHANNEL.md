@@ -1,6 +1,6 @@
 # The channel
 
-**The channel exists:** <https://youtube.com/@setty-balgatti>.
+**The channel:** <https://youtube.com/@setty-balgatti> — rename the handle to `@intervalatsix`, see below.
 Studio dashboard: `studio.youtube.com/channel/UCDwPVv1p9wjcV6JfiRlrefg` — that
 one only opens while you are signed in.
 
@@ -17,26 +17,34 @@ show you what is about to go live before anything is published.
 
 ## Naming
 
-The handle is `@setty-balgatti` and the show is called Comic Gyaan. Those do not
-match, which costs you a little on search and on someone recognising a share.
-Two ways to close it, both fine:
+The show is **Interval at Six**. The interval is the half-time break in an Indian
+cinema; the six is both six stories and six o'clock. Nothing else is using the
+name — it was checked before it was chosen.
 
-- Set the **channel name** to `Comic Gyaan` and leave the handle alone. The name
-  is what shows on the video, the search result and the thumbnail; the handle is
-  mostly the URL. This is the cheaper fix and it is probably enough.
-- Or change the handle too, while nothing links to it yet. YouTube allows a
-  handle change, and the cost of doing it now is zero — it will not be zero once
-  the first video has been shared.
+Two things to change on the channel, and now is when they are free:
 
-Either way the channel name should read `Comic Gyaan`, because that is the word
-the videos, the artwork and the site all say.
+1. **Channel name** → `Interval at Six`. This is the one that matters — it is
+   what shows on the video, the search result and the subscription list.
+2. **Handle** → `@intervalatsix`, replacing `@setty-balgatti`. YouTube allows a
+   handle change and the cost today is zero, because nothing links to the old
+   one yet. That stops being true the moment the first video is shared.
+
+### The six is a promise about a clock
+
+Put a number in the name and people hold you to it. **Publish at 6pm IST**, say
+so in the channel description, and hold it — a daily lives on the habit more
+than on any single video.
+
+If a day runs late, the name still survives, because *six* is also the six
+stories, and that half is locked into the format and enforced by the verifier.
+That ambiguity is deliberate. Do not lean on it twice a week.
 
 ## Setting it up
 
 1. If the channel is on your personal profile rather than a **Brand Account**,
    move it now. YouTube lets you transfer a Brand Account between owners later;
    a personal channel is welded to the login.
-2. **Channel name:** `Comic Gyaan`, per the section above.
+2. **Channel name:** `Interval at Six`, per the section above.
 3. **Avatar:** export [`avatar.svg`](avatar.svg) to PNG at 800×800.
    **Banner:** export [`banner.svg`](banner.svg) to PNG at 2560×1440.
    Both use the deck's own palette — void black, hot pink, gold, halftone — and
@@ -47,13 +55,14 @@ the videos, the artwork and the site all say.
    that is the actual differentiator against every other daily film-news channel.
 
 ```
-Six things a day from Hindi cinema — releases, box office, casting, the things
-that actually moved. Ninety seconds to read, five minutes to watch.
+Six things that actually happened in Hindi cinema — releases, box office,
+casting, streaming. Ninety seconds to read, five minutes to watch.
+
+New edition every day at 6pm IST.
 
 Every claim is sourced and every source is linked in the description. Forecasts
-are labelled as forecasts. Corrections go at the top of the next day's edition.
-
-New edition every day.
+are labelled as forecasts, not reported as results. Corrections go at the top of
+the next day's edition.
 ```
 
 5. **Defaults** (Settings → Upload defaults) — set these once and stop retyping

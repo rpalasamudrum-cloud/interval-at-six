@@ -29,32 +29,34 @@
 
   <!-- progress rail, the deck's own signature, bled across the top of the crop -->
   <g fill="#fff6e9">
-    <rect x="507" y="470" width="180" height="7" rx="3.5"></rect>
-    <rect x="699" y="470" width="180" height="7" rx="3.5"></rect>
-    <rect x="891" y="470" width="180" height="7" rx="3.5" opacity="0.3"></rect>
-    <rect x="1083" y="470" width="180" height="7" rx="3.5" opacity="0.3"></rect>
-    <rect x="1275" y="470" width="180" height="7" rx="3.5" opacity="0.3"></rect>
-    <rect x="1467" y="470" width="180" height="7" rx="3.5" opacity="0.3"></rect>
-    <rect x="1659" y="470" width="180" height="7" rx="3.5" opacity="0.3"></rect>
-    <rect x="1851" y="470" width="202" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="507" y="466" width="180" height="7" rx="3.5"></rect>
+    <rect x="699" y="466" width="180" height="7" rx="3.5"></rect>
+    <rect x="891" y="466" width="180" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="1083" y="466" width="180" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="1275" y="466" width="180" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="1467" y="466" width="180" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="1659" y="466" width="180" height="7" rx="3.5" opacity="0.3"></rect>
+    <rect x="1851" y="466" width="202" height="7" rx="3.5" opacity="0.3"></rect>
   </g>
 
-  <text x="1280" y="742" text-anchor="middle"
+  <!-- INTERVAL sets the width, AT SIX under it carries the colour -->
+  <text x="1280" y="700" text-anchor="middle"
         font-family="'Bebas Neue', Impact, 'Haettenschweiler', sans-serif"
-        font-size="186" letter-spacing="3">
-    <tspan fill="#fff6e9">COMIC </tspan><tspan fill="#ff2d6f">GYAAN</tspan>
-  </text>
+        font-size="196" fill="#fff6e9" letter-spacing="4">INTERVAL</text>
+  <text x="1280" y="812" text-anchor="middle"
+        font-family="'Bebas Neue', Impact, 'Haettenschweiler', sans-serif"
+        font-size="118" fill="#ff2d6f" letter-spacing="18">AT SIX</text>
 
-  <text x="1280" y="822" text-anchor="middle"
+  <text x="1280" y="876" text-anchor="middle"
         font-family="Poppins, 'Helvetica Neue', Arial, sans-serif"
-        font-weight="600" font-size="46" fill="#fff6e9" opacity="0.9">
-    Six things that actually happened in Hindi cinema. Every day.
+        font-weight="600" font-size="40" fill="#fff6e9" opacity="0.9">
+    Six things that actually happened in Hindi cinema. Every day at 6pm IST.
   </text>
 
   <g>
-    <rect x="1006" y="866" width="548" height="60" rx="30" fill="none" stroke="#a3e635" stroke-width="3" opacity="0.72"></rect>
-    <circle cx="1046" cy="896" r="9" fill="#a3e635"></circle>
-    <text x="1074" y="911" font-family="Poppins, 'Helvetica Neue', Arial, sans-serif"
-          font-weight="600" font-size="32" fill="#fff6e9" letter-spacing="3">EVERY CARD SOURCED</text>
+    <rect x="1006" y="906" width="548" height="58" rx="29" fill="none" stroke="#a3e635" stroke-width="3" opacity="0.72"></rect>
+    <circle cx="1046" cy="935" r="9" fill="#a3e635"></circle>
+    <text x="1074" y="949" font-family="Poppins, 'Helvetica Neue', Arial, sans-serif"
+          font-weight="600" font-size="31" fill="#fff6e9" letter-spacing="3">EVERY CARD SOURCED</text>
   </g>
 </svg>

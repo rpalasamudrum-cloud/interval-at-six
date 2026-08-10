@@ -1,4 +1,4 @@
-// Comic Gyaan verifier.
+// Interval at Six verifier.
 //
 // Runs on macOS's built-in JavaScriptCore — this machine has no node:
 //
@@ -45,7 +45,7 @@ function checkHouseStyle(name, html) {
 function checkEdition(name, html) {
   checkHouseStyle(name, html);
 
-  if (!/<title>Comic Gyaan/.test(html)) fail(name, 'title does not start with Comic Gyaan');
+  if (!/<title>Interval at Six/.test(html)) fail(name, 'title does not start with Interval at Six');
   if (html.indexOf('id="deck"') === -1) fail(name, 'has no deck');
   if (html.indexOf('id="rail"') === -1) fail(name, 'has no progress rail');
   if (html.indexOf('scroll-snap-type') === -1) fail(name, 'deck does not snap');
@@ -150,7 +150,7 @@ for (var k = 0; k < checked.length; k++) {
 // --------------------------------------------------------------------- report
 
 print('');
-print('Comic Gyaan — verify');
+print('Interval at Six — verify');
 print('--------------------');
 print('editions checked: ' + checked.length + (checked.length ? '  (' + checked.join(', ') + ')' : ''));
 print('');

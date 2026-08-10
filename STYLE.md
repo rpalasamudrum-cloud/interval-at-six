@@ -34,7 +34,7 @@ entrance animations. `prefers-reduced-motion` turns off what is left.
 ```
 +---------------------------------------+
 | ▓▓▓ progress rail — one segment/card  |
-| COMIC GYAAN               9 AUG 2026  |
+| INTERVAL AT SIX               9 AUG 2026  |
 |                                  ┌──┐ |
 |                                  │01│ |  <- .ghost, watermark numeral
 |                                  └──┘ |

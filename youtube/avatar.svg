@@ -1,7 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
   <!-- Channel avatar master. Export to PNG at 800x800 before uploading.
        YouTube crops avatars to a circle, so nothing important goes outside
-       the 720px circle centred at 400,400. -->
+       the 720px circle centred at 400,400.
+
+       The mark is the numeral, not the name. At the size this actually gets
+       seen — 48px beside a comment — a single glyph is the only thing that
+       survives, and the 6 is the half of the name worth keeping. -->
   <defs>
     <radialGradient id="wash" cx="18%" cy="88%" r="96%">
       <stop offset="0%" stop-color="#ff2d6f"></stop>
@@ -22,14 +26,14 @@
   <rect width="800" height="800" fill="url(#wash2)"></rect>
   <rect width="800" height="800" fill="url(#halftone)"></rect>
 
-  <text x="400" y="392" text-anchor="middle"
+  <text x="400" y="470" text-anchor="middle"
         font-family="'Bebas Neue', Impact, 'Haettenschweiler', sans-serif"
-        font-size="300" fill="#fff6e9" letter-spacing="6">CG</text>
+        font-size="420" fill="#fff6e9">6</text>
 
-  <rect x="238" y="436" width="324" height="9" rx="4.5" fill="#ffc93c"></rect>
+  <rect x="258" y="512" width="284" height="8" rx="4" fill="#ffc93c"></rect>
 
-  <text x="400" y="516" text-anchor="middle"
+  <text x="400" y="576" text-anchor="middle"
         font-family="Poppins, 'Helvetica Neue', Arial, sans-serif"
-        font-weight="700" font-size="42" fill="#fff6e9" letter-spacing="13"
-        opacity="0.92">GYAAN</text>
+        font-weight="700" font-size="38" fill="#fff6e9" letter-spacing="9"
+        opacity="0.92">INTERVAL</text>
 </svg>

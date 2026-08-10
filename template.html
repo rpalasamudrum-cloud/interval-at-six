@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <!--
-  Comic Gyaan — edition template.
+  Interval at Six — edition template.
 
   To make tomorrow's edition:
     1. cp template.html editions/YYYY-MM-DD.html
@@ -21,7 +21,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Comic Gyaan — __DATE_LONG__</title>
+<title>Interval at Six — __DATE_LONG__</title>
 <meta name="description" content="Six things that happened in Hindi cinema today. Swipe through. Every card sourced.">
 <meta name="theme-color" content="#0a0612">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,8 +101,8 @@ h2.head em{font-style:normal;color:var(--gold)}
 .card.quiet h2.head{font-size:clamp(32px,7.6vw,58px);color:rgba(255,246,233,.94)}
 
 .card.open{justify-content:center;text-align:left}
-.wordmark{font-family:var(--display);font-size:clamp(64px,19vw,180px);line-height:.82;margin:0 0 6px;letter-spacing:.004em}
-.wordmark span{color:var(--hot)}
+.wordmark{font-family:var(--display);font-size:clamp(52px,15vw,148px);line-height:.82;margin:0 0 6px;letter-spacing:.004em}
+.wordmark span{color:var(--hot);font-size:.6em;letter-spacing:.05em}
 .tagline{font-size:clamp(14px,4.2vw,19px);font-weight:500;color:rgba(255,246,233,.85);margin:0 0 26px;max-width:26ch}
 .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:34px}
 .meta div{min-width:96px}
@@ -137,7 +137,7 @@ h2.head em{font-style:normal;color:var(--gold)}
   .card > *{max-width:760px}
 }
 @media (max-height:720px){
-  .wordmark{font-size:clamp(46px,12vw,92px)}
+  .wordmark{font-size:clamp(42px,10vw,80px)}
   .tagline{margin-bottom:18px}
   .meta{margin-bottom:22px}
   .tease li{padding:6px 0;font-size:13px}
@@ -154,12 +154,12 @@ h2.head em{font-style:normal;color:var(--gold)}
 <body>
 
 <div class="rail" id="rail" role="tablist" aria-label="Cards in this edition"></div>
-<div class="brandbar"><span><b>COMIC GYAAN</b></span><span>__DATE_SHORT__</span></div>
+<div class="brandbar"><span><b>INTERVAL AT SIX</b></span><span>__DATE_SHORT__</span></div>
 
 <main class="deck" id="deck">
 
   <section class="card open" style="--a1:#5b1049;--a2:#2a1160" data-label="Start">
-    <h1 class="wordmark">COMIC<br><span>GYAAN</span></h1>
+    <h1 class="wordmark">INTERVAL<br><span>AT SIX</span></h1>
     <p class="tagline">Six things that actually happened in Hindi cinema today.</p>
     <div class="meta">
       <div><div class="k">Edition</div><div class="v">No. __EDITION_NO__</div></div>

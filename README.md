@@ -1,4 +1,4 @@
-# Comic Gyaan
+# Interval at Six
 
 Six things that actually happened in Hindi cinema, every day — as a deck of
 full-screen cards you swipe through in ninety seconds, plus the five-minute
@@ -92,7 +92,7 @@ voice-over to that flash and every card lands where the script says.
 
 Card one is already vertical, which is the Short.
 
-The channel is <https://youtube.com/@setty-balgatti>. Uploading is yours to
+The channel is <https://youtube.com/@intervalatsix>. Uploading is yours to
 press; setup and the daily loop are in [`youtube/CHANNEL.md`](youtube/CHANNEL.md).
 
 ## Editorial rules
