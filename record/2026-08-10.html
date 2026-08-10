@@ -276,12 +276,15 @@ body{font-family:var(--ui);color:var(--cream)}
 
 <div id="desk">
   <div class="steps">
-    <b>Recording cut &mdash; 4:34.</b> Press <span class="key">F</span> for fullscreen, then
-    <span class="key">Space</span> to roll. <span class="key">1</span>&ndash;<span class="key">8</span> parks on a
-    single card so you can check a frame without sitting through the whole thing.
-    A 3-2-1 slate runs first and the last frame of it is a
-    white flash &mdash; line your voice-over up to that flash in the edit and everything after it
-    lands on the script&rsquo;s timecodes. <span class="key">R</span> restarts.
+    <b>Recording cut &mdash; 4:34.</b> Click the page once, then press
+    <span class="key">Space</span> to roll. That is the only step that matters.
+    <span class="key">1</span>&ndash;<span class="key">8</span> parks on a single card to check a frame,
+    <span class="key">R</span> restarts, <span class="key">F</span> goes fullscreen &mdash;
+    <b>fullscreen is optional</b>, maximising the window works just as well, and some
+    browsers refuse it outright.
+    <br>
+    A 3-2-1 slate runs first and its last frame is a white flash &mdash; line your voice-over
+    up to that flash in the edit and everything after it lands on the timecodes.
     <br>
     Record with <b>QuickTime &rarr; New Screen Recording</b>, dragging a selection around the
     black-edged 9:16 frame only. Nothing on this bar is in shot &mdash; it disappears when you roll.
@@ -444,13 +447,43 @@ body{font-family:var(--ui);color:var(--cream)}
     tc.textContent = '0:00 / 4:34';
   }
 
+  // Fullscreen, defensively. Safari only exposes the webkit-prefixed call, and
+  // the unprefixed one rejects a promise rather than throwing — so an
+  // unhandled failure looks exactly like the key doing nothing.
+  function isFull() {
+    return document.fullscreenElement || document.webkitFullscreenElement;
+  }
+  function fullscreenUnavailable() {
+    tc.textContent = 'fullscreen blocked — maximise the window instead';
+    tc.style.color = '#ffc93c';
+  }
+  function toggleFull() {
+    var el = document.documentElement;
+    if (isFull()) {
+      (document.exitFullscreen || document.webkitExitFullscreen || function () {}).call(document);
+      return;
+    }
+    var req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if (!req) { fullscreenUnavailable(); return; }
+    try {
+      var p = req.call(el);
+      if (p && p.catch) p.catch(fullscreenUnavailable);
+    } catch (err) { fullscreenUnavailable(); }
+  }
+
   document.getElementById('go').addEventListener('click', roll);
   document.getElementById('again').addEventListener('click', restart);
-  document.getElementById('full').addEventListener('click', function () {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else document.documentElement.requestFullscreen();
-  });
+  document.getElementById('full').addEventListener('click', toggleFull);
   document.addEventListener('fullscreenchange', function () { setTimeout(resize, 60); });
+  document.addEventListener('webkitfullscreenchange', function () { setTimeout(resize, 60); });
+
+  // Keyboard shortcuts only fire if the document actually has focus. Opening a
+  // file straight from Finder does not always give it focus, which makes every
+  // key look broken. Take it, and take it back on any click.
+  window.focus();
+  document.body.setAttribute('tabindex', '-1');
+  document.body.focus();
+  document.addEventListener('click', function () { document.body.focus(); });
 
   // 1-8 park on a card so you can check a frame without sitting through five
   // minutes. Ignored once the roll has started.
@@ -465,10 +498,7 @@ body{font-family:var(--ui);color:var(--cream)}
     if (e.key >= '1' && e.key <= '8') { park(+e.key - 1); return; }
     if (e.key === ' ') { e.preventDefault(); roll(); }
     if (e.key === 'r' || e.key === 'R') restart();
-    if (e.key === 'f' || e.key === 'F') {
-      if (document.fullscreenElement) document.exitFullscreen();
-      else document.documentElement.requestFullscreen();
-    }
+    if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFull(); }
   });
 })();
 </script>
