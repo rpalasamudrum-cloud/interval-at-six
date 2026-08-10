@@ -2,11 +2,19 @@
 <meta charset="utf-8">
 <title>Measure</title>
 <body style="font:14px ui-monospace,Menlo,monospace;background:#111;color:#eee;padding:20px">
+<p style="color:#888">Add <code>?date=YYYY-MM-DD</code> to measure a different edition.</p>
 <pre id="out">loading…</pre>
 <script>
-const CARD_PAUSE = 2.6;
-const files = ['../audio/parts/0.m4a','../audio/parts/1.m4a','../audio/parts/2.m4a','../audio/parts/3.m4a',
-               '../audio/parts/4.m4a','../audio/parts/5.m4a','../audio/parts/6.m4a','../audio/parts/7.m4a','../audio/2026-08-09.m4a'];
+// Times an edition's voiceover and prints the MARKS array the recording cut
+// needs. Measure here and nowhere else: `afinfo` reports a different duration
+// depending on the container — 274.9s as AIFF against 253.7s as M4A for the
+// same input — and every timing derived from it was wrong. The browser decodes
+// the file, so these numbers are real.
+const CARD_PAUSE = 2.6;   // must match make-voice.sh
+const date = new URLSearchParams(location.search).get('date') || '2026-08-10';
+
+const files = [0,1,2,3,4,5,6,7].map(i => `../audio/parts/${i}.m4a`)
+                               .concat([`../audio/${date}.m4a`]);
 
 function dur(src) {
   return new Promise((res, rej) => {
@@ -27,14 +35,22 @@ Promise.all(files.map(dur)).then(ds => {
     cum += d + (i < 7 ? CARD_PAUSE : 0);
   });
   const sum = parts.reduce((a, b) => a + b, 0) + 7 * CARD_PAUSE;
+
+  // Nudge the marks onto the combined file's own timeline, so the deck cannot
+  // drift late against the audio it is supposed to be following.
+  const scale = combined / sum;
+  const scaled = marks.map(m => Math.round(m * scale));
+
   document.getElementById('out').textContent =
-    lines.join('\n') +
+    `edition ${date}\n\n` + lines.join('\n') +
     `\n\nsum of parts + pauses : ${sum.toFixed(1)}s` +
     `\ncombined file duration : ${combined.toFixed(1)}s` +
-    `\ndelta                  : ${(combined - sum).toFixed(1)}s` +
-    `\n\nMARKS   = [${marks.join(',')}]` +
-    `\nRUNTIME = ${Math.ceil(combined) + 1}`;
-  window.__result = { marks, combined, sum };
+    `\nscale                  : ${scale.toFixed(5)}` +
+    `\n\nPaste into record/${date}.html:` +
+    `\n  var MARKS = [${scaled.join(',')}];` +
+    `\n  var RUNTIME = ${Math.ceil(combined) + 1};` +
+    `\n\ncard spans: ${scaled.map((v,i)=>((scaled[i+1]||Math.ceil(combined)+1)-v)).join(', ')}`;
+  window.__result = { marks: scaled, combined };
 }).catch(e => { document.getElementById('out').textContent = 'failed on ' + e; });
 </script>
 </body>

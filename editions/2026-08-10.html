@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interval at Six — Monday, 10 August 2026</title>
+<meta name="description" content="Six things that happened in Hindi cinema today. Swipe through. Every card sourced.">
+<meta name="theme-color" content="#0a0612">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0a0612;
+  --cream:#fff6e9;
+  --dim:rgba(255,246,233,.62);
+  --hot:#ff2d6f;
+  --gold:#ffc93c;
+  --violet:#9b5cff;
+  --cyan:#22d3ee;
+  --lime:#a3e635;
+  --steel:#7c8ba1;
+  --display:'Bebas Neue','Haettenschweiler',Impact,sans-serif;
+  --ui:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overscroll-behavior:none}
+body{background:var(--void);color:var(--cream);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+.rail{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;gap:4px;padding:10px 14px calc(10px + env(safe-area-inset-top,0px));background:linear-gradient(to bottom,rgba(10,6,18,.92),rgba(10,6,18,0))}
+.rail button{flex:1;height:3px;border:0;padding:0;cursor:pointer;background:rgba(255,246,233,.22);border-radius:99px;transition:background .25s ease}
+.rail button.on{background:var(--cream)}
+
+.brandbar{position:fixed;z-index:40;top:calc(26px + env(safe-area-inset-top,0px));left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;font-family:var(--ui);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);pointer-events:none}
+.brandbar b{color:var(--cream);font-weight:800}
+
+.deck{height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.deck::-webkit-scrollbar{display:none}
+
+.card{
+  position:relative;
+  /* min-height, not height: a card with a lot in it grows and scrolls rather
+     than clipping its own top off on a short screen. */
+  min-height:100dvh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:96px 22px calc(30px + env(safe-area-inset-bottom,0px));
+  overflow:hidden;
+  isolation:isolate;
+}
+.card::before{content:'';position:absolute;inset:0;z-index:-2;background:radial-gradient(78% 58% at 88% 8%,var(--a2) 0%,transparent 62%),radial-gradient(92% 70% at 6% 96%,var(--a1) 0%,transparent 66%);opacity:.9}
+.card::after{content:'';position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,246,233,.16) 1px,transparent 1.4px);background-size:13px 13px;mask-image:linear-gradient(to top,#000 12%,transparent 78%);-webkit-mask-image:linear-gradient(to top,#000 12%,transparent 78%)}
+
+.ghost{position:absolute;z-index:-1;top:calc(8px + env(safe-area-inset-top,0px));right:-14px;font-family:var(--display);font-size:min(46vw,300px);line-height:.72;color:rgba(255,246,233,.07);letter-spacing:-.03em;pointer-events:none}
+
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px 6px;border-radius:99px;background:var(--cream);color:var(--void)}
+.chip.ghosted{background:transparent;color:var(--cream);border:1.5px solid rgba(255,246,233,.4)}
+.chip.warn{background:var(--gold);color:#231600}
+
+h2.head{font-family:var(--display);font-size:clamp(40px,10.5vw,88px);line-height:.92;letter-spacing:.005em;margin:0 0 16px;text-wrap:balance}
+h2.head em{font-style:normal;color:var(--gold)}
+
+.stat{display:inline-flex;align-items:baseline;gap:10px;align-self:flex-start;margin:0 0 18px;padding:10px 16px 8px;border-radius:14px;background:rgba(10,6,18,.55);border:1.5px solid rgba(255,246,233,.22);backdrop-filter:blur(6px)}
+.stat .big{font-family:var(--display);font-size:clamp(30px,7.5vw,52px);line-height:1}
+.stat .lbl{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+
+.body{margin:0 0 22px;max-width:58ch;font-size:clamp(15px,4vw,18px);color:rgba(255,246,233,.9)}
+.body b{color:var(--cream);font-weight:600}
+.body + .body{margin-top:-10px}
+
+.pull{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--gold);font-size:clamp(18px,5.4vw,26px);font-weight:500;font-style:italic;line-height:1.3;max-width:22ch}
+
+.src{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;text-decoration:none;padding:9px 15px 8px;border-radius:99px;background:rgba(255,246,233,.1);border:1.5px solid rgba(255,246,233,.24);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.03em}
+.src:hover,.src:focus-visible{background:var(--cream);color:var(--void)}
+.src .dot{width:7px;height:7px;border-radius:99px;background:var(--lime);flex:none}
+.src:hover .dot{background:var(--hot)}
+
+.card.quiet::before{background:radial-gradient(120% 90% at 50% 100%,#141a24 0%,transparent 70%)}
+.card.quiet .ghost{display:none}
+.card.quiet h2.head{font-size:clamp(32px,7.6vw,58px);color:rgba(255,246,233,.94)}
+
+.card.open{justify-content:center;text-align:left}
+.wordmark{font-family:var(--display);font-size:clamp(52px,15vw,148px);line-height:.82;margin:0 0 6px;letter-spacing:.004em}
+/* AT SIX sits under INTERVAL, smaller and in the accent — the long word sets
+   the width, the short one carries the colour. */
+.wordmark span{color:var(--hot);font-size:.6em;letter-spacing:.05em}
+.tagline{font-size:clamp(14px,4.2vw,19px);font-weight:500;color:rgba(255,246,233,.85);margin:0 0 26px;max-width:26ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:34px}
+.meta div{min-width:96px}
+.meta .k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.meta .v{font-family:var(--display);font-size:26px;line-height:1}
+
+.tease{list-style:none;margin:0 0 30px;padding:0;max-width:34ch}
+.tease li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid rgba(255,246,233,.16);font-size:14px;font-weight:500}
+.tease li:last-child{border-bottom:1px solid rgba(255,246,233,.16)}
+.tease .n{font-family:var(--display);font-size:17px;color:var(--gold);min-width:20px}
+
+.cue{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.cue .arrow{width:26px;height:26px;border-radius:99px;border:1.5px solid rgba(255,246,233,.35);display:grid;place-items:center;animation:nudge 1.9s ease-in-out infinite}
+.cue svg{width:11px;height:11px}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+.card.end{justify-content:center}
+.end h2{font-family:var(--display);font-size:clamp(38px,10vw,74px);line-height:.94;margin:0 0 18px}
+.notes{border-radius:18px;border:1.5px solid rgba(255,246,233,.2);background:rgba(10,6,18,.5);padding:18px 18px 16px;margin-bottom:24px;max-width:46ch}
+.notes .k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notes p{margin:0 0 12px;font-size:14px;color:rgba(255,246,233,.86)}
+.notes p:last-child{margin-bottom:0}
+.notes b{color:var(--cream);font-weight:600}
+
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;text-decoration:none;padding:14px 22px 12px;border-radius:99px;background:var(--hot);color:var(--cream);font-family:var(--display);font-size:22px;letter-spacing:.03em}
+.cta:hover{background:var(--gold);color:var(--void)}
+.backlink{margin-top:20px;font-size:12px;font-weight:500;color:var(--dim);text-decoration:none;align-self:flex-start}
+.backlink:hover{color:var(--cream)}
+
+@media (min-width:820px){
+  .card{padding:110px 8vw 56px;justify-content:center}
+  .card > *{max-width:760px}
+}
+@media (max-height:720px){
+  .wordmark{font-size:clamp(42px,10vw,80px)}
+  .tagline{margin-bottom:18px}
+  .meta{margin-bottom:22px}
+  .tease li{padding:6px 0;font-size:13px}
+  .tease{margin-bottom:20px}
+  h2.head{font-size:clamp(34px,8vw,64px)}
+  .card{padding-top:78px}
+}
+@media (prefers-reduced-motion:reduce){
+  .deck{scroll-behavior:auto}
+  .cue .arrow{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="rail" id="rail" role="tablist" aria-label="Cards in this edition"></div>
+<div class="brandbar"><span><b>INTERVAL AT SIX</b></span><span>10 AUG 2026</span></div>
+
+<main class="deck" id="deck">
+
+  <!-- ------------------------------------------------------------ open -->
+  <section class="card open" style="--a1:#5b1049;--a2:#2a1160" data-label="Start">
+    <h1 class="wordmark">INTERVAL<br><span>AT SIX</span></h1>
+    <p class="tagline">Six things that actually happened in Hindi cinema today.</p>
+
+    <div class="meta">
+      <div><div class="k">Edition</div><div class="v">No. 2</div></div>
+      <div><div class="k">Date</div><div class="v">10 Aug</div></div>
+      <div><div class="k">Cards</div><div class="v">Six</div></div>
+    </div>
+
+    <ol class="tease">
+      <li><span class="n">1</span><span>A court draws a line around Tabu&rsquo;s face and voice</span></li>
+      <li><span class="n">2</span><span>The 14 August screen war has begun</span></li>
+      <li><span class="n">3</span><span>Salman and Sanjay Dutt take 21 August</span></li>
+      <li><span class="n">4</span><span>A.R. Rahman&rsquo;s son hurt in a Chennai crash</span></li>
+      <li><span class="n">5</span><span>Akshay Kumar to play Rajesh Khanna</span></li>
+      <li><span class="n">6</span><span>Ajay Devgn takes over Crime Patrol</span></li>
+    </ol>
+
+    <div class="cue">
+      <span class="arrow"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v9M2 6.5 6 10.5 10 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      Swipe to start
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------------------- 1 -->
+  <section class="card" style="--a1:#7a0f3d;--a2:#3a1170" data-label="Tabu ruling">
+    <div class="ghost">01</div>
+    <div class="chiprow"><span class="chip">The courts</span><span class="chip ghosted">The big one</span></div>
+    <h2 class="head">A court draws a line around Tabu&rsquo;s face, name <em>and voice</em></h2>
+    <div class="stat"><span class="big">150+</span><span class="lbl">URLs ordered<br>down</span><span class="big">36 HRS</span><span class="lbl">to comply</span></div>
+    <p class="body">Justice Jyoti Singh of the Delhi High Court has granted <b>Tabu</b> an ex parte interim injunction over her name, image and voice &mdash; naming AI, deepfakes and face morphing explicitly. Google must pull 34 URLs, Meta 106, X three, with Reddit and eBay named too. Some of it was AI-generated obscene content built from her own film scenes.</p>
+    <p class="pull">&ldquo;Not confined to commercial loss &mdash; it can also affect privacy, personality and the right to live with dignity.&rdquo;</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/delhi-high-court-grants-tabu-protection-from-ai-misuse-orders-removal-of-150-urls/"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+  </section>
+
+  <!-- --------------------------------------------------------------- 2 -->
+  <section class="card" style="--a1:#8a1e10;--a2:#6b3a00" data-label="Screen war">
+    <div class="ghost">02</div>
+    <div class="chiprow"><span class="chip">Box office</span><span class="chip ghosted">Exclusive</span></div>
+    <h2 class="head">The 14 August screen war has started early</h2>
+    <div class="stat"><span class="big">&#8377;35 CR</span><span class="lbl">Spider-Man,<br>second Sunday</span></div>
+    <p class="body">PVR Inox Pictures, distributing <b>Batwara 1947</b>, is asking single screens for every show &mdash; and in multiplexes for seven shows a day in a two-screener, rising to fifteen in a five-screener. <b>Awarapan 2</b>&rsquo;s side will share.</p>
+    <p class="body">A two-screen cinema has about ten shows in a day. If one film takes seven, there is very little left &mdash; and <b>Spider-Man: Brand New Day</b> is still taking &#8377;35 crore on a second Sunday, so nobody wants to drop it either. Advance booking had not opened as of today.</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/exclusive-batwara-1947-vs-awarapan-2-show-sharing-tussle-begins-distributor-of-sunny-deol-starrer-asks-for-all-shows-in-single-screens-spider-mans-rock-steady-run-complicates-the-battle/"><span class="dot"></span>Bollywood Hungama &middot; exclusive</a>
+  </section>
+
+  <!-- --------------------------------------------------------------- 3 -->
+  <section class="card" style="--a1:#0f5f6b;--a2:#4a1a6b" data-label="7 Dogs">
+    <div class="ghost">03</div>
+    <div class="chiprow"><span class="chip">In eleven days</span></div>
+    <h2 class="head">Salman and Sanjay Dutt take 21 August</h2>
+    <div class="stat"><span class="big">21 AUG</span><span class="lbl">India<br>release</span></div>
+    <p class="body"><b>7 Dogs</b>, with <b>Salman Khan</b> and <b>Sanjay Dutt</b>, is set for an India release on 21 August &mdash; one week behind the 14 August pile-up, and into whatever screens that fight leaves standing.</p>
+    <p class="body">That is the interesting part of the date, not the date itself. A week is long enough for the Independence Day releases to have shown their hand, and short enough to still catch the holiday tail.</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/salman-khan-sanjay-dutts-7-dogs-set-for-india-release-on-august-21/"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+  </section>
+
+  <!-- --------------------------------------------------------------- 4 -->
+  <section class="card quiet" style="--a1:#141a24;--a2:#141a24" data-label="A.R. Rahman">
+    <div class="chiprow"><span class="chip ghosted">Reported</span></div>
+    <h2 class="head">A.R. Rahman&rsquo;s son hurt in a car accident in Chennai</h2>
+    <p class="body">Reports today say the composer&rsquo;s son was injured in a car accident in Chennai and has since been discharged from hospital.</p>
+    <p class="body">That is the whole of what is known, and this card will not go further than the reporting does. House rule: when something has happened to a real person, the card runs without colour and without a joke, and it does not speculate to fill space.</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/a-r-rahmans-son-injured-in-car-accident-in-chennai-discharged-from-hospital-report/"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+  </section>
+
+  <!-- --------------------------------------------------------------- 5 -->
+  <section class="card" style="--a1:#6b1550;--a2:#8a5a00" data-label="Akshay as Rajesh Khanna">
+    <div class="ghost">05</div>
+    <div class="chiprow"><span class="chip">Casting</span><span class="chip warn">Scoop, not announced</span></div>
+    <h2 class="head">Akshay Kumar to play Rajesh Khanna</h2>
+    <p class="body">Trade reporting has <b>Akshay Kumar</b> playing <b>Rajesh Khanna</b> in the <b>R.D. Burman</b> biopic being made by <b>Farhan Akhtar</b> and <b>Neeraj Pandey</b>. India&rsquo;s first superstar, played by one of the ones who came after.</p>
+    <p class="body">Carried as a scoop rather than an announcement, so treat it as reported and not confirmed &mdash; nobody involved has said it on the record yet.</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/scoop-akshay-kumar-to-play-rajesh-khanna-in-farhan-akhtar-and-neeraj-pandeys-r-d-burman-biopic/"><span class="dot"></span>Bollywood Hungama &middot; scoop</a>
+  </section>
+
+  <!-- --------------------------------------------------------------- 6 -->
+  <section class="card" style="--a1:#123f6b;--a2:#2f1a6b" data-label="Crime Patrol">
+    <div class="ghost">06</div>
+    <div class="chiprow"><span class="chip">Television</span></div>
+    <h2 class="head">Ajay Devgn takes over Crime Patrol</h2>
+    <div class="stat"><span class="big">15</span><span class="lbl">episodes<br>already shot</span></div>
+    <p class="body"><b>Ajay Devgn</b> is reported to have replaced <b>Anup Soni</b> as the host of <b>Crime Patrol</b>, with fifteen episodes already in the can.</p>
+    <p class="body">Soni hosted it long enough that the show and the voice became the same thing to most people watching, which makes this a bigger change on screen than a hosting credit usually is.</p>
+    <a class="src" href="https://www.bollywoodhungama.com/news/bollywood/ajay-devgn-replaces-anup-soni-as-crime-patrol-host-has-shot-15-episodes-report/"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+  </section>
+
+  <!-- ------------------------------------------------------------- end -->
+  <section class="card end" style="--a1:#4a0f3d;--a2:#1a1160" data-label="Desk notes">
+    <h2>That&rsquo;s edition two.</h2>
+
+    <div class="notes">
+      <div class="k">Before you go</div>
+      <p><b>Every card links to the outlet that reported it.</b> Nothing here is written from memory.</p>
+      <p><b>Two are not settled facts.</b> The Akshay Kumar casting is a scoop, not an announcement, and is flagged on the card. The A.R. Rahman story and the Crime Patrol change are both carried as reports.</p>
+      <p><b>The screen-share numbers are a demand, not an outcome.</b> Advance booking had not opened when this went out; what the cinemas actually give each film is decided this week.</p>
+      <p>Corrections run at the top of the next edition &mdash; here, not quietly in a description.</p>
+    </div>
+
+    <a class="cta" href="../index.html">All editions</a>
+    <a class="backlink" href="#top" id="restart">Back to the start</a>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var deck  = document.getElementById('deck');
+  var rail  = document.getElementById('rail');
+  var cards = Array.prototype.slice.call(deck.querySelectorAll('.card'));
+
+  // One rail segment per card, each one a jump target.
+  cards.forEach(function (card, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', card.dataset.label || ('Card ' + (i + 1)));
+    b.addEventListener('click', function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    rail.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(rail.children);
+
+  function mark(i) {
+    for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('on', d <= i);
+  }
+  mark(0);
+
+  var current = 0;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        current = cards.indexOf(e.target);
+        mark(current);
+      }
+    });
+  }, { root: deck, threshold: 0.55 });
+  cards.forEach(function (c) { io.observe(c); });
+
+  function go(step) {
+    var next = Math.min(cards.length - 1, Math.max(0, current + step));
+    cards[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest('a, button')) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')                   { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); cards[0].scrollIntoView({ behavior: 'smooth' }); }
+    if (e.key === 'End')  { e.preventDefault(); cards[cards.length - 1].scrollIntoView({ behavior: 'smooth' }); }
+  });
+
+  document.getElementById('restart').addEventListener('click', function (e) {
+    e.preventDefault();
+    cards[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+</body>
+</html>

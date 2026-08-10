@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<!--
+  Interval at Six — recording cut, edition No. 2.
+
+  A 1080x1920 auto-playing version of the deck, timed to the beats in
+  scripts/2026-08-10.md. Press F for fullscreen, then Space to roll. It runs
+  4:34 unattended, so you record it in one pass and never touch the keyboard.
+
+  This file is a production tool. It is not linked from index.html and it is not
+  what gets published — editions/2026-08-10.html is.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval at Six — recording cut, 10 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0a0612;
+  --cream:#fff6e9;
+  --dim:rgba(255,246,233,.62);
+  --hot:#ff2d6f;
+  --gold:#ffc93c;
+  --lime:#a3e635;
+  --display:'Bebas Neue','Haettenschweiler',Impact,sans-serif;
+  --ui:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+body{font-family:var(--ui);color:var(--cream)}
+
+/* -------------------------------------------------- the 1080x1920 canvas */
+
+#fit{position:fixed;inset:0;background:#000;overflow:hidden}
+/* The stage is always a literal 1080x1920 and is placed by hand — centring an
+   oversized box with grid or flex overflows instead of centring. */
+#stage{
+  width:1080px;height:1920px;
+  position:absolute;top:50%;left:50%;
+  overflow:hidden;
+  background:var(--void);
+  transform-origin:center center;
+}
+
+/* -------------------------------------------------------------- the rail */
+
+#rail{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;gap:8px;padding:26px 40px}
+#rail .seg{flex:1;height:7px;border-radius:99px;background:rgba(255,246,233,.24);overflow:hidden}
+#rail .seg i{display:block;height:100%;width:0;background:var(--cream);border-radius:99px}
+
+#brand{
+  position:absolute;z-index:30;top:64px;left:44px;right:44px;
+  display:flex;justify-content:space-between;
+  font-weight:600;font-size:26px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+#brand b{color:var(--cream);font-weight:800}
+
+/* -------------------------------------------------------------- the cards */
+
+.card{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:200px 84px 130px;
+  opacity:0;visibility:hidden;
+  transition:opacity .45s ease;
+}
+.card.live{opacity:1;visibility:visible}
+
+.card .wash{position:absolute;inset:0;z-index:0;opacity:.92;
+  background:radial-gradient(78% 58% at 88% 8%,var(--a2) 0%,transparent 62%),
+             radial-gradient(92% 70% at 6% 96%,var(--a1) 0%,transparent 66%)}
+.card .screen{position:absolute;inset:0;z-index:1;
+  background-image:radial-gradient(rgba(255,246,233,.16) 2px,transparent 2.6px);
+  background-size:26px 26px;
+  mask-image:linear-gradient(to top,#000 12%,transparent 78%);
+  -webkit-mask-image:linear-gradient(to top,#000 12%,transparent 78%)}
+.card > *:not(.wash):not(.screen):not(.ghost){position:relative;z-index:3}
+
+/* the slow push-in, only on the cards the script asks for it */
+.card .wash,.card .screen,.card .ghost{transition:transform 70s linear}
+.card.push.live .wash,.card.push.live .screen,.card.push.live .ghost{transform:scale(1.09)}
+
+.ghost{position:absolute;z-index:2;top:40px;right:-40px;
+  font-family:var(--display);font-size:620px;line-height:.72;
+  color:rgba(255,246,233,.07);letter-spacing:-.03em}
+
+.chiprow{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:40px}
+.chip{font-size:28px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:18px 30px 15px;border-radius:99px;background:var(--cream);color:var(--void)}
+.chip.ghosted{background:transparent;color:var(--cream);border:3px solid rgba(255,246,233,.4)}
+.chip.warn{background:var(--gold);color:#231600}
+
+.head{font-family:var(--display);font-size:132px;line-height:.92;margin:0 0 38px;letter-spacing:.005em}
+.head em{font-style:normal;color:var(--gold)}
+
+.stat{display:inline-flex;align-items:baseline;gap:24px;align-self:flex-start;
+  margin:0 0 40px;padding:24px 38px 20px;border-radius:28px;
+  background:rgba(10,6,18,.55);border:3px solid rgba(255,246,233,.22)}
+.stat .big{font-family:var(--display);font-size:104px;line-height:1}
+.stat .lbl{font-size:26px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+
+.body{margin:0 0 34px;font-size:42px;line-height:1.46;color:rgba(255,246,233,.92)}
+.body b{color:var(--cream);font-weight:600}
+
+.pull{margin:0 0 40px;padding-left:34px;border-left:8px solid var(--gold);
+  font-size:66px;font-weight:500;font-style:italic;line-height:1.26}
+
+.src{display:inline-flex;align-items:center;gap:20px;align-self:flex-start;
+  padding:22px 36px 18px;border-radius:99px;
+  background:rgba(255,246,233,.1);border:3px solid rgba(255,246,233,.24);
+  font-size:32px;font-weight:600;letter-spacing:.03em}
+.src .dot{width:18px;height:18px;border-radius:99px;background:var(--lime)}
+
+.card.quiet .wash{background:radial-gradient(120% 90% at 50% 100%,#141a24 0%,transparent 70%)}
+.card.quiet .head{font-size:100px;color:rgba(255,246,233,.94)}
+
+/* the punch-in: the named element grows, the rest of the card falls back */
+.card .hero{transition:transform 1.1s cubic-bezier(.2,.7,.2,1);transform-origin:left center}
+.card.punched .hero{transform:scale(1.22)}
+.card.punched > *:not(.hero):not(.wash):not(.screen):not(.ghost){opacity:.3;transition:opacity 1.1s ease}
+
+/* open + end */
+.card.open,.card.end{justify-content:center}
+.wordmark{font-family:var(--display);font-size:238px;line-height:.82;margin:0 0 24px}
+.wordmark span{color:var(--hot);font-size:.6em;letter-spacing:.05em}
+.tagline{font-size:50px;font-weight:500;margin:0 0 60px;max-width:24ch;color:rgba(255,246,233,.88)}
+.tease{list-style:none;margin:0;padding:0}
+.tease li{display:flex;gap:28px;align-items:baseline;padding:24px 0;
+  border-top:2px solid rgba(255,246,233,.16);font-size:40px;font-weight:500;
+  opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.tease li:last-child{border-bottom:2px solid rgba(255,246,233,.16)}
+.tease li.in{opacity:1;transform:none}
+.tease .n{font-family:var(--display);font-size:46px;color:var(--gold);min-width:44px}
+
+.end .big{font-family:var(--display);font-size:150px;line-height:.94;margin:0 0 44px}
+.notes{border-radius:34px;border:3px solid rgba(255,246,233,.22);background:rgba(10,6,18,.5);
+  padding:40px 40px 34px;margin-bottom:52px}
+.notes p{margin:0 0 24px;font-size:38px;line-height:1.42;color:rgba(255,246,233,.88)}
+.notes p:last-child{margin:0}
+.notes b{color:var(--cream);font-weight:600}
+.endmark{display:inline-flex;align-items:center;gap:18px;align-self:flex-start;
+  font-family:var(--display);font-size:56px;letter-spacing:.03em;color:var(--void);
+  background:var(--hot);padding:22px 40px 16px;border-radius:99px}
+
+/* ------------------------------------------------------ countdown + sync */
+
+#slate{position:absolute;inset:0;z-index:60;background:#000;display:grid;place-items:center}
+#slate.gone{display:none}
+#count{font-family:var(--display);font-size:400px;line-height:1;color:var(--cream)}
+#flash{position:absolute;inset:0;z-index:70;background:#fff;opacity:0;pointer-events:none}
+
+/* --------------------------------------------------------- the desk panel */
+/* Everything below is for you, not for the recording. It hides the moment the
+   roll starts and never comes back until you reload. */
+
+#desk{
+  position:fixed;z-index:90;left:0;right:0;bottom:0;
+  background:rgba(8,6,14,.94);border-top:1px solid rgba(255,246,233,.18);
+  padding:18px 22px;display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  font-size:13px;color:var(--dim);
+}
+#desk.hidden{display:none}
+#desk b{color:var(--cream)}
+#desk .key{display:inline-block;border:1px solid rgba(255,246,233,.34);border-radius:5px;
+  padding:2px 7px;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--cream)}
+#desk button{
+  font-family:var(--ui);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  border:0;border-radius:99px;padding:11px 20px;cursor:pointer;background:var(--hot);color:#fff;
+}
+#desk button.ghost{background:transparent;color:var(--cream);border:1px solid rgba(255,246,233,.34)}
+#desk .steps{flex:1 1 380px;min-width:280px;line-height:1.6}
+#tc{font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--cream)}
+</style>
+</head>
+<body>
+
+<div id="fit">
+  <div id="stage">
+
+    <div id="rail"></div>
+    <div id="brand"><span><b>INTERVAL AT SIX</b></span><span>10 AUG 2026</span></div>
+
+    <!-- 0 · open -->
+    <section class="card open" style="--a1:#5b1049;--a2:#2a1160">
+      <div class="wash"></div><div class="screen"></div>
+      <h1 class="wordmark">INTERVAL<br><span>AT SIX</span></h1>
+      <p class="tagline">Six things that actually happened in Hindi cinema today.</p>
+      <ol class="tease" id="tease">
+        <li><span class="n">1</span><span>A court draws a line around Tabu&rsquo;s face and voice</span></li>
+        <li><span class="n">2</span><span>The 14 August screen war has begun</span></li>
+        <li><span class="n">3</span><span>Salman and Sanjay Dutt take 21 August</span></li>
+        <li><span class="n">4</span><span>A.R. Rahman&rsquo;s son hurt in a Chennai crash</span></li>
+        <li><span class="n">5</span><span>Akshay Kumar to play Rajesh Khanna</span></li>
+        <li><span class="n">6</span><span>Ajay Devgn takes over Crime Patrol</span></li>
+      </ol>
+    </section>
+
+    <!-- 1 · lead — slow push in, punch the stat -->
+    <section class="card push" style="--a1:#7a0f3d;--a2:#3a1170">
+      <div class="wash"></div><div class="screen"></div><div class="ghost">01</div>
+      <div class="chiprow"><span class="chip">The courts</span><span class="chip ghosted">The big one</span></div>
+      <h2 class="head">A court draws a line around Tabu&rsquo;s face, name <em>and voice</em></h2>
+      <div class="stat hero"><span class="big">150+</span><span class="lbl">URLs ordered<br>down</span><span class="big">36 HRS</span><span class="lbl">to comply</span></div>
+      <p class="body">Justice Jyoti Singh of the Delhi High Court has granted <b>Tabu</b> an ex parte interim injunction over her name, image and voice &mdash; naming AI, deepfakes and face morphing.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+    </section>
+
+    <!-- 2 · money — punch the stat -->
+    <section class="card" style="--a1:#8a1e10;--a2:#6b3a00">
+      <div class="wash"></div><div class="screen"></div><div class="ghost">02</div>
+      <div class="chiprow"><span class="chip">Box office</span><span class="chip ghosted">Exclusive</span></div>
+      <h2 class="head">The 14 August screen war has started early</h2>
+      <div class="stat hero"><span class="big">&#8377;35 CR</span><span class="lbl">Spider-Man,<br>second Sunday</span></div>
+      <p class="body">PVR Inox wants every show in single screens for <b>Batwara 1947</b>, and seven a day in a two-screen multiplex. <b>Awarapan 2</b> will share. Spider-Man is not moving.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; exclusive</a>
+    </section>
+
+    <!-- 3 · next — punch the date -->
+    <section class="card" style="--a1:#0f5f6b;--a2:#4a1a6b">
+      <div class="wash"></div><div class="screen"></div><div class="ghost">03</div>
+      <div class="chiprow"><span class="chip">In eleven days</span></div>
+      <h2 class="head">Salman and Sanjay Dutt take 21 August</h2>
+      <div class="stat hero"><span class="big">21 AUG</span><span class="lbl">India<br>release</span></div>
+      <p class="body"><b>7 Dogs</b> lands one week behind the 14 August pile-up &mdash; into whatever screens that fight leaves standing.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+    </section>
+
+    <!-- 4 · quiet — no push, no punch, nothing -->
+    <section class="card quiet" style="--a1:#141a24;--a2:#141a24">
+      <div class="wash"></div><div class="screen"></div>
+      <div class="chiprow"><span class="chip ghosted">Reported</span></div>
+      <h2 class="head">A.R. Rahman&rsquo;s son hurt in a car accident in Chennai</h2>
+      <p class="body">Reports today say the composer&rsquo;s son was injured in a car accident in Chennai and has since been discharged from hospital. That is the whole of what is known.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+    </section>
+
+    <!-- 5 · human — punch the scoop chip -->
+    <section class="card" style="--a1:#6b1550;--a2:#8a5a00">
+      <div class="wash"></div><div class="screen"></div><div class="ghost">05</div>
+      <div class="chiprow"><span class="chip">Casting</span><span class="chip warn hero">Scoop, not announced</span></div>
+      <h2 class="head">Akshay Kumar to play Rajesh Khanna</h2>
+      <p class="body">In the <b>R.D. Burman</b> biopic from <b>Farhan Akhtar</b> and <b>Neeraj Pandey</b>. India&rsquo;s first superstar, played by one of the ones who came after.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; scoop</a>
+    </section>
+
+    <!-- 6 · small screen — fast, no move -->
+    <section class="card" style="--a1:#123f6b;--a2:#2f1a6b">
+      <div class="wash"></div><div class="screen"></div><div class="ghost">06</div>
+      <div class="chiprow"><span class="chip">Television</span></div>
+      <h2 class="head">Ajay Devgn takes over Crime Patrol</h2>
+      <div class="stat"><span class="big">15</span><span class="lbl">episodes<br>already shot</span></div>
+      <p class="body">Replacing <b>Anup Soni</b>, who hosted it long enough that the show and the voice became the same thing.</p>
+      <a class="src"><span class="dot"></span>Bollywood Hungama &middot; 10 Aug 2026</a>
+    </section>
+
+    <!-- 7 · end -->
+    <section class="card end" style="--a1:#4a0f3d;--a2:#1a1160">
+      <div class="wash"></div><div class="screen"></div>
+      <div class="big">That&rsquo;s edition two.</div>
+      <div class="notes">
+        <p><b>Every card links to the outlet that reported it.</b> Nothing here is written from memory.</p>
+        <p><b>Two of the six are reports, not confirmed facts</b> &mdash; and both are flagged on the card.</p>
+        <p>Corrections run at the top of the next edition.</p>
+      </div>
+      <span class="endmark">Tomorrow, six more</span>
+    </section>
+
+    <div id="slate"><div id="count">3</div></div>
+    <div id="flash"></div>
+
+  </div>
+</div>
+
+<div id="desk">
+  <div class="steps">
+    <b>Recording cut &mdash; 4:34.</b> Press <span class="key">F</span> for fullscreen, then
+    <span class="key">Space</span> to roll. <span class="key">1</span>&ndash;<span class="key">8</span> parks on a
+    single card so you can check a frame without sitting through the whole thing.
+    A 3-2-1 slate runs first and the last frame of it is a
+    white flash &mdash; line your voice-over up to that flash in the edit and everything after it
+    lands on the script&rsquo;s timecodes. <span class="key">R</span> restarts.
+    <br>
+    Record with <b>QuickTime &rarr; New Screen Recording</b>, dragging a selection around the
+    black-edged 9:16 frame only. Nothing on this bar is in shot &mdash; it disappears when you roll.
+  </div>
+  <span id="tc">0:00 / 4:34</span>
+  <button id="go">Roll</button>
+  <button id="full" class="ghost">Fullscreen</button>
+  <button id="again" class="ghost">Restart</button>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var fit   = document.getElementById('fit');
+  var cards = Array.prototype.slice.call(stage.querySelectorAll('.card'));
+  var rail  = document.getElementById('rail');
+  var slate = document.getElementById('slate');
+  var count = document.getElementById('count');
+  var flash = document.getElementById('flash');
+  var desk  = document.getElementById('desk');
+  var tc    = document.getElementById('tc');
+
+  // Card boundaries, in seconds. These are NOT guesses — each card's clip was
+  // decoded and measured, and the deck was re-timed to the audio rather than
+  // the audio padded out to fit a deck that was too long. This edition was
+  // measured with scripts/measure-audio.html?date=2026-08-10 and runs 4:34.
+  //
+  // Measure with scripts/measure-audio.html — open it in a browser after
+  // running make-voice.sh. Do NOT measure with afinfo: it reports a different
+  // duration per container and was out by fourteen seconds on card zero.
+  var MARKS = [0, 22, 92, 145, 177, 204, 233, 257];
+  var RUNTIME = 274;                       // 4:34
+
+  // The punch-ins the script calls for. Each names the card it lands on, and
+  // sits at the same point within it as it did before the re-time.
+  var PUNCH = [
+    { at: 47,  card: 1 },                  // the 150 URLs & 36 hours
+    { at: 123, card: 2 },                  // Spider-Man's 35 crore
+    { at: 167, card: 3 },                  // the 21 August date
+    { at: 219, card: 5 }                   // the "scoop, not announced" chip
+  ];
+
+  // ---- rail ---------------------------------------------------------------
+  var fills = [];
+  MARKS.forEach(function () {
+    var seg = document.createElement('div');
+    seg.className = 'seg';
+    var i = document.createElement('i');
+    seg.appendChild(i);
+    rail.appendChild(seg);
+    fills.push(i);
+  });
+
+  // ---- fit the 1080x1920 canvas into whatever window we are in ------------
+  function resize() {
+    var pad = desk.classList.contains('hidden') ? 0 : desk.offsetHeight;
+    var availH = Math.max(200, fit.clientHeight - pad);
+    var s = Math.min(fit.clientWidth / 1080, availH / 1920);
+    stage.style.left = (fit.clientWidth / 2) + 'px';
+    stage.style.top = (availH / 2) + 'px';
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---- transport ----------------------------------------------------------
+  var t0 = null, raf = null, running = false;
+
+  function show(i) {
+    cards.forEach(function (c, n) {
+      c.classList.toggle('live', n === i);
+      if (n !== i) c.classList.remove('punched');
+    });
+    if (i === 0) revealTease();
+  }
+
+  function revealTease() {
+    var items = document.querySelectorAll('#tease li');
+    items.forEach(function (li, n) {
+      li.classList.remove('in');
+      setTimeout(function () { li.classList.add('in'); }, 1600 + n * 900);
+    });
+  }
+
+  function fmt(s) {
+    var m = Math.floor(s / 60), r = Math.floor(s % 60);
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  function frame(now) {
+    var t = (now - t0) / 1000;
+    if (t >= RUNTIME) { stop(); return; }
+
+    var idx = 0;
+    for (var i = 0; i < MARKS.length; i++) if (t >= MARKS[i]) idx = i;
+    if (!cards[idx].classList.contains('live')) show(idx);
+
+    // punch-ins
+    for (var p = 0; p < PUNCH.length; p++) {
+      var next = (p + 1 < PUNCH.length) ? PUNCH[p + 1].at : RUNTIME;
+      var card = cards[PUNCH[p].card];
+      var on = t >= PUNCH[p].at && card.classList.contains('live') && t < next;
+      if (on !== card.classList.contains('punched')) card.classList.toggle('punched', on);
+    }
+
+    // rail
+    for (var s = 0; s < MARKS.length; s++) {
+      var start = MARKS[s];
+      var end = (s + 1 < MARKS.length) ? MARKS[s + 1] : RUNTIME;
+      var pct = t <= start ? 0 : t >= end ? 1 : (t - start) / (end - start);
+      fills[s].style.width = (pct * 100) + '%';
+    }
+
+    tc.textContent = fmt(t) + ' / 4:34';
+    raf = requestAnimationFrame(frame);
+  }
+
+  function stop() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+    tc.textContent = '4:34 / 4:34 — done';
+  }
+
+  function roll() {
+    if (running) return;
+    running = true;
+    desk.classList.add('hidden');
+    resize();
+
+    // 3 — 2 — 1 — white flash. The flash is the sync point for the voice-over.
+    var n = 3;
+    slate.classList.remove('gone');
+    count.textContent = n;
+    var tick = setInterval(function () {
+      n--;
+      if (n > 0) { count.textContent = n; return; }
+      clearInterval(tick);
+      slate.classList.add('gone');
+      flash.style.transition = 'none';
+      flash.style.opacity = '1';
+      setTimeout(function () {
+        flash.style.transition = 'opacity .12s linear';
+        flash.style.opacity = '0';
+        show(0);
+        t0 = performance.now();
+        raf = requestAnimationFrame(frame);
+      }, 90);
+    }, 1000);
+  }
+
+  function restart() {
+    stop();
+    slate.classList.remove('gone');
+    count.textContent = '3';
+    flash.style.opacity = '0';
+    cards.forEach(function (c) { c.classList.remove('live', 'punched'); });
+    fills.forEach(function (f) { f.style.width = '0%'; });
+    desk.classList.remove('hidden');
+    resize();
+    tc.textContent = '0:00 / 4:34';
+  }
+
+  document.getElementById('go').addEventListener('click', roll);
+  document.getElementById('again').addEventListener('click', restart);
+  document.getElementById('full').addEventListener('click', function () {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen();
+  });
+  document.addEventListener('fullscreenchange', function () { setTimeout(resize, 60); });
+
+  // 1-8 park on a card so you can check a frame without sitting through five
+  // minutes. Ignored once the roll has started.
+  function park(i) {
+    if (running) return;
+    slate.classList.add('gone');
+    show(i);
+    tc.textContent = 'parked on card ' + (i + 1);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key >= '1' && e.key <= '8') { park(+e.key - 1); return; }
+    if (e.key === ' ') { e.preventDefault(); roll(); }
+    if (e.key === 'r' || e.key === 'R') restart();
+    if (e.key === 'f' || e.key === 'F') {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>
