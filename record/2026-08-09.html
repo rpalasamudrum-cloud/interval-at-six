@@ -5,7 +5,7 @@
 
   A 1080x1920 auto-playing version of the deck, timed to the beats in
   scripts/2026-08-09.md. Press F for fullscreen, then Space to roll. It runs
-  5:08 unattended, so you record it in one pass and never touch the keyboard.
+  4:27 unattended, so you record it in one pass and never touch the keyboard.
 
   This file is a production tool. It is not linked from index.html and it is not
   what gets published — editions/2026-08-09.html is.
@@ -80,7 +80,7 @@ body{font-family:var(--ui);color:var(--cream)}
 .card > *:not(.wash):not(.screen):not(.ghost){position:relative;z-index:3}
 
 /* the slow push-in, only on the cards the script asks for it */
-.card .wash,.card .screen,.card .ghost{transition:transform 62s linear}
+.card .wash,.card .screen,.card .ghost{transition:transform 51s linear}
 .card.push.live .wash,.card.push.live .screen,.card.push.live .ghost{transform:scale(1.09)}
 
 .ghost{position:absolute;z-index:2;top:40px;right:-40px;
@@ -277,7 +277,7 @@ body{font-family:var(--ui);color:var(--cream)}
 
 <div id="desk">
   <div class="steps">
-    <b>Recording cut &mdash; 5:08.</b> Press <span class="key">F</span> for fullscreen, then
+    <b>Recording cut &mdash; 4:27.</b> Press <span class="key">F</span> for fullscreen, then
     <span class="key">Space</span> to roll. <span class="key">1</span>&ndash;<span class="key">8</span> parks on a
     single card so you can check a frame without sitting through the whole thing.
     A 3-2-1 slate runs first and the last frame of it is a
@@ -287,7 +287,7 @@ body{font-family:var(--ui);color:var(--cream)}
     Record with <b>QuickTime &rarr; New Screen Recording</b>, dragging a selection around the
     black-edged 9:16 frame only. Nothing on this bar is in shot &mdash; it disappears when you roll.
   </div>
-  <span id="tc">0:00 / 5:08</span>
+  <span id="tc">0:00 / 4:27</span>
   <button id="go">Roll</button>
   <button id="full" class="ghost">Fullscreen</button>
   <button id="again" class="ghost">Restart</button>
@@ -305,16 +305,24 @@ body{font-family:var(--ui);color:var(--cream)}
   var desk  = document.getElementById('desk');
   var tc    = document.getElementById('tc');
 
-  // Card boundaries, in seconds, straight off scripts/2026-08-09.md.
-  var MARKS = [0, 18, 80, 135, 185, 230, 270, 292];
-  var RUNTIME = 308;                       // 5:08
+  // Card boundaries, in seconds. These are NOT guesses — each card's clip was
+  // decoded and measured, and the deck was re-timed to the audio rather than
+  // the audio padded out to fit a deck that was too long. Edition one was
+  // written for 5:08 and the voiceover came out 4:27.
+  //
+  // Measure with scripts/measure-audio.html — open it in a browser after
+  // running make-voice.sh. Do NOT measure with afinfo: it reports a different
+  // duration per container and was out by fourteen seconds on card zero.
+  var MARKS = [0, 34, 85, 127, 168, 199, 226, 246];
+  var RUNTIME = 267;                       // 4:27
 
-  // The punch-ins the script calls for. Each names the card it lands on.
+  // The punch-ins the script calls for. Each names the card it lands on, and
+  // sits at the same point within it as it did before the re-time.
   var PUNCH = [
-    { at: 40,  card: 1 },                  // 0:40 — the two dates
-    { at: 112, card: 2 },                  // 1:52 — the 462 crore
-    { at: 170, card: 3 },                  // 2:50 — the projection chip
-    { at: 250, card: 5 }                   // 4:10 — the pull quote
+    { at: 52,  card: 1 },                  // the two dates
+    { at: 109, card: 2 },                  // the 462 crore
+    { at: 156, card: 3 },                  // the projection chip
+    { at: 212, card: 5 }                   // the pull quote
   ];
 
   // ---- rail ---------------------------------------------------------------
@@ -388,14 +396,14 @@ body{font-family:var(--ui);color:var(--cream)}
       fills[s].style.width = (pct * 100) + '%';
     }
 
-    tc.textContent = fmt(t) + ' / 5:08';
+    tc.textContent = fmt(t) + ' / 4:27';
     raf = requestAnimationFrame(frame);
   }
 
   function stop() {
     running = false;
     if (raf) cancelAnimationFrame(raf);
-    tc.textContent = '5:08 / 5:08 — done';
+    tc.textContent = '4:27 / 4:27 — done';
   }
 
   function roll() {
@@ -434,7 +442,7 @@ body{font-family:var(--ui);color:var(--cream)}
     fills.forEach(function (f) { f.style.width = '0%'; });
     desk.classList.remove('hidden');
     resize();
-    tc.textContent = '0:00 / 5:08';
+    tc.textContent = '0:00 / 4:27';
   }
 
   document.getElementById('go').addEventListener('click', roll);

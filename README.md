@@ -26,7 +26,7 @@ top, swipe or arrow keys to move. It reads the same on a laptop.
 | `scripts/YYYY-MM-DD.md` | the five-minute video script, with timecodes and metadata |
 | `scripts/YYYY-MM-DD.voice.txt` | the same voiceover, stage directions stripped and names respelled, ready to paste into a voice clone |
 | `scripts/PRONUNCIATION.md` | the running respelling list — the thing that stops TTS mangling names |
-| `record/YYYY-MM-DD.html` | the recording cut — 1080×1920, plays itself for 5:08, for screen capture |
+| `record/YYYY-MM-DD.html` | the recording cut — 1080×1920, plays itself for 4:27, for screen capture |
 | `youtube/CHANNEL.md` | channel setup, upload defaults, the daily loop |
 | `youtube/avatar.svg`, `youtube/banner.svg` | channel artwork masters, export to PNG |
 | `STYLE.md` | the house style and the editorial rules |
@@ -87,7 +87,7 @@ cues cut against the cards, the Shorts cut-down, and the title, thumbnail text,
 chapters, description and tags ready to paste.
 
 `record/YYYY-MM-DD.html` is the picture: the same edition on a fixed 1080×1920
-canvas that plays itself for 5:08, advancing on the script's timecodes with the
+canvas that plays itself for 4:27, advancing on the script's timecodes with the
 push-ins and punch-ins programmed in. Press F, then Space, and screen-record it
 in one pass. It opens on a 3-2-1 slate ending in a white flash frame — sync the
 voice-over to that flash and every card lands where the script says.

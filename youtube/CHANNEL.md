@@ -124,7 +124,14 @@ is not yours.
 
 YouTube draws the line at **whose** voice it is. Cloning your own voice for
 voiceover is listed as **not** requiring the altered-content disclosure;
-cloning someone else's is. So the upload default stays **off**.
+cloning someone else's is. So the upload default stays **off** — once the voice
+is yours.
+
+**While the voice is `Tara`** — the macOS system voice edition one ships with —
+it is a synthetic narrator that is nobody's voice, which is not clearly inside
+that exemption. **Turn the disclosure on** until you switch to your own. It is a
+small label, and a channel that labels forecasts as forecasts should label a
+synthetic voice as synthetic.
 
 Confirm this on YouTube's own policy page before the first upload rather than
 taking it from here — it was read off secondary sources, and this is a policy
@@ -187,11 +194,9 @@ does not need you to sound awake.
 5. Drop the MP3 and the screen recording into iMovie, snap the audio to the
    white flash frame, trim the slate, export.
 
-**Expect to add silence.** The script is 635 spoken words — 4:14 at 150wpm
-inside a 5:08 picture. The missing ~54 seconds is breathing room at the eight
-card transitions, roughly seven seconds each, which a person takes without being
-told and a generated read does not. Cut the audio at each transition and pad it,
-or the voice lands a minute early and the last card plays to silence.
+**No manual pause work.** The gaps between paragraphs and cards are baked into
+the generated audio, and the deck was timed off that exact file. Line the audio
+start to the white flash and the two track each other to the end.
 
 If you record the cold open and the quiet card yourself, they are the **first**
 and **fifth** blocks of the voice file in script order — delete those two before
@@ -225,7 +230,7 @@ model. Words are quotable. Voices and faces are not.
 
 There is a purpose-built cut for this: [`../record/2026-08-09.html`](../record/2026-08-09.html).
 It is the same edition rendered on a fixed **1080×1920** canvas that plays itself
-for 5:08, advancing on the script's timecodes, with the push-ins and punch-ins
+for 4:27, advancing on the script's timecodes, with the push-ins and punch-ins
 already programmed. You record it in one pass instead of swiping by hand and
 hoping the timing lands.
 

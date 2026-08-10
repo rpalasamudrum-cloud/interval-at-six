@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Measure</title>
+<body style="font:14px ui-monospace,Menlo,monospace;background:#111;color:#eee;padding:20px">
+<pre id="out">loading…</pre>
+<script>
+const CARD_PAUSE = 2.6;
+const files = ['../audio/parts/0.m4a','../audio/parts/1.m4a','../audio/parts/2.m4a','../audio/parts/3.m4a',
+               '../audio/parts/4.m4a','../audio/parts/5.m4a','../audio/parts/6.m4a','../audio/parts/7.m4a','../audio/2026-08-09.m4a'];
+
+function dur(src) {
+  return new Promise((res, rej) => {
+    const a = new Audio();
+    a.preload = 'metadata';
+    a.onloadedmetadata = () => res(a.duration);
+    a.onerror = () => rej(src);
+    a.src = src;
+  });
+}
+
+Promise.all(files.map(dur)).then(ds => {
+  const parts = ds.slice(0, 8), combined = ds[8];
+  let cum = 0, marks = [], lines = [];
+  parts.forEach((d, i) => {
+    marks.push(Math.round(cum));
+    lines.push(`card ${i}  speech ${d.toFixed(1).padStart(6)}s   mark ${Math.round(cum).toString().padStart(4)}`);
+    cum += d + (i < 7 ? CARD_PAUSE : 0);
+  });
+  const sum = parts.reduce((a, b) => a + b, 0) + 7 * CARD_PAUSE;
+  document.getElementById('out').textContent =
+    lines.join('\n') +
+    `\n\nsum of parts + pauses : ${sum.toFixed(1)}s` +
+    `\ncombined file duration : ${combined.toFixed(1)}s` +
+    `\ndelta                  : ${(combined - sum).toFixed(1)}s` +
+    `\n\nMARKS   = [${marks.join(',')}]` +
+    `\nRUNTIME = ${Math.ceil(combined) + 1}`;
+  window.__result = { marks, combined, sum };
+}).catch(e => { document.getElementById('out').textContent = 'failed on ' + e; });
+</script>
+</body>

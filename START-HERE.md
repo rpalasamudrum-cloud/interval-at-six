@@ -59,7 +59,31 @@ square and crops the artwork off both sides.
 Description text is in [`youtube/CHANNEL.md`](youtube/CHANNEL.md) under *Setting
 it up*, step 4. Upload defaults are step 5 in the same file.
 
-### 5. Record one minute of your voice
+### 5. The voiceover is already made
+
+`audio/2026-08-09.m4a` exists. It is **Tara**, the Indian-English voice built
+into macOS, at 130wpm, with the pauses between paragraphs and between cards
+already baked in. Free, offline, no account.
+
+Regenerate it any time with:
+
+```
+./scripts/make-voice.sh 2026-08-09
+```
+
+**Listen to it before you commit to it.** If Tara is not good enough, the two
+upgrades are below and neither blocks edition one. Getting a first video out
+matters more than the voice being right, because nobody is watching yet — which
+makes now the free moment to have an imperfect one.
+
+Whatever you use, **turn YouTube's altered-content disclosure on while the voice
+is synthetic**. It is a small label, and for a channel whose whole pitch is
+labelling forecasts as forecasts, labelling a synthetic voice is the consistent
+thing to do. It comes back off when the voice is your own.
+
+The rest of this section is the upgrade path. Skip it today.
+
+### 5a. Record one minute of your voice
 
 **What to record with.** Either is fine and both are already on the Mac:
 
@@ -84,7 +108,7 @@ One continuous take. No music, no traffic, no fan. Mouth about a hand's width
 from the mic. If you fluff a line, start the take again rather than editing —
 one clean minute is worth more than two patched ones.
 
-### 6. Make the clone
+### 5b. Make the clone
 
 **This costs money, and the free tier will not do it.** Instant Voice Cloning
 needs the **Starter plan, about $5 a month**. Starter is also the tier that
@@ -118,14 +142,20 @@ by the time you get there. The decisions are what matter, not the button names.*
 
 ## Part Two — the first video, about 40 minutes
 
-### 7. Generate the voiceover
+### 7. Check the voiceover
 
-Paste [`scripts/2026-08-09.voice.txt`](scripts/2026-08-09.voice.txt) into the
-clone, whole. The stage directions are already stripped and the names are
-already respelled. Generate, **listen to it end to end**, download the MP3.
+`audio/2026-08-09.m4a` is ready. **Listen to it end to end once** — I generated
+it but cannot hear it, so every pronunciation in it is an educated guess.
 
-Anything mispronounced: fix the spelling in the text, regenerate, and add the
-row to [`scripts/PRONUNCIATION.md`](scripts/PRONUNCIATION.md).
+Anything mangled: fix the spelling in
+[`scripts/2026-08-09.voice.txt`](scripts/2026-08-09.voice.txt), add the row to
+[`scripts/PRONUNCIATION.md`](scripts/PRONUNCIATION.md), and re-run
+`./scripts/make-voice.sh 2026-08-09`.
+
+If a fix changes the length noticeably, re-measure: open
+[`scripts/measure-audio.html`](scripts/measure-audio.html) in a browser and
+paste the new `MARKS` and `RUNTIME` into the recording cut. Small wording
+changes will not need this; cutting or adding a paragraph will.
 
 ### 8. Screen-record the deck
 
@@ -133,23 +163,30 @@ Open [`record/2026-08-09.html`](record/2026-08-09.html). Press **F** for
 fullscreen, then **Space**.
 
 Record with QuickTime → New Screen Recording, dragging a selection around the
-9:16 frame only. It runs 5:08 unattended. Do not touch anything while it rolls.
+9:16 frame only. It runs 4:27 unattended. Do not touch anything while it rolls.
 
 It opens on a 3-2-1 slate ending in a **single white flash frame**. That flash
 is your sync point.
 
 ### 9. Assemble
 
-In iMovie: video track = the screen recording, audio track = the MP3.
+In iMovie: video track = the screen recording, audio track = `audio/2026-08-09.m4a`.
 
 - Line the **start of the audio** up to the **white flash frame**.
 - Trim the slate off the front of the finished cut.
-- **Add silence at the card transitions.** The script is 635 spoken words, 4:14
-  at reading pace, inside a 5:08 picture. The missing ~54 seconds is pause time
-  at the eight transitions, about seven seconds each. A person takes those
-  pauses unasked; a generated read does not. Cut the audio at each transition
-  and pad it, or the voice ends a minute before the deck does.
 - Export 1080×1920.
+
+That is the whole edit. **You do not need to add pauses** — the gaps between
+paragraphs and between cards are inside the audio file already, and the deck's
+card timings were measured off that exact file rather than guessed. Picture and
+voice should track each other the whole way down without a single manual cut.
+
+If they drift, the audio and the deck have fallen out of step: re-measure with
+[`scripts/measure-audio.html`](scripts/measure-audio.html) and paste fresh
+`MARKS` into the recording cut.
+
+If you would rather cut card by card, `audio/parts/0.m4a` … `7.m4a` are the same
+voiceover split one clip per card.
 
 ### 10. Upload
 
