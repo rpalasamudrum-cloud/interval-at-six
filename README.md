@@ -112,3 +112,14 @@ The short version, in full in [`STYLE.md`](STYLE.md):
 
 All rights reserved — see [`LICENSE`](LICENSE). The news itself belongs to the
 outlets that reported it, which is why every card links to them.
+
+## Byline
+
+The show is credited to **Guru Gyaan**, which is a pen name. It is what appears
+on the site footer, in the LICENSE and as the on-screen credit; the real name
+stays off the public pages, the same reason commits are authored with GitHub's
+`noreply` address.
+
+Worth knowing rather than worth worrying about: a pseudonymous copyright line is
+valid, but if you ever actually needed to enforce it you would have to establish
+that Guru Gyaan is you. Keep a record somewhere that it is.
