@@ -32,21 +32,27 @@ free:
 
 Download, unzip, select the `.ttf` files, open, **Install Font**.
 
-### 3. Export and upload the artwork
+### 3. Upload the artwork — the PNGs are already exported
 
-`youtube/avatar-800.png` is already exported and correct at 800×800 — but it was
-rendered *before* the fonts were installed, so redo it after step 2 if you want
-the real Bebas.
+Both are done and the right size:
 
-For the banner, and for re-exporting the avatar:
+- `youtube/avatar-800.png` — 800×800
+- `youtube/banner-2560x1440.png` — 2560×1440
+
+**Upload them:** YouTube Studio → Customisation → Branding. Picture takes the
+avatar, Banner image takes the banner. Save, top right.
+
+The banner's readable content sits in the centre 1546×423, which is all a phone
+shows, so YouTube's crop preview will look right without adjustment.
+
+These were rendered *before* the fonts in step 2 were installed, so the type is
+a close fallback rather than true Bebas Neue. Good enough to launch with. To
+redo them properly after installing the fonts:
 
 > Open the `.svg` in **Preview** → File → Export → Format **PNG** → Save.
 
-Preview keeps the aspect ratio. Do not use QuickLook's thumbnail (spacebar
-preview) — it force-crops to a square and ruins the banner.
-
-Upload both under Customisation → Branding. Banner readable content sits in the
-centre 1546×423, which is all a phone shows.
+Do not use QuickLook (spacebar preview) for the banner — it aspect-fills to a
+square and crops the artwork off both sides.
 
 ### 4. Set the channel description and upload defaults
 
