@@ -483,6 +483,25 @@ body{font-family:var(--ui);color:var(--cream)}
   document.body.focus();
   document.addEventListener("click", function () { document.body.focus(); });
 
+  // ?auto=8 rolls by itself after eight seconds. The point is that you should
+  // not be pressing a key on the same machine you are screen-recording — start
+  // the capture, then leave it alone. Default eight seconds if no number given.
+  var auto = new URLSearchParams(location.search).get("auto");
+  if (auto !== null) {
+    var left = parseInt(auto, 10);
+    if (!left || left < 1) left = 8;
+    var say = function () {
+      tc.textContent = "auto-roll in " + left + "s — start recording now";
+      tc.style.color = "#a3e635";
+    };
+    say();
+    var ticker = setInterval(function () {
+      left--;
+      if (left <= 0) { clearInterval(ticker); tc.style.color = ""; roll(); }
+      else say();
+    }, 1000);
+  }
+
   // 1-8 park on a card so you can check a frame without sitting through five
   // minutes. Ignored once the roll has started.
   function park(i) {

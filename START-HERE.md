@@ -165,14 +165,27 @@ changes will not need this; cutting or adding a paragraph will.
 
 ### 8. Screen-record the deck
 
-Open [`record/2026-08-09.html`](record/2026-08-09.html). Press **F** for
-fullscreen, then **Space**.
+**Use the auto-roll.** Open the recording cut with `?auto=10` on the end:
 
-Record with QuickTime → New Screen Recording, dragging a selection around the
-9:16 frame only. It runs 4:27 unattended. Do not touch anything while it rolls.
+```
+open "record/2026-08-10.html?auto=10"
+```
 
-It opens on a 3-2-1 slate ending in a **single white flash frame**. That flash
-is your sync point.
+It counts down ten seconds in the bottom bar and then starts by itself. That
+matters because you should not be pressing keys on the machine you are
+recording — set the capture going, then take your hands off.
+
+1. QuickTime → **New Screen Recording** → drag a selection around the
+   black-edged 9:16 frame only → **Record**.
+2. Now open the URL above. It rolls on its own after ten seconds.
+3. Leave it alone for the full runtime. Stop the capture, ⌘S to save.
+
+It opens on a 3-2-1 slate ending in a **single white flash frame** — that is
+your sync point, so make sure the capture is already running before it appears.
+
+Fullscreen is optional. The instruction bar hides itself the moment the roll
+starts, so a maximised window records just as cleanly. **F** toggles fullscreen
+if you want it, and will say so in the bar if the browser refuses.
 
 ### 9. Assemble
 
