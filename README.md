@@ -94,7 +94,7 @@ voice-over to that flash and every card lands where the script says.
 
 Card one is already vertical, which is the Short.
 
-The channel is <https://youtube.com/@intervalatsix>. Uploading is yours to
+The channel is <https://www.youtube.com/@intervalatsix>. Uploading is yours to
 press; setup and the daily loop are in [`youtube/CHANNEL.md`](youtube/CHANNEL.md).
 
 ## Editorial rules

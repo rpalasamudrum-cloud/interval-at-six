@@ -9,17 +9,18 @@ Part Three is every day after.
 
 ## Part One — setup, about 40 minutes, once
 
-### 1. Fix the channel
+### 1. The channel — done
 
-At <https://studio.youtube.com/channel/UCDwPVv1p9wjcV6JfiRlrefg> →
-Customisation → Basic info:
+<https://www.youtube.com/@intervalatsix> · channel ID `UCHf12GpzEesKkt_H9wSuz-g`
 
-- **Channel name** → `Interval at Six`
-- **Handle** → `@intervalatsix`
+Named **Interval at Six**, handle set, no videos yet. Nothing to do.
 
-Both are free to change today and awkward once a video has been shared. If the
-channel sits on your personal Google profile rather than a Brand Account, move
-it now too — a Brand Account can be transferred later, a personal one cannot.
+> **One standing warning.** There is a second channel on the same login,
+> `UCDwPVv1p9wjcV6JfiRlrefg`, titled **Raju Palasamudrum**. YouTube defaults to
+> whichever channel you used last, so **check the account picker before every
+> upload**. A video that lands there is published under the real name, which is
+> the one thing the pen name, the noreply commit address and the LICENSE were
+> all set up to avoid.
 
 ### 2. Install the two fonts
 

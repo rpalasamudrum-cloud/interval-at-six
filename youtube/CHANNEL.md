@@ -1,8 +1,22 @@
 # The channel
 
-**The channel:** <https://youtube.com/@setty-balgatti> — rename the handle to `@intervalatsix`, see below.
-Studio dashboard: `studio.youtube.com/channel/UCDwPVv1p9wjcV6JfiRlrefg` — that
-one only opens while you are signed in.
+**The channel:** <https://www.youtube.com/@intervalatsix>
+Channel ID `UCHf12GpzEesKkt_H9wSuz-g`. Named **Interval at Six**, handle set, no
+videos on it yet. The old `@setty-balgatti` handle still redirects to it.
+
+Studio: `studio.youtube.com/channel/UCHf12GpzEesKkt_H9wSuz-g` — signed in only.
+
+## Upload to the right channel
+
+There is a second channel on this login: **`UCDwPVv1p9wjcV6JfiRlrefg`**, titled
+**Raju Palasamudrum**. That is the personal one, and it carries the real name
+this project deliberately keeps off everything else.
+
+**Check the account picker before every upload.** YouTube defaults to whichever
+channel you last used, and an upload that lands on the personal channel puts the
+real name on a public video — which is the exact thing the Guru Gyaan byline,
+the noreply commit address and the pen-name LICENSE all exist to prevent. It is
+a two-second check and an awkward thing to undo.
 
 ## What is left for you, and why
 
@@ -15,19 +29,13 @@ Once an `.mp4` exists I can drive Studio in your signed-in Chrome and fill the
 whole upload form out from the script file. I will stop on the review screen and
 show you what is about to go live before anything is published.
 
-## Naming
+## Naming — done
 
 The show is **Interval at Six**. The interval is the half-time break in an Indian
 cinema; the six is both six stories and six o'clock. Nothing else is using the
 name — it was checked before it was chosen.
 
-Two things to change on the channel, and now is when they are free:
-
-1. **Channel name** → `Interval at Six`. This is the one that matters — it is
-   what shows on the video, the search result and the subscription list.
-2. **Handle** → `@intervalatsix`, replacing `@setty-balgatti`. YouTube allows a
-   handle change and the cost today is zero, because nothing links to the old
-   one yet. That stops being true the moment the first video is shared.
+Channel name and handle are both set. Nothing outstanding here.
 
 ### The six is a promise about a clock
 
