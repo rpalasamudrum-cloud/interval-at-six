@@ -24,6 +24,7 @@ top, swipe or arrow keys to move. It reads the same on a laptop.
 | `editions/YYYY-MM-DD.html` | one edition — eight cards, self-contained |
 | `template.html` | the shell to copy for a new edition, with `__TOKENS__` to fill |
 | `scripts/YYYY-MM-DD.md` | the five-minute video script, with timecodes and metadata |
+| `record/YYYY-MM-DD.html` | the recording cut — 1080×1920, plays itself for 5:08, for screen capture |
 | `youtube/CHANNEL.md` | channel setup, upload defaults, the daily loop |
 | `youtube/avatar.svg`, `youtube/banner.svg` | channel artwork masters, export to PNG |
 | `STYLE.md` | the house style and the editorial rules |
@@ -83,12 +84,16 @@ macOS's built-in JavaScriptCore.
 cues cut against the cards, the Shorts cut-down, and the title, thumbnail text,
 chapters, description and tags ready to paste.
 
-The cards are the storyboard — screen-record the deck rather than building a
-second set of graphics. Card one is already vertical, which is the Short.
+`record/YYYY-MM-DD.html` is the picture: the same edition on a fixed 1080×1920
+canvas that plays itself for 5:08, advancing on the script's timecodes with the
+push-ins and punch-ins programmed in. Press F, then Space, and screen-record it
+in one pass. It opens on a 3-2-1 slate ending in a white flash frame — sync the
+voice-over to that flash and every card lands where the script says.
 
-The channel itself has to be created and the videos uploaded by you; that part
-is not something I can do on your behalf. Setup notes are in
-[`youtube/CHANNEL.md`](youtube/CHANNEL.md).
+Card one is already vertical, which is the Short.
+
+The channel is <https://youtube.com/@setty-balgatti>. Uploading is yours to
+press; setup and the daily loop are in [`youtube/CHANNEL.md`](youtube/CHANNEL.md).
 
 ## Editorial rules
 

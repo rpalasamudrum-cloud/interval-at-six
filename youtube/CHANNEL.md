@@ -1,25 +1,42 @@
 # The channel
 
-Everything here is ready to use except the one step I cannot do.
+**The channel exists:** <https://youtube.com/@setty-balgatti>.
+Studio dashboard: `studio.youtube.com/channel/UCDwPVv1p9wjcV6JfiRlrefg` — that
+one only opens while you are signed in.
 
-## What I cannot do, and you can
+## What is left for you, and why
 
-**I can't create the YouTube channel or the Google account behind it.** Creating
-accounts and entering passwords is off-limits for me, and that is not a setting
-that can be flipped. The account and the channel have to be made by you, signed
-in as you. Same for uploading: the upload itself is yours to press.
+**I can't press upload.** Publishing to a public channel, and signing into the
+account behind it, are both yours. Everything on either side of that — the
+edition, the recording cut, the script, the artwork, the title, description,
+chapters and tags — is in this repo and is done.
 
-Everything on either side of that — the edition, the script, the artwork, the
-title, the description, the chapters, the tags — is in this repo and is done.
+Once an `.mp4` exists I can drive Studio in your signed-in Chrome and fill the
+whole upload form out from the script file. I will stop on the review screen and
+show you what is about to go live before anything is published.
 
-## Setting the channel up
+## Naming
 
-1. Create the channel as a **Brand Account**, not on your personal profile.
-   YouTube lets you move a Brand Account between owners later; a personal channel
-   is welded to the login. Do this now and you will not have to redo it.
-2. **Name:** `Comic Gyaan`. **Handle:** `@comicgyaan` if it is free.
-   Check it against the handle you use elsewhere before committing — the handle
-   is the one thing that is awkward to change once people have linked to it.
+The handle is `@setty-balgatti` and the show is called Comic Gyaan. Those do not
+match, which costs you a little on search and on someone recognising a share.
+Two ways to close it, both fine:
+
+- Set the **channel name** to `Comic Gyaan` and leave the handle alone. The name
+  is what shows on the video, the search result and the thumbnail; the handle is
+  mostly the URL. This is the cheaper fix and it is probably enough.
+- Or change the handle too, while nothing links to it yet. YouTube allows a
+  handle change, and the cost of doing it now is zero — it will not be zero once
+  the first video has been shared.
+
+Either way the channel name should read `Comic Gyaan`, because that is the word
+the videos, the artwork and the site all say.
+
+## Setting it up
+
+1. If the channel is on your personal profile rather than a **Brand Account**,
+   move it now. YouTube lets you transfer a Brand Account between owners later;
+   a personal channel is welded to the login.
+2. **Channel name:** `Comic Gyaan`, per the section above.
 3. **Avatar:** export [`avatar.svg`](avatar.svg) to PNG at 800×800.
    **Banner:** export [`banner.svg`](banner.svg) to PNG at 2560×1440.
    Both use the deck's own palette — void black, hot pink, gold, halftone — and
@@ -44,6 +61,29 @@ New edition every day.
    **off** (the cards are original type and colour, no synthetic likenesses),
    comments on with hold-for-review, licence Standard YouTube.
 
+## Recording the video
+
+There is a purpose-built cut for this: [`../record/2026-08-09.html`](../record/2026-08-09.html).
+It is the same edition rendered on a fixed **1080×1920** canvas that plays itself
+for 5:08, advancing on the script's timecodes, with the push-ins and punch-ins
+already programmed. You record it in one pass instead of swiping by hand and
+hoping the timing lands.
+
+1. Open it, press **F** for fullscreen, then **Space** to roll. `1`–`8` parks on
+   a single card if you want to check a frame first. `R` restarts.
+2. It runs a **3-2-1 slate and then a single white flash frame**. That flash is
+   your sync point — line the voice-over up to it in the edit and every card
+   lands where the script says it does.
+3. Record with **QuickTime → New Screen Recording**, dragging a selection around
+   the 9:16 frame only. The instruction bar at the bottom of the page hides the
+   moment you roll, so it is never in shot.
+4. Record the voice-over separately, reading the script at a steady 150wpm.
+   Drop both into iMovie, snap the audio to the flash, trim the slate off the
+   front, export 1080×1920.
+
+Make a fresh `record/YYYY-MM-DD.html` per edition — copy the last one and swap
+the card content and the `MARKS` array to match the new script.
+
 ## The daily loop
 
 Roughly ninety minutes end to end once the reading is done.
@@ -56,7 +96,7 @@ Roughly ninety minutes end to end once the reading is done.
 | 4 | Add the edition to `index.html` — latest card and archive row. | [`../index.html`](../index.html) |
 | 5 | `jsc verify.js` — must pass before anything else happens. | [`../verify.js`](../verify.js) |
 | 6 | Write `scripts/YYYY-MM-DD.md` off the finished edition. | [`../scripts`](../scripts) |
-| 7 | Record voice to the script. Screen-record the deck on a phone-shaped canvas. | — |
+| 7 | Record voice to the script, and screen-record the recording cut. | [`../record`](../record) |
 | 8 | Cut to the timecodes. Source super on screen for every card. | — |
 | 9 | Upload with the title, chapters, description and tags from the script file. | — |
 | 10 | Push the repo so the written edition is live when the video is. | — |
