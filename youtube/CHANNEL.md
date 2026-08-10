@@ -136,9 +136,14 @@ is a small label, not a penalty.
 ElevenLabs is the obvious tool. It offers two tiers and the difference matters:
 
 - **Instant cloning** wants one to three minutes of audio. Usable tomorrow, and
-  it sounds it — flat, and it drifts on long paragraphs.
+  it sounds it — flat, and it drifts on long paragraphs. Needs the **Starter**
+  plan, around $5 a month; it is not on the free tier.
 - **Professional cloning** wants around thirty minutes. Materially better, and
-  for a daily where the same voice shows up every day, worth waiting for.
+  for a daily where the same voice shows up every day, worth waiting for. Sits
+  on **Creator**, around $22.
+
+Starter is also the tier that carries **commercial usage rights**. A public
+channel needs those, so this is not the place to economise.
 
 **So read the first six editions yourself.** Six scripts at five minutes each is
 almost exactly the thirty minutes a professional clone wants — and it is thirty

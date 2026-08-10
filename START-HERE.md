@@ -61,26 +61,58 @@ it up*, step 4. Upload defaults are step 5 in the same file.
 
 ### 5. Record one minute of your voice
 
-Read the **first four paragraphs** of
-[`scripts/2026-08-09.voice.txt`](scripts/2026-08-09.voice.txt) — from
-"Six things happened in Hindi cinema today" down to "…and holds India back."
-That is about 135 words, which is a little under a minute at reading pace.
+**What to record with.** Either is fine and both are already on the Mac:
 
-Read it the way you would actually present it. The clone copies your cadence,
-not just your timbre, so a flat sample gives a flat clone.
+- **QuickTime Player** → File → New Audio Recording → red button. Stop, then
+  File → Save.
+- **Voice Memos** → red button. Then right-click the recording → Share → Save to
+  Files.
 
-Record in a small room with soft furnishings. Voice Memos on a phone held a
-hand's width away is fine. No music, no background noise, one continuous take.
+Or use a phone. A phone in a small room with soft furniture beats a good mic in
+a hard-walled kitchen — the room matters more than the microphone.
+
+**What to read.** The **first four paragraphs** of
+[`scripts/2026-08-09.voice.txt`](scripts/2026-08-09.voice.txt) — from "Six
+things happened in Hindi cinema today" down to "…and holds India back." About
+135 words, a little under a minute at reading pace.
+
+**How to read it.** The way you would actually present it, not the way you would
+read a form aloud. The clone copies your cadence and your energy, not just the
+sound of you. A flat sample gives a flat clone, and you will be stuck with it.
+
+One continuous take. No music, no traffic, no fan. Mouth about a hand's width
+from the mic. If you fluff a line, start the take again rather than editing —
+one clean minute is worth more than two patched ones.
 
 ### 6. Make the clone
 
-<https://elevenlabs.io> → Voices → **Instant Voice Clone** → upload the
-recording.
+**This costs money, and the free tier will not do it.** Instant Voice Cloning
+needs the **Starter plan, about $5 a month**. Starter is also the tier that
+carries **commercial usage rights**, which a public channel needs — so this is
+not a step to economise on. Professional cloning, which sounds materially
+closer to you, sits on Creator at about $22 and wants ~30 minutes of audio.
 
-One minute is the minimum. It will sound slightly flat and it will drift on long
-paragraphs — that is the tier, not your reading. Re-clone with more audio as you
-accumulate it, and move to **Professional** cloning once you have about thirty
-minutes, which is roughly six editions' worth.
+Then:
+
+1. <https://elevenlabs.io> → sign up → take **Starter**.
+2. **Voices** → Add a new voice → **Instant Voice Clone**.
+3. Upload the recording from step 5.
+4. Confirm the rights checkbox. It is your own voice, so this is honest — it is
+   there because cloning someone else's is what the box exists to stop.
+5. Name it something you will recognise in a year: `Interval at Six — host`.
+6. When generating, push **similarity high** and keep **stability around the
+   middle**. Too stable reads robotic; too loose drifts halfway through a
+   paragraph. Choose the **highest-quality model offered, not the fastest** —
+   the Flash and Turbo models trade quality for latency, and you are not doing
+   anything live.
+
+One minute is the floor. It will sound slightly flat and it will wander on the
+long paragraphs — that is the tier, not your reading. Re-clone with more audio
+as it accumulates, and move to Professional once you have about six editions'
+worth.
+
+*The interface changes often; the steps above may be named slightly differently
+by the time you get there. The decisions are what matter, not the button names.*
 
 ---
 
