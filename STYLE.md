@@ -1,130 +1,138 @@
 # House style
 
-The look is a newsprint comic strip: flat ink, halftone dots, one spot colour,
-hard corners. It is not a "modern app" and it is not trying to be. If something
-you are about to add would look at home in a SaaS dashboard, it is wrong here.
+Loud, dark, poster-sized. Built for a phone held vertically, by someone who
+already follows three film accounts and will give you ninety seconds.
 
-## Not allowed
+An edition is a **deck of full-screen cards** you swipe through — an opening
+card, six story cards, an end card. Not an article. Nothing on a card should
+need a second read, and nothing should need a scroll inside the card.
 
-The verifier fails the build on all of these, so they are not opinions:
-
-- **Emoji.** Anywhere.
-- **Gradients.** Colour is flat or it is halftone dots. Never a fade.
-- **Shadows** — box, text, drop, backdrop-filter. Depth comes from a 3px ink
-  border, not from a blur.
-- **Photographs.** No `<img>`. Every panel is drawn in inline SVG. This is a
-  legal position as much as an aesthetic one: no likenesses, no licensed stills.
-- **Unfilled `__PLACEHOLDER__` tokens.**
-
-## Palette
+## The look
 
 | | | |
 | --- | --- | --- |
-| Newsprint | `#efe6d4` | page |
-| Card | `#f7f1e4` | inside a panel, below the art |
-| Ink | `#17130f` | every line, every border, most type |
-| Vermilion | `#b3321a` | the spot colour — sound effects, one shape per panel |
-| Indigo | `#28486d` | the second halftone, for cooler panels |
-| Mustard | `#e6d5a5` | caption boxes and the projection tag, nothing else |
+| Void | `#0a0612` | the base, near-black with a violet bias |
+| Cream | `#fff6e9` | all body text and most headlines |
+| Hot pink | `#ff2d6f` | the brand accent — wordmark, primary button |
+| Gold | `#ffc93c` | highlight inside a headline, pull quotes, warning chip |
+| Lime | `#a3e635` | the sourced dot, and nothing else |
 
-One spot colour per panel. If both vermilion and indigo are load-bearing in the
-same frame, one of them is decoration and should come out.
+Each card sets its own two-colour wash through `--a1` and `--a2` in the inline
+`style` attribute. Pick deep, saturated versions — they sit under a dark overlay
+and will look muddy if you start light. A halftone dot screen sits over the
+whole card and fades out toward the top.
 
-## Type
+**Type.** `Bebas Neue` for anything big — the wordmark, headlines, stat numbers,
+the ghost numeral. `Poppins` for everything you actually read. Headlines are
+sentence case, not shouty caps; Bebas is already shouting.
 
-| Role | Face | Notes |
-| --- | --- | --- |
-| Masthead, panel numbers, sound effects | **Anton** | Impact / Haettenschweiler fallback |
-| Caption boxes, balloons, tags, footers | **Archivo Narrow** | always uppercase, letterspaced |
-| Body copy, desk notes | **Spectral** | Georgia fallback |
+**Motion** is limited to the swipe cue and the smooth snap. No parallax, no
+entrance animations. `prefers-reduced-motion` turns off what is left.
 
-Balloon text is uppercase because that is how comics are lettered — it does the
-work that a novelty "comic" font would otherwise be asked to do, without the
-cheapness. Do not reach for Comic Neue or anything like it.
-
-Google Fonts is the only network request the page makes, and it degrades to
-Impact and Georgia if the request fails. Keep it that way: no other external
-dependency, no build step, one self-contained file per edition.
-
-## Panel anatomy
+## Card anatomy
 
 ```
-+-----------------------------------------------+
-| [caption box, mustard]                   [03] |   <- .cap and .num, absolute
-|                                               |
-|              drawn SVG art                    |   <- .art, viewBox 440x300
-|                                               |      (lead panel: 900x300)
-|   ( BALLOON, UPPERCASE )        SFX WORD      |   <- .balloon and .sfx
-+-----------------------------------------------+
-|  Body copy, Spectral, two short paragraphs.   |   <- .text
-|                                               |
-+-----------------------------------------------+
-|  REPORTED · OUTLET — LINK                     |   <- .cite, pinned to the bottom
-+-----------------------------------------------+
++---------------------------------------+
+| ▓▓▓ progress rail — one segment/card  |
+| COMIC GYAAN               9 AUG 2026  |
+|                                  ┌──┐ |
+|                                  │01│ |  <- .ghost, watermark numeral
+|                                  └──┘ |
+|                                       |
+|  [ BOX OFFICE ] [ record broken ]     |  <- .chiprow
+|  HEADLINE THAT DOES                   |  <- h2.head, Bebas, up to 88px
+|  THE WHOLE JOB                        |
+|  ┌───────────────┐                    |
+|  │ ₹462 CR  week1│                    |  <- .stat, optional
+|  └───────────────┘                    |
+|  Two short paragraphs. Sixty words    |  <- .body
+|  is plenty. Bold the film titles.     |
+|                                       |
+|  ( • Deccan Herald )                  |  <- .src, always last, always there
++---------------------------------------+
 ```
 
-The lead panel takes `class="panel lead"` and spans both columns; its first
-paragraph takes `class="lede"` for the drop cap.
+Content is bottom-aligned on a phone and centred on a desktop. The card is
+`min-height:100dvh`, not `height`, so a card with a lot in it grows and scrolls
+rather than clipping its own top off on a short screen.
 
 ## The six slots
 
-The same six every day. The constraint is the format — it is what makes it a
-strip rather than a feed, and it is what makes the video a fixed five minutes.
+Same six every day. The constraint is the format — it is what makes it a deck
+rather than a feed, and what keeps the video at a fixed five minutes.
 
-| | Slot | What goes in it |
-| --- | --- | --- |
-| 1 | **Lead** | the biggest story, double width, gets a full minute on video |
-| 2 | **Money** | box office, acquisitions, budgets |
-| 3 | **Next** | what releases, when — dates, censor, trailers |
-| 4 | **Quiet** | the story that touches real events or real people |
-| 5 | **Human** | a return, a debut, a career turn |
-| 6 | **Small screen** | streaming, television, and the industry beyond Hindi |
+| | Slot | What goes in it | Card |
+| --- | --- | --- | --- |
+| 1 | **Lead** | the biggest story of the day | full wash, stat, a minute on video |
+| 2 | **Money** | box office, acquisitions, budgets | stat block, figure always dated |
+| 3 | **Next** | what releases, when — dates, censor, trailers | warn chip if you quote a forecast |
+| 4 | **Quiet** | the story that touches real events or real people | no wash, no numeral, no stat |
+| 5 | **Human** | a return, a debut, a career turn | pull quote |
+| 6 | **Small screen** | streaming, TV, the industry beyond Hindi | stat block |
 
-If a day genuinely has nothing for a slot, take a second story into the nearest
-neighbouring slot rather than padding. Six panels, always.
+If a day has nothing for a slot, take a second story into the nearest
+neighbouring slot rather than padding. Six cards, always.
 
-## Drawing the art
+## The quiet card
 
-Flat shapes, `stroke-width` 5–7, no fills except the spot colour and the card
-cream. Objects, not people. The strip is about what happened, and a bow, a
-calendar page or a set of tree rings carries a story better than a caricature —
-and does not put a real person's face in a drawing they did not agree to.
+Card four drops the colour wash, the ghost numeral, the stat block and the gold.
+Near-black, one ghosted chip, plain type.
 
-Halftone the background with the shared patterns, at 24–40% opacity:
+It exists so the deck can carry a story about something that happened to people
+without the design making a party of it. The rule is not "be tasteful when it
+feels right" — it is a slot, it is in the template, and the verifier fails an
+edition that does not have exactly one.
 
-```html
-<rect x="0" y="0" width="440" height="300" fill="url(#dotsRed)" opacity="0.3"></rect>
-```
+## Hard rules
 
-Both patterns are defined once in a zero-size `<svg>` at the top of the page, not
-inside a panel, so reordering or dropping a panel cannot take the fill out from
-under the others. The verifier checks that every `url(#…)` resolves.
+The verifier fails the build on these, so they are not opinions:
 
-Art built so far, to steal from: a drawn bow and a lamp (edition 1, panel 1), a
-bar chart and a torn ticket (panel 2), a calendar page with a date ringed
-(panel 3), rails running to a doorway (panel 4), tree rings (panel 5), a screen
-and a ranked list (panel 6).
+- **No `<img>`. Ever.** No stills, no posters, no paparazzi shots, nobody's
+  likeness. This is a legal position, not a taste one. Every visual is type,
+  colour and CSS.
+- **No emoji.** The chips and badges do that job and do it without looking
+  cheap.
+- **Every story card carries a `.src` link** to the outlet that reported it.
+- **A hedged number wears the warning chip.** If the card says forecast,
+  projection, projected or estimate anywhere, `class="chip warn"` has to be on
+  it.
+- **Exactly one quiet card, exactly six story cards, one open, one end.**
+- **No unfilled `__TOKEN__`.**
+
+Gradients, shadows and blurs are all fine here and used deliberately. That is a
+change from the sibling `smartrama` quiz repo, where they are banned — different
+project, different audience, different brief.
 
 ## Editorial rules
 
-These are the ones that matter more than any of the above.
+These matter more than any of the above.
 
-1. **No panel ships without a source link.** Not "as reported" — a link, to the
-   outlet, on the panel.
-2. **Nothing is written from memory.** The stories come from the trades on the
-   morning of the edition. If it cannot be sourced by the time the strip is
-   drawn, it waits or it is dropped.
-3. **A projection is labelled a projection.** An opening-weekend estimate is a
-   forecast. It gets the mustard tag on the panel and the word "forecast" in the
-   voice-over, and it is never restated later as though it were the result.
+1. **No card ships without a source link.** Not "as reported" — a link.
+2. **Nothing is written from memory.** Stories come from the trades on the
+   morning of the edition. If it cannot be sourced by the time the deck is
+   built, it waits or it is dropped.
+3. **A forecast is labelled a forecast**, on the card, and is never restated
+   later as though it were the result.
 4. **Numbers are dated.** Box-office totals move. Say which day the figure is
    from, every time.
-5. **The quiet panel runs quiet.** No sound effect, no punchline, no music, on
-   anything that touches what happened to real people.
-6. **Corrections go at the top of the next edition** — in the strip, where the
-   mistake was, not silently into a description.
+5. **The quiet card runs quiet.**
+6. **Corrections go at the top of the next edition** — on the cards, where the
+   mistake was, not silently into a video description.
 
-Rules 1 to 4 exist because of a specific and recent lesson: the Bollywood quiz
-pack in the sibling `smartrama` repo was written from model knowledge, never
-checked, and is still unpublished because of it. That is the failure mode this
-project is built to not repeat.
+Rules 1 to 4 exist because of a specific lesson: the Bollywood quiz pack in the
+sibling `smartrama` repo was written from model knowledge, never checked, and is
+still unpublished because of it. That is the failure mode this project is built
+not to repeat.
+
+## Writing for the cards
+
+- **Headline does the whole job.** If the reader swipes past after the headline
+  they should still have got the news.
+- **Sixty words of body, in two paragraphs.** More than that and it is an
+  article wearing a card.
+- **Bold the film titles, nothing else.**
+- **Second paragraph is the "so what".** The first says what happened; the
+  second says why it is interesting, or what the catch is.
+- **No hype adjectives.** "Biggest", "shocking", "breaks the internet" — the
+  stat block is already doing the shouting, and this is the difference between
+  the deck and every other Bollywood account.

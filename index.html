@@ -2,117 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comic Gyaan — the day in Hindi cinema, drawn in panels</title>
-<meta name="description" content="A daily comic-strip edition of the day's Hindi film news. Six panels, every one of them sourced.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comic Gyaan — six things a day from Hindi cinema</title>
+<meta name="description" content="Six things that actually happened in Hindi cinema, every day. Swipeable cards. Every one of them sourced.">
+<meta name="theme-color" content="#0a0612">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@500;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#efe6d4;
-  --card:#f7f1e4;
-  --ink:#17130f;
-  --red:#b3321a;
-  --mustard:#e6d5a5;
-  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
-  --letter:'Archivo Narrow','Arial Narrow',Arial,sans-serif;
-  --body:'Spectral',Georgia,'Times New Roman',serif;
+  --void:#0a0612;
+  --cream:#fff6e9;
+  --dim:rgba(255,246,233,.62);
+  --hot:#ff2d6f;
+  --gold:#ffc93c;
+  --lime:#a3e635;
+  --display:'Bebas Neue','Haettenschweiler',Impact,sans-serif;
+  --ui:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
-.sheet{max-width:780px;margin:0 auto;padding:28px 20px 64px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--void);color:var(--cream);
+  font-family:var(--ui);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(70% 44% at 88% 0%,#3a1170 0%,transparent 60%),
+    radial-gradient(80% 50% at 0% 8%,#7a0f3d 0%,transparent 58%);
+  background-repeat:no-repeat;
+}
+.wrap{max-width:960px;margin:0 auto;padding:38px 22px 80px}
 
-.masthead{border-bottom:4px solid var(--ink);padding-bottom:14px}
-.masthead h1{font-family:var(--display);font-size:clamp(46px,12vw,92px);line-height:.86;margin:0;text-transform:uppercase}
-.masthead h1 .g{color:var(--red)}
-.strap{font-family:var(--letter);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;margin-top:10px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:44px}
+.top b{color:var(--cream);font-weight:800}
 
-.blurb{border-bottom:1px solid var(--ink);padding:20px 0 22px}
-.blurb p{margin:0 0 12px}
-.blurb p:last-child{margin-bottom:0}
+.wordmark{font-family:var(--display);font-size:clamp(60px,15vw,150px);line-height:.82;margin:0 0 14px}
+.wordmark span{color:var(--hot)}
+.lede{font-size:clamp(17px,4.6vw,24px);font-weight:500;max-width:24ch;margin:0 0 14px}
+.sub{color:var(--dim);max-width:52ch;margin:0 0 40px;font-size:15px}
+.sub b{color:var(--cream);font-weight:600}
 
-h2{font-family:var(--letter);text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;margin:30px 0 12px}
+h2{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:46px 0 16px}
 
-.latest{border:3px solid var(--ink);background:var(--card);display:block;text-decoration:none;color:var(--ink)}
-.latest .band{background:var(--ink);color:var(--paper);font-family:var(--letter);text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;padding:7px 16px 6px}
-.latest .inner{padding:18px 18px 20px}
-.latest .no{font-family:var(--display);font-size:34px;line-height:1;text-transform:uppercase}
-.latest .when{font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:12px;font-weight:700;margin:6px 0 12px}
-.latest .lines{margin:0;padding-left:20px}
-.latest .lines li{margin-bottom:5px}
-.latest .go{display:inline-block;margin-top:14px;border:2px solid var(--ink);background:var(--mustard);font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:700;padding:8px 14px 7px}
-.latest:hover .go{background:var(--red);color:var(--paper)}
+.latest{
+  display:block;text-decoration:none;color:var(--cream);
+  border-radius:24px;overflow:hidden;
+  border:1.5px solid rgba(255,246,233,.2);
+  background:
+    radial-gradient(80% 90% at 100% 0%,#5b1049 0%,transparent 62%),
+    radial-gradient(90% 90% at 0% 100%,#2a1160 0%,transparent 62%),
+    rgba(255,246,233,.05);
+  padding:26px 24px 24px;
+  position:relative;
+}
+.latest::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,246,233,.14) 1px,transparent 1.4px);
+  background-size:13px 13px;
+  mask-image:linear-gradient(to top left,#000,transparent 62%);
+  -webkit-mask-image:linear-gradient(to top left,#000,transparent 62%);
+}
+.latest:hover{border-color:var(--hot)}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:var(--hot);color:var(--cream);padding:6px 11px 5px;border-radius:99px;margin-bottom:16px}
+.latest .no{font-family:var(--display);font-size:clamp(34px,8vw,54px);line-height:.95}
+.latest .when{font-size:13px;font-weight:500;color:var(--dim);margin-bottom:18px}
+.latest ol{list-style:none;margin:0 0 22px;padding:0;max-width:40ch;position:relative;z-index:1}
+.latest ol li{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid rgba(255,246,233,.14);font-size:14.5px;font-weight:500}
+.latest ol li:last-child{border-bottom:1px solid rgba(255,246,233,.14)}
+.latest ol .n{font-family:var(--display);font-size:16px;color:var(--gold);min-width:18px}
+.go{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-size:21px;letter-spacing:.03em;background:var(--cream);color:var(--void);padding:11px 20px 9px;border-radius:99px;position:relative;z-index:1}
+.latest:hover .go{background:var(--gold)}
 
-ol.archive{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
-ol.archive li{border-bottom:1px solid var(--ink)}
-ol.archive a{display:flex;justify-content:space-between;gap:16px;padding:11px 2px;text-decoration:none;color:var(--ink)}
-ol.archive a:hover{background:var(--card);color:var(--red)}
-ol.archive .d{font-family:var(--letter);text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:700}
-ol.archive .t{font-size:15px;text-align:right}
+ol.archive{list-style:none;margin:0;padding:0}
+ol.archive li{border-top:1px solid rgba(255,246,233,.16)}
+ol.archive li:last-child{border-bottom:1px solid rgba(255,246,233,.16)}
+ol.archive a{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:15px 4px;text-decoration:none;color:var(--cream)}
+ol.archive a:hover{color:var(--gold)}
+ol.archive .d{font-family:var(--display);font-size:19px;letter-spacing:.03em;color:var(--dim);white-space:nowrap}
+ol.archive a:hover .d{color:var(--gold)}
+ol.archive .t{font-size:15px;font-weight:500;text-align:right}
 
-.rules{border:3px solid var(--ink);background:var(--card);padding:18px}
-.rules ul{margin:0;padding-left:20px}
-.rules li{margin-bottom:9px}
-.rules li:last-child{margin-bottom:0}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.rule{border-radius:18px;border:1.5px solid rgba(255,246,233,.18);background:rgba(255,246,233,.045);padding:18px 18px 16px}
+.rule .k{font-family:var(--display);font-size:22px;color:var(--gold);line-height:1;margin-bottom:8px}
+.rule p{margin:0;font-size:14px;color:rgba(255,246,233,.86)}
 
-footer{margin-top:36px;border-top:4px solid var(--ink);padding-top:12px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:10px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+.promise{
+  display:flex;gap:12px;align-items:flex-start;
+  border-radius:18px;border:1.5px solid rgba(163,230,53,.4);
+  background:rgba(163,230,53,.07);padding:18px;margin-top:16px;
+}
+.promise .dot{width:9px;height:9px;border-radius:99px;background:var(--lime);flex:none;margin-top:7px}
+.promise p{margin:0;font-size:14.5px}
+.promise b{font-weight:600}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,246,233,.16);display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 </style>
 </head>
 <body>
-<div class="sheet">
+<div class="wrap">
 
-<header class="masthead">
-  <h1>Comic <span class="g">Gyaan</span></h1>
-  <p class="strap">The day in Hindi cinema, drawn in panels</p>
-</header>
+<div class="top"><span><b>COMIC GYAAN</b></span><span>Daily</span></div>
 
-<div class="blurb">
-  <p>One edition a day. Six panels. The day&rsquo;s Hindi film news &mdash; releases, box office, castings, the things that actually moved &mdash; drawn as a comic strip instead of written as a list.</p>
-  <p>The drawings are the point, but the sourcing is the promise: <b>no panel goes out without a link to the outlet that reported it</b>, and anything that is a forecast rather than a fact is labelled a projection on the panel itself.</p>
-</div>
+<h1 class="wordmark">COMIC<br><span>GYAAN</span></h1>
+<p class="lede">Six things that actually happened in Hindi cinema. Every day.</p>
+<p class="sub">Releases, box office, casting, streaming &mdash; as a stack of cards you swipe through in ninety seconds, not a wall of text. <b>Every card links to the outlet that reported it,</b> and anything that is a forecast rather than a fact is labelled on the card.</p>
 
-<h2>Today&rsquo;s edition</h2>
+<h2>Today</h2>
 
 <a class="latest" href="editions/2026-08-09.html">
-  <div class="band">Latest</div>
-  <div class="inner">
-    <div class="no">Edition No. 1</div>
-    <div class="when">Sunday, 9 August 2026</div>
-    <ul class="lines">
-      <li><i>Ramayana</i> takes 6 November abroad and Diwali at home</li>
-      <li>A Hollywood record falls in India at &#8377;400 crore</li>
-      <li><i>Awarapan 2</i> clears censor for the 14th</li>
-      <li><i>Batwara 1947</i> goes to Punjab, and to the survivors</li>
-      <li><i>Masoom</i>, forty-three years later</li>
-      <li><i>Governor</i> tops Prime Video; TVF turns Marathi</li>
-    </ul>
-    <span class="go">Read the strip</span>
-  </div>
+  <span class="badge">New today</span>
+  <div class="no">Edition No. 1</div>
+  <div class="when">Sunday, 9 August 2026</div>
+  <ol>
+    <li><span class="n">1</span><span>Ramayana lands on Diwali &mdash; but not first</span></li>
+    <li><span class="n">2</span><span>A Hollywood record falls at &#8377;400 crore</span></li>
+    <li><span class="n">3</span><span>Awarapan 2 is five days out</span></li>
+    <li><span class="n">4</span><span>Batwara 1947 goes to Punjab</span></li>
+    <li><span class="n">5</span><span>Masoom, forty-three years later</span></li>
+    <li><span class="n">6</span><span>Governor is No. 1 on Prime Video</span></li>
+  </ol>
+  <span class="go">Start swiping</span>
 </a>
 
-<h2>All editions</h2>
+<h2>Every edition</h2>
 
 <ol class="archive">
   <li>
     <a href="editions/2026-08-09.html">
-      <span class="d">No. 1 &middot; 9 Aug 2026</span>
-      <span class="t">The epic picks its day</span>
+      <span class="d">No. 1 &middot; 9 Aug</span>
+      <span class="t">Ramayana picks Diwali, and a Hollywood record falls</span>
     </a>
   </li>
 </ol>
 
-<h2>How an edition is made</h2>
+<h2>How it works</h2>
 
 <div class="rules">
-  <ul>
-    <li><b>Six panels, chosen the same way every day.</b> One lead, one on money, one on what releases next, one on the industry beyond the stars, one human story, one on streaming or television.</li>
-    <li><b>Sourced first, drawn second.</b> The stories are pulled from the trade press on the morning of the edition. If a story cannot be sourced by the time the strip is drawn, it waits or it is dropped.</li>
-    <li><b>Projections are marked as projections.</b> An opening-weekend estimate is not a box-office result and never gets written as one.</li>
-    <li><b>No photographs.</b> Every panel is drawn &mdash; flat ink, halftone, one spot colour. Nobody&rsquo;s likeness and nobody&rsquo;s copyrighted still.</li>
-    <li><b>Some panels get no joke.</b> If a story touches something that happened to real people, it runs quiet: no sound effect, no punchline.</li>
-  </ul>
+  <div class="rule"><div class="k">Six slots</div><p>The lead, the money, what releases next, the quiet one, the human one, the small screen. Same six every day.</p></div>
+  <div class="rule"><div class="k">Ninety seconds</div><p>Full-screen cards you swipe or arrow through. Built for a phone first.</p></div>
+  <div class="rule"><div class="k">Five minutes</div><p>Every edition also goes out as a five-minute video, cut to the same six cards.</p></div>
+  <div class="rule"><div class="k">No photos</div><p>Nothing is lifted. No stills, no paparazzi shots, nobody&rsquo;s likeness used without asking.</p></div>
+</div>
+
+<div class="promise">
+  <span class="dot"></span>
+  <p><b>The promise.</b> Nothing here is written from memory. Stories are pulled from the trades on the morning of the edition, and if one cannot be sourced by the time the cards are built, it waits or it is dropped. Forecasts are labelled forecasts. Corrections run at the top of the next edition.</p>
 </div>
 
 <footer>

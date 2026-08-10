@@ -1,24 +1,27 @@
 # Comic Gyaan
 
-A daily comic-strip edition of the day's Hindi film news, and the five-minute
+Six things that actually happened in Hindi cinema, every day — as a deck of
+full-screen cards you swipe through in ninety seconds, plus the five-minute
 video script that goes with it.
 
-Six panels a day — releases, box office, casting, streaming — drawn rather than
-listed. **Every panel carries a link to the outlet that reported it**, and
-anything that is a forecast rather than a fact is labelled a projection on the
-panel itself.
+Releases, box office, casting, streaming. **Every card links to the outlet that
+reported it**, and anything that is a forecast rather than a fact is labelled on
+the card itself.
 
 Each edition is one self-contained HTML file. No build step, no dependencies, no
-server, no framework. Open it in a browser and it works, online or off. The only
-network request is a Google Fonts stylesheet, which degrades to Impact and
-Georgia if it fails.
+server, no framework. Open it in a browser and it works. The only network
+request is a Google Fonts stylesheet, which degrades to Impact and a system sans
+if it fails.
+
+Built phone-first: full-height snap-scrolling cards, a progress rail across the
+top, swipe or arrow keys to move. It reads the same on a laptop.
 
 ## What is here
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | the front page: latest edition, archive, and the sourcing promise |
-| `editions/YYYY-MM-DD.html` | one edition, self-contained |
+| `index.html` | the front page: today's edition, the archive, and the sourcing promise |
+| `editions/YYYY-MM-DD.html` | one edition — eight cards, self-contained |
 | `template.html` | the shell to copy for a new edition, with `__TOKENS__` to fill |
 | `scripts/YYYY-MM-DD.md` | the five-minute video script, with timecodes and metadata |
 | `youtube/CHANNEL.md` | channel setup, upload defaults, the daily loop |
@@ -26,8 +29,20 @@ Georgia if it fails.
 | `STYLE.md` | the house style and the editorial rules |
 | `verify.js` | the verifier — run it before every push |
 
-`index.html` is the manifest. The verifier only checks editions that are linked
-from it, which is how you find out you forgot to link one.
+`index.html` is the manifest. The verifier only checks editions linked from it,
+which is how you find out you forgot to link one.
+
+## An edition, structurally
+
+One opening card, **six story cards**, one end card carrying the desk notes. The
+six slots are the same every day: the lead, the money, what releases next, the
+quiet one, the human one, the small screen. That fixed shape is what keeps the
+video at a reliable five minutes.
+
+Card four is the **quiet card** — no colour wash, no watermark numeral, no stat,
+no punchline. It is where a story that touches what actually happened to people
+goes, and it is a slot rather than a judgement call so that it does not get
+skipped on a busy day.
 
 ## Making tomorrow's edition
 
@@ -35,40 +50,43 @@ from it, which is how you find out you forgot to link one.
 cp template.html editions/2026-08-10.html
 ```
 
-Fill in every `__TOKEN__`, draw the six panels, add the edition to `index.html`
-in two places — the "Latest" card and the archive list — then:
+Fill in every `__TOKEN__`, pick each card's two wash colours, add the edition to
+`index.html` in two places — the "Today" card and the archive list — then:
 
 ```bash
 /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc verify.js
 ```
 
-It must print `PASS` before anything gets pushed or recorded.
-
-Then write `scripts/2026-08-10.md` from the finished edition. The verifier fails
-an edition that has no script, on the grounds that a written edition without its
-video is a half-finished day.
+It must print `PASS` before anything gets pushed or recorded. Then write
+`scripts/2026-08-10.md` from the finished deck.
 
 ## What the verifier checks
 
-House style — no emoji, no gradient, no shadow, no `<img>`, no unfilled
-placeholder tokens. Structure — six panels, each with a caption box, a panel
-number, and a source line carrying a real `https` link. The quiet panel has no
-sound effect. Anything mentioning a projection carries the projection tag. Every
-`url(#…)` fill resolves to a definition that exists. Every edition linked from
-the index exists, links back to the index, and has a script file that points at
-it.
+No emoji, no `<img>`, no unfilled placeholder tokens. Exactly one opening card,
+six story cards, one end card, and exactly one quiet card. Every story card has
+a headline, a chip row, a rail label, and a source line carrying a real `https`
+link. Any card that hedges a number — forecast, projection, estimate — carries
+the gold warning chip. The quiet card carries no watermark numeral. Every
+edition linked from the index exists, links back to the index, and has a script
+file that points at it.
+
+It does **not** police gradients, shadows or blurs. The deck is deliberately
+loud. That is the opposite of the sibling `smartrama` quiz repo, which bans all
+three — different project, different audience.
 
 This machine has no `node` and no Homebrew, so the verifier is written for
-macOS's built-in JavaScriptCore. See the sibling `smartrama` repo for the same
-arrangement.
+macOS's built-in JavaScriptCore.
 
 ## The video
 
 `scripts/YYYY-MM-DD.md` is the whole upload: voice-over with timecodes, on-screen
-cues, the shorts cut-down, and the title, thumbnail text, chapters, description
-and tags ready to paste.
+cues cut against the cards, the Shorts cut-down, and the title, thumbnail text,
+chapters, description and tags ready to paste.
 
-The channel itself has to be created and the videos uploaded by you — that part
+The cards are the storyboard — screen-record the deck rather than building a
+second set of graphics. Card one is already vertical, which is the Short.
+
+The channel itself has to be created and the videos uploaded by you; that part
 is not something I can do on your behalf. Setup notes are in
 [`youtube/CHANNEL.md`](youtube/CHANNEL.md).
 
@@ -76,15 +94,14 @@ is not something I can do on your behalf. Setup notes are in
 
 The short version, in full in [`STYLE.md`](STYLE.md):
 
-1. No panel ships without a source link.
+1. No card ships without a source link.
 2. Nothing is written from memory.
-3. A projection is labelled a projection, and never restated as a result.
+3. A forecast is labelled a forecast, and never restated as a result.
 4. Numbers are dated, because box-office totals move.
-5. The quiet panel runs quiet — no sound effect on stories about what happened
-   to real people.
-6. Corrections go at the top of the next edition, in the strip.
+5. The quiet card runs quiet.
+6. Corrections go at the top of the next edition, on the cards.
 
 ## Licence
 
 All rights reserved — see [`LICENSE`](LICENSE). The news itself belongs to the
-outlets that reported it, which is why every panel links to them.
+outlets that reported it, which is why every card links to them.

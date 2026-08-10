@@ -5,226 +5,313 @@
 
   To make tomorrow's edition:
     1. cp template.html editions/YYYY-MM-DD.html
-    2. Replace every __TOKEN__ below. There are no optional ones; verify.js
-       fails the file if a single __ pair survives.
-    3. Drop the art into each <!-- ART n --> slot. Art blocks to start from are
-       in STYLE.md; the fills url(#dotsRed) and url(#dotsBlue) are defined once
-       at the top of this file and are available to every panel.
-    4. Add the edition to index.html — the "Latest" card and the archive list.
-    5. jsc verify.js
+    2. Replace every __TOKEN__. verify.js fails the file if one survives.
+    3. Pick each card's two wash colours in the inline style="--a1:…;--a2:…".
+       Deep and saturated; they sit under a dark overlay. Steal from edition 1.
+    4. Card four is the quiet slot — leave it as class="card quiet", with no
+       ghost numeral, no stat block, no gold. Move it only if the day's quiet
+       story genuinely sits somewhere else.
+    5. Add the edition to index.html — the "Today" card and the archive row.
+    6. jsc verify.js
+    7. Write scripts/YYYY-MM-DD.md from the finished deck.
+
+  The CSS and the script below are identical to the shipped edition. Keep them
+  that way: if you improve one, copy it across, or the template drifts.
 -->
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Comic Gyaan — __DATE_LONG__</title>
-<meta name="description" content="The day in Hindi cinema, drawn in panels. Every panel carries its source.">
+<meta name="description" content="Six things that happened in Hindi cinema today. Swipe through. Every card sourced.">
+<meta name="theme-color" content="#0a0612">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@500;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#efe6d4;
-  --card:#f7f1e4;
-  --ink:#17130f;
-  --red:#b3321a;
-  --blue:#28486d;
-  --mustard:#e6d5a5;
-  --rule:#17130f;
-  --display:'Anton','Haettenschweiler','Arial Narrow',sans-serif;
-  --letter:'Archivo Narrow','Arial Narrow',Arial,sans-serif;
-  --body:'Spectral',Georgia,'Times New Roman',serif;
+  --void:#0a0612;
+  --cream:#fff6e9;
+  --dim:rgba(255,246,233,.62);
+  --hot:#ff2d6f;
+  --gold:#ffc93c;
+  --violet:#9b5cff;
+  --cyan:#22d3ee;
+  --lime:#a3e635;
+  --steel:#7c8ba1;
+  --display:'Bebas Neue','Haettenschweiler',Impact,sans-serif;
+  --ui:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
-.sheet{max-width:1080px;margin:0 auto;padding:28px 20px 64px}
 
-.masthead{border-bottom:4px solid var(--rule);padding-bottom:14px;margin-bottom:6px}
-.masthead h1{font-family:var(--display);font-size:clamp(46px,11vw,104px);line-height:.86;letter-spacing:.01em;margin:0;text-transform:uppercase}
-.masthead h1 .g{color:var(--red)}
-.strap{font-family:var(--letter);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;margin-top:10px}
-.dateline{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:500;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:6px 0;margin:14px 0 26px}
-.dateline span:not(:last-child)::after{content:' /';opacity:.45;margin-left:18px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overscroll-behavior:none}
+body{background:var(--void);color:var(--cream);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.panel{border:3px solid var(--ink);background:var(--card);display:flex;flex-direction:column}
-.panel.lead{grid-column:1 / -1}
+.rail{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;gap:4px;padding:10px 14px calc(10px + env(safe-area-inset-top,0px));background:linear-gradient(to bottom,rgba(10,6,18,.92),rgba(10,6,18,0))}
+.rail button{flex:1;height:3px;border:0;padding:0;cursor:pointer;background:rgba(255,246,233,.22);border-radius:99px;transition:background .25s ease}
+.rail button.on{background:var(--cream)}
 
-.art{position:relative;border-bottom:3px solid var(--ink);background:var(--paper)}
-.art svg{display:block;width:100%;height:auto}
+.brandbar{position:fixed;z-index:40;top:calc(26px + env(safe-area-inset-top,0px));left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;font-family:var(--ui);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);pointer-events:none}
+.brandbar b{color:var(--cream);font-weight:800}
 
-.cap{position:absolute;top:0;left:0;background:var(--mustard);border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);font-family:var(--letter);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:7px 12px 6px;max-width:74%}
-.num{position:absolute;top:0;right:0;background:var(--ink);color:var(--paper);font-family:var(--display);font-size:15px;padding:5px 10px 4px;letter-spacing:.06em}
+.deck{height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.deck::-webkit-scrollbar{display:none}
 
-.balloon{position:absolute;left:16px;bottom:34px;max-width:62%;background:#fffdf7;border:3px solid var(--ink);border-radius:16px;padding:11px 14px 10px;font-family:var(--letter);font-weight:700;text-transform:uppercase;font-size:14px;line-height:1.28;letter-spacing:.02em}
-.balloon::after{content:'';position:absolute;bottom:-19px;left:34px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:19px solid var(--ink)}
-.balloon::before{content:'';position:absolute;bottom:-13px;left:38px;z-index:1;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid #fffdf7}
-.balloon.right{left:auto;right:16px}
-.balloon.right::after{left:auto;right:34px}
-.balloon.right::before{left:auto;right:38px}
+.card{
+  position:relative;
+  /* min-height, not height: a card with a lot in it grows and scrolls rather
+     than clipping its own top off on a short screen. */
+  min-height:100dvh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:96px 22px calc(30px + env(safe-area-inset-bottom,0px));
+  overflow:hidden;
+  isolation:isolate;
+}
+.card::before{content:'';position:absolute;inset:0;z-index:-2;background:radial-gradient(78% 58% at 88% 8%,var(--a2) 0%,transparent 62%),radial-gradient(92% 70% at 6% 96%,var(--a1) 0%,transparent 66%);opacity:.9}
+.card::after{content:'';position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,246,233,.16) 1px,transparent 1.4px);background-size:13px 13px;mask-image:linear-gradient(to top,#000 12%,transparent 78%);-webkit-mask-image:linear-gradient(to top,#000 12%,transparent 78%)}
 
-.sfx{position:absolute;font-family:var(--display);color:var(--red);-webkit-text-stroke:2px var(--ink);text-transform:uppercase;line-height:.8;transform:rotate(-7deg);pointer-events:none}
+.ghost{position:absolute;z-index:-1;top:calc(8px + env(safe-area-inset-top,0px));right:-14px;font-family:var(--display);font-size:min(46vw,300px);line-height:.72;color:rgba(255,246,233,.07);letter-spacing:-.03em;pointer-events:none}
 
-.text{padding:16px 18px 6px}
-.text p{margin:0 0 11px}
-.text .lede{font-size:19px}
-.text .lede::first-letter{font-family:var(--display);font-size:44px;line-height:.8;float:left;margin:5px 8px 0 0;color:var(--red)}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px 6px;border-radius:99px;background:var(--cream);color:var(--void)}
+.chip.ghosted{background:transparent;color:var(--cream);border:1.5px solid rgba(255,246,233,.4)}
+.chip.warn{background:var(--gold);color:#231600}
 
-.cite{margin-top:auto;border-top:1px solid var(--rule);padding:8px 18px 10px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:500}
-.cite a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
-.cite a:hover{color:var(--red)}
-.cite .tag{display:inline-block;border:1px solid var(--ink);padding:1px 5px;margin-right:7px;letter-spacing:.1em}
-.cite .tag.projection{background:var(--mustard)}
+h2.head{font-family:var(--display);font-size:clamp(40px,10.5vw,88px);line-height:.92;letter-spacing:.005em;margin:0 0 16px;text-wrap:balance}
+h2.head em{font-style:normal;color:var(--gold)}
 
-.quiet .sfx{display:none}
+.stat{display:inline-flex;align-items:baseline;gap:10px;align-self:flex-start;margin:0 0 18px;padding:10px 16px 8px;border-radius:14px;background:rgba(10,6,18,.55);border:1.5px solid rgba(255,246,233,.22);backdrop-filter:blur(6px)}
+.stat .big{font-family:var(--display);font-size:clamp(30px,7.5vw,52px);line-height:1}
+.stat .lbl{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
 
-.desk{margin-top:34px;border:3px solid var(--ink);background:var(--card)}
-.desk h2{font-family:var(--display);text-transform:uppercase;font-size:22px;letter-spacing:.04em;margin:0;padding:11px 18px 9px;background:var(--ink);color:var(--paper)}
-.desk .inner{padding:16px 18px 18px}
-.desk ul{margin:0;padding-left:20px}
-.desk li{margin-bottom:9px}
-.desk .head{font-family:var(--letter);text-transform:uppercase;letter-spacing:.09em;font-weight:700;font-size:11px;margin:0 0 8px}
-.desk .head + p{margin-top:0}
+.body{margin:0 0 22px;max-width:58ch;font-size:clamp(15px,4vw,18px);color:rgba(255,246,233,.9)}
+.body b{color:var(--cream);font-weight:600}
+.body + .body{margin-top:-10px}
 
-footer{margin-top:34px;border-top:4px solid var(--rule);padding-top:12px;font-family:var(--letter);text-transform:uppercase;letter-spacing:.1em;font-size:10px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
-footer a{color:var(--ink)}
+.pull{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--gold);font-size:clamp(18px,5.4vw,26px);font-weight:500;font-style:italic;line-height:1.3;max-width:22ch}
 
-@media (max-width:760px){
-  .strip{grid-template-columns:1fr}
-  .balloon{max-width:76%;font-size:13px}
+.src{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;text-decoration:none;padding:9px 15px 8px;border-radius:99px;background:rgba(255,246,233,.1);border:1.5px solid rgba(255,246,233,.24);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.03em}
+.src:hover,.src:focus-visible{background:var(--cream);color:var(--void)}
+.src .dot{width:7px;height:7px;border-radius:99px;background:var(--lime);flex:none}
+.src:hover .dot{background:var(--hot)}
+
+.card.quiet::before{background:radial-gradient(120% 90% at 50% 100%,#141a24 0%,transparent 70%)}
+.card.quiet .ghost{display:none}
+.card.quiet h2.head{font-size:clamp(32px,7.6vw,58px);color:rgba(255,246,233,.94)}
+
+.card.open{justify-content:center;text-align:left}
+.wordmark{font-family:var(--display);font-size:clamp(64px,19vw,180px);line-height:.82;margin:0 0 6px;letter-spacing:.004em}
+.wordmark span{color:var(--hot)}
+.tagline{font-size:clamp(14px,4.2vw,19px);font-weight:500;color:rgba(255,246,233,.85);margin:0 0 26px;max-width:26ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:34px}
+.meta div{min-width:96px}
+.meta .k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.meta .v{font-family:var(--display);font-size:26px;line-height:1}
+
+.tease{list-style:none;margin:0 0 30px;padding:0;max-width:34ch}
+.tease li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid rgba(255,246,233,.16);font-size:14px;font-weight:500}
+.tease li:last-child{border-bottom:1px solid rgba(255,246,233,.16)}
+.tease .n{font-family:var(--display);font-size:17px;color:var(--gold);min-width:20px}
+
+.cue{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.cue .arrow{width:26px;height:26px;border-radius:99px;border:1.5px solid rgba(255,246,233,.35);display:grid;place-items:center;animation:nudge 1.9s ease-in-out infinite}
+.cue svg{width:11px;height:11px}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+.card.end{justify-content:center}
+.end h2{font-family:var(--display);font-size:clamp(38px,10vw,74px);line-height:.94;margin:0 0 18px}
+.notes{border-radius:18px;border:1.5px solid rgba(255,246,233,.2);background:rgba(10,6,18,.5);padding:18px 18px 16px;margin-bottom:24px;max-width:46ch}
+.notes .k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notes p{margin:0 0 12px;font-size:14px;color:rgba(255,246,233,.86)}
+.notes p:last-child{margin-bottom:0}
+.notes b{color:var(--cream);font-weight:600}
+
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;text-decoration:none;padding:14px 22px 12px;border-radius:99px;background:var(--hot);color:var(--cream);font-family:var(--display);font-size:22px;letter-spacing:.03em}
+.cta:hover{background:var(--gold);color:var(--void)}
+.backlink{margin-top:20px;font-size:12px;font-weight:500;color:var(--dim);text-decoration:none;align-self:flex-start}
+.backlink:hover{color:var(--cream)}
+
+@media (min-width:820px){
+  .card{padding:110px 8vw 56px;justify-content:center}
+  .card > *{max-width:760px}
+}
+@media (max-height:720px){
+  .wordmark{font-size:clamp(46px,12vw,92px)}
+  .tagline{margin-bottom:18px}
+  .meta{margin-bottom:22px}
+  .tease li{padding:6px 0;font-size:13px}
+  .tease{margin-bottom:20px}
+  h2.head{font-size:clamp(34px,8vw,64px)}
+  .card{padding-top:78px}
+}
+@media (prefers-reduced-motion:reduce){
+  .deck{scroll-behavior:auto}
+  .cue .arrow{animation:none}
 }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <defs>
-    <pattern id="dotsRed" width="7" height="7" patternUnits="userSpaceOnUse">
-      <circle cx="1.8" cy="1.8" r="1.5" fill="#b3321a"></circle>
-    </pattern>
-    <pattern id="dotsBlue" width="7" height="7" patternUnits="userSpaceOnUse">
-      <circle cx="1.8" cy="1.8" r="1.5" fill="#28486d"></circle>
-    </pattern>
-  </defs>
-</svg>
+<div class="rail" id="rail" role="tablist" aria-label="Cards in this edition"></div>
+<div class="brandbar"><span><b>COMIC GYAAN</b></span><span>__DATE_SHORT__</span></div>
 
-<div class="sheet">
+<main class="deck" id="deck">
 
-<header class="masthead">
-  <h1>Comic <span class="g">Gyaan</span></h1>
-  <p class="strap">The day in Hindi cinema, drawn in panels</p>
-</header>
+  <section class="card open" style="--a1:#5b1049;--a2:#2a1160" data-label="Start">
+    <h1 class="wordmark">COMIC<br><span>GYAAN</span></h1>
+    <p class="tagline">Six things that actually happened in Hindi cinema today.</p>
+    <div class="meta">
+      <div><div class="k">Edition</div><div class="v">No. __EDITION_NO__</div></div>
+      <div><div class="k">Date</div><div class="v">__DATE_SHORT__</div></div>
+      <div><div class="k">Cards</div><div class="v">Six</div></div>
+    </div>
+    <ol class="tease">
+      <li><span class="n">1</span><span>__TEASE_1__</span></li>
+      <li><span class="n">2</span><span>__TEASE_2__</span></li>
+      <li><span class="n">3</span><span>__TEASE_3__</span></li>
+      <li><span class="n">4</span><span>__TEASE_4__</span></li>
+      <li><span class="n">5</span><span>__TEASE_5__</span></li>
+      <li><span class="n">6</span><span>__TEASE_6__</span></li>
+    </ol>
+    <div class="cue">
+      <span class="arrow"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v9M2 6.5 6 10.5 10 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      Swipe to start
+    </div>
+  </section>
 
-<div class="dateline">
-  <span>Edition No. __EDITION_NO__</span>
-  <span>__DATE_LONG__</span>
-  <span>Six panels</span>
-  <span>Every panel carries its source</span>
-</div>
+  <!-- 1 — THE LEAD. Biggest story of the day. -->
+  <section class="card" style="--a1:__WASH_1A__;--a2:__WASH_1B__" data-label="__LABEL_1__">
+    <div class="ghost">01</div>
+    <div class="chiprow"><span class="chip">__CHIP_1__</span></div>
+    <h2 class="head">__HEAD_1__</h2>
+    <div class="stat"><span class="big">__STAT_1__</span><span class="lbl">__STATLBL_1__</span></div>
+    <p class="body">__BODY_1A__</p>
+    <p class="body">__BODY_1B__</p>
+    <a class="src" href="__URL_1__"><span class="dot"></span>__OUTLET_1__</a>
+  </section>
 
-<main class="strip">
+  <!-- 2 — MONEY. Box office, acquisitions, budgets. Date every figure. -->
+  <section class="card" style="--a1:__WASH_2A__;--a2:__WASH_2B__" data-label="__LABEL_2__">
+    <div class="ghost">02</div>
+    <div class="chiprow"><span class="chip">__CHIP_2__</span></div>
+    <h2 class="head">__HEAD_2__</h2>
+    <div class="stat"><span class="big">__STAT_2__</span><span class="lbl">__STATLBL_2__</span></div>
+    <p class="body">__BODY_2A__</p>
+    <p class="body">__BODY_2B__</p>
+    <a class="src" href="__URL_2__"><span class="dot"></span>__OUTLET_2__</a>
+  </section>
 
-  <article class="panel lead">
-    <div class="art">
-      <!-- ART 1 — viewBox "0 0 900 300", the lead is double width -->
-      <div class="cap">Panel one &mdash; __CAP_1__</div>
-      <div class="num">01</div>
-      <div class="balloon">__BALLOON_1__</div>
-    </div>
-    <div class="text">
-      <p class="lede">__LEDE_1__</p>
-      <p>__BODY_1__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_1__ &mdash; <a href="__URL_1__">__LINKTEXT_1__</a></p>
-  </article>
+  <!-- 3 — WHAT RELEASES NEXT. If you quote a forecast, keep the warn chip. -->
+  <section class="card" style="--a1:__WASH_3A__;--a2:__WASH_3B__" data-label="__LABEL_3__">
+    <div class="ghost">03</div>
+    <div class="chiprow"><span class="chip">__CHIP_3__</span><span class="chip warn">Projection, not a result</span></div>
+    <h2 class="head">__HEAD_3__</h2>
+    <div class="stat"><span class="big">__STAT_3__</span><span class="lbl">__STATLBL_3__</span></div>
+    <p class="body">__BODY_3A__</p>
+    <p class="body">__BODY_3B__</p>
+    <a class="src" href="__URL_3__"><span class="dot"></span>__OUTLET_3__</a>
+  </section>
 
-  <article class="panel">
-    <div class="art">
-      <!-- ART 2 — viewBox "0 0 440 300" -->
-      <div class="cap">Panel two &mdash; __CAP_2__</div>
-      <div class="num">02</div>
-      <div class="sfx" style="left:22px;top:52px;font-size:52px">__SFX_2__</div>
-    </div>
-    <div class="text">
-      <p>__BODY_2__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_2__ &mdash; <a href="__URL_2__">__LINKTEXT_2__</a></p>
-  </article>
+  <!-- 4 — THE QUIET ONE. Anything that touches what happened to real people.
+       No wash, no ghost numeral, no stat, no punchline. Leave it plain. -->
+  <section class="card quiet" style="--a1:#141a24;--a2:#141a24" data-label="__LABEL_4__">
+    <div class="chiprow"><span class="chip ghosted">__CHIP_4__</span></div>
+    <h2 class="head">__HEAD_4__</h2>
+    <p class="body">__BODY_4A__</p>
+    <p class="body">__BODY_4B__</p>
+    <a class="src" href="__URL_4__"><span class="dot"></span>__OUTLET_4__</a>
+  </section>
 
-  <article class="panel">
-    <div class="art">
-      <!-- ART 3 — viewBox "0 0 440 300" -->
-      <div class="cap">Panel three &mdash; __CAP_3__</div>
-      <div class="num">03</div>
-      <div class="balloon right">__BALLOON_3__</div>
-    </div>
-    <div class="text">
-      <p>__BODY_3__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_3__ &mdash; <a href="__URL_3__">__LINKTEXT_3__</a></p>
-  </article>
+  <!-- 5 — THE HUMAN ONE. A return, a debut, a career turn. Use the pull quote
+       when the person said it better than you would write it. -->
+  <section class="card" style="--a1:__WASH_5A__;--a2:__WASH_5B__" data-label="__LABEL_5__">
+    <div class="ghost">05</div>
+    <div class="chiprow"><span class="chip">__CHIP_5__</span></div>
+    <h2 class="head">__HEAD_5__</h2>
+    <p class="pull">&ldquo;__PULL_5__&rdquo;</p>
+    <p class="body">__BODY_5__</p>
+    <a class="src" href="__URL_5__"><span class="dot"></span>__OUTLET_5__</a>
+  </section>
 
-  <!-- Panel four is the quiet slot. Keep class="panel quiet" whenever the story
-       touches something that happened to real people: no sfx, no punchline. -->
-  <article class="panel quiet">
-    <div class="art">
-      <!-- ART 4 — viewBox "0 0 440 300" -->
-      <div class="cap">Panel four &mdash; __CAP_4__</div>
-      <div class="num">04</div>
-    </div>
-    <div class="text">
-      <p>__BODY_4__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_4__ &mdash; <a href="__URL_4__">__LINKTEXT_4__</a></p>
-  </article>
+  <!-- 6 — SMALL SCREEN. Streaming, TV, and the industry beyond Hindi. -->
+  <section class="card" style="--a1:__WASH_6A__;--a2:__WASH_6B__" data-label="__LABEL_6__">
+    <div class="ghost">06</div>
+    <div class="chiprow"><span class="chip">__CHIP_6__</span></div>
+    <h2 class="head">__HEAD_6__</h2>
+    <div class="stat"><span class="big">__STAT_6__</span><span class="lbl">__STATLBL_6__</span></div>
+    <p class="body">__BODY_6A__</p>
+    <p class="body">__BODY_6B__</p>
+    <a class="src" href="__URL_6__"><span class="dot"></span>__OUTLET_6__</a>
+  </section>
 
-  <article class="panel">
-    <div class="art">
-      <!-- ART 5 — viewBox "0 0 440 300" -->
-      <div class="cap">Panel five &mdash; __CAP_5__</div>
-      <div class="num">05</div>
-      <div class="balloon">__BALLOON_5__</div>
+  <section class="card end" style="--a1:#4a0f3d;--a2:#1a1160" data-label="Desk notes">
+    <h2>That&rsquo;s edition __EDITION_NO__.</h2>
+    <div class="notes">
+      <div class="k">Before you go</div>
+      <p><b>Every card above links to the outlet that reported it.</b> Nothing here is written from memory, and nothing goes in because it would make a good card.</p>
+      <p><b>__CAVEAT__</b></p>
+      <p>Corrections run at the top of the next edition &mdash; here, not quietly in a description.</p>
     </div>
-    <div class="text">
-      <p>__BODY_5__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_5__ &mdash; <a href="__URL_5__">__LINKTEXT_5__</a></p>
-  </article>
-
-  <article class="panel">
-    <div class="art">
-      <!-- ART 6 — viewBox "0 0 440 300" -->
-      <div class="cap">Panel six &mdash; __CAP_6__</div>
-      <div class="num">06</div>
-    </div>
-    <div class="text">
-      <p>__BODY_6__</p>
-    </div>
-    <p class="cite"><span class="tag">Reported</span> __OUTLET_6__ &mdash; <a href="__URL_6__">__LINKTEXT_6__</a></p>
-  </article>
+    <a class="cta" href="../index.html">All editions</a>
+    <a class="backlink" href="#top" id="restart">Back to the start</a>
+  </section>
 
 </main>
 
-<section class="desk">
-  <h2>Desk notes</h2>
-  <div class="inner">
-    <p class="head">What is confirmed</p>
-    <p>__CONFIRMED__</p>
-    <p class="head">What is not a fact yet</p>
-    <ul>
-      <li>__CAVEAT__</li>
-    </ul>
-    <p class="head">The standing rule</p>
-    <p>No panel ships without a source link. Nothing goes in from memory, and nothing goes in because it would make a good panel. If a story cannot be sourced by the time the edition is drawn, it waits for tomorrow or it is dropped.</p>
-  </div>
-</section>
+<script>
+(function () {
+  var deck  = document.getElementById('deck');
+  var rail  = document.getElementById('rail');
+  var cards = Array.prototype.slice.call(deck.querySelectorAll('.card'));
 
-<footer>
-  <span><a href="../index.html">All editions</a></span>
-  <span>Comic Gyaan &mdash; Edition No. __EDITION_NO__</span>
-  <span>&copy; 2026 Raj Palasamudrum</span>
-</footer>
+  // One rail segment per card, each one a jump target.
+  cards.forEach(function (card, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', card.dataset.label || ('Card ' + (i + 1)));
+    b.addEventListener('click', function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    rail.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(rail.children);
 
-</div>
+  function mark(i) {
+    for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('on', d <= i);
+  }
+  mark(0);
+
+  var current = 0;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        current = cards.indexOf(e.target);
+        mark(current);
+      }
+    });
+  }, { root: deck, threshold: 0.55 });
+  cards.forEach(function (c) { io.observe(c); });
+
+  function go(step) {
+    var next = Math.min(cards.length - 1, Math.max(0, current + step));
+    cards[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest('a, button')) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')                   { e.preventDefault(); go(-1); }
+    if (e.key === 'Home') { e.preventDefault(); cards[0].scrollIntoView({ behavior: 'smooth' }); }
+    if (e.key === 'End')  { e.preventDefault(); cards[cards.length - 1].scrollIntoView({ behavior: 'smooth' }); }
+  });
+
+  document.getElementById('restart').addEventListener('click', function (e) {
+    e.preventDefault();
+    cards[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
 </body>
 </html>

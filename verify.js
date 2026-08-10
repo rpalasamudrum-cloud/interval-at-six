@@ -8,6 +8,10 @@
 // after every hand-edit and before every push. index.html is the manifest: an
 // edition that is not linked from index.html is not checked, which is itself
 // the check that you remembered to link it.
+//
+// What it does NOT police any more: gradients, shadows and blurs. The deck is
+// deliberately loud. What it still polices is everything the editorial standing
+// or the legal position depends on.
 
 var failures = [];
 var checked = [];
@@ -22,19 +26,18 @@ function read(path) {
 // ---------------------------------------------------------------- house style
 
 // Emoji blocks, plus the variation selector that usually rides with them.
+// Badges and chips do the job emoji would do, and do it without looking cheap.
 var EMOJI = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{1F000}-\u{1F0FF}]/u;
 
 function checkHouseStyle(name, html) {
   if (EMOJI.test(html)) fail(name, 'contains an emoji');
-  if (/gradient\s*\(/.test(html)) fail(name, 'contains a CSS gradient');
-  if (/box-shadow|text-shadow|filter\s*:\s*drop-shadow/.test(html)) fail(name, 'contains a shadow');
-  if (/backdrop-filter/.test(html)) fail(name, 'contains a backdrop filter');
 
   var stray = html.match(/__[A-Z0-9_]+__/g);
   if (stray) fail(name, 'unfilled placeholder ' + stray[0]);
 
-  // Photographs are not allowed — every panel is drawn.
-  if (/<img\b/.test(html)) fail(name, 'contains an <img>; panels are drawn, not photographed');
+  // No stills, no paparazzi shots, no likenesses. This one is a legal position,
+  // not a taste one, so it is a hard failure.
+  if (/<img\b/.test(html)) fail(name, 'contains an <img>; no photographs, ever');
 }
 
 // ------------------------------------------------------------------- editions
@@ -42,50 +45,62 @@ function checkHouseStyle(name, html) {
 function checkEdition(name, html) {
   checkHouseStyle(name, html);
 
-  var panels = html.split('<article class="panel');
-  panels.shift();
-
-  if (panels.length !== 6) fail(name, 'has ' + panels.length + ' panels, expected 6');
-
-  for (var i = 0; i < panels.length; i++) {
-    // Stop at the closing tag, or the last panel swallows the desk notes.
-    var p = panels[i];
-    var end = p.indexOf('</article>');
-    if (end !== -1) p = p.slice(0, end);
-    var n = 'panel ' + (i + 1);
-
-    if (p.indexOf('class="cite"') === -1) {
-      fail(name, n + ' has no source line');
-    } else {
-      var cite = p.slice(p.indexOf('class="cite"'));
-      cite = cite.slice(0, cite.indexOf('</p>'));
-      if (!/href="https:\/\//.test(cite)) fail(name, n + ' cites no source URL');
-      if (!/class="tag"/.test(cite)) fail(name, n + ' has no Reported tag');
-    }
-
-    if (p.indexOf('class="cap"') === -1) fail(name, n + ' has no caption box');
-    if (!/class="num"/.test(p)) fail(name, n + ' has no panel number');
-
-    // The quiet-panel rule: a panel marked quiet must not carry a sound effect.
-    if (p.indexOf('quiet"') === 0 || /^ quiet"/.test(p)) {
-      if (/class="sfx"/.test(p)) fail(name, n + ' is marked quiet but carries a sound effect');
-    }
-
-    // Anything described as a projection has to be flagged as one on the panel.
-    if (/projection/i.test(p) && !/class="tag projection"/.test(p)) {
-      fail(name, n + ' talks about a projection without the Projection tag');
-    }
-  }
-
-  if (html.indexOf('class="desk"') === -1) fail(name, 'has no desk notes');
   if (!/<title>Comic Gyaan/.test(html)) fail(name, 'title does not start with Comic Gyaan');
+  if (html.indexOf('id="deck"') === -1) fail(name, 'has no deck');
+  if (html.indexOf('id="rail"') === -1) fail(name, 'has no progress rail');
+  if (html.indexOf('scroll-snap-type') === -1) fail(name, 'deck does not snap');
 
-  // Every id referenced by a fill must be defined somewhere in the document.
-  var refs = html.match(/url\(#([A-Za-z0-9_-]+)\)/g) || [];
-  for (var r = 0; r < refs.length; r++) {
-    var id = refs[r].slice(5, -1);
-    if (html.indexOf('id="' + id + '"') === -1) fail(name, 'fill url(#' + id + ') has no matching definition');
+  var cards = html.split('<section class="card');
+  cards.shift();
+  for (var i = 0; i < cards.length; i++) {
+    var end = cards[i].indexOf('</section>');
+    if (end !== -1) cards[i] = cards[i].slice(0, end);
   }
+
+  var opens = 0, ends = 0, stories = 0, quiets = 0;
+
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var isOpen  = /^ open"/.test(card);
+    var isEnd   = /^ end"/.test(card);
+    var isQuiet = /^ quiet"/.test(card);
+
+    if (isOpen) { opens++; continue; }
+
+    if (isEnd) {
+      ends++;
+      if (card.indexOf('class="notes"') === -1) fail(name, 'the end card has no desk notes');
+      continue;
+    }
+
+    stories++;
+    if (isQuiet) quiets++;
+    var n = 'story card ' + stories;
+
+    // The one rule the whole project rests on.
+    var src = card.match(/class="src" href="(https:\/\/[^"]+)"/);
+    if (!src) fail(name, n + ' has no source link');
+
+    if (card.indexOf('class="chiprow"') === -1) fail(name, n + ' has no chips');
+    if (card.indexOf('class="head"') === -1)    fail(name, n + ' has no headline');
+    if (!/data-label="[^"]+"/.test(card))       fail(name, n + ' has no rail label');
+
+    // Anything hedged as a forecast has to wear the warning chip, so a reader
+    // skimming the card cannot mistake it for a result.
+    if (/forecast|projection|projected|estimate/i.test(card) && card.indexOf('class="chip warn"') === -1) {
+      fail(name, n + ' hedges a number without the warning chip');
+    }
+
+    // The quiet card stays quiet: no watermark numeral shouting behind it.
+    if (isQuiet && card.indexOf('class="ghost"') !== -1) {
+      fail(name, n + ' is the quiet card but carries a ghost numeral');
+    }
+  }
+
+  if (opens !== 1)   fail(name, 'has ' + opens + ' opening cards, expected 1');
+  if (ends !== 1)    fail(name, 'has ' + ends + ' end cards, expected 1');
+  if (stories !== 6) fail(name, 'has ' + stories + ' story cards, expected 6');
+  if (quiets !== 1)  fail(name, 'has ' + quiets + ' quiet cards, expected exactly 1');
 }
 
 // ---------------------------------------------------------------------- index
