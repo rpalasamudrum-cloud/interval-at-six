@@ -271,26 +271,31 @@ body{font-family:var(--ui);color:var(--cream)}
     <div id="slate"><div id="count">3</div></div>
     <div id="flash"></div>
 
+    <!-- The voiceover lives in the page so that a tab capture picks it up as
+         part of the recording, and so the deck can use it as its clock. -->
+    <audio id="vo" src="../audio/2026-08-10.m4a" preload="auto"></audio>
+
   </div>
 </div>
 
 <div id="desk">
   <div class="steps">
-    <b>Recording cut &mdash; 4:34.</b> Click the page once, then press
-    <span class="key">Space</span> to roll. That is the only step that matters.
-    <span class="key">1</span>&ndash;<span class="key">8</span> parks on a single card to check a frame,
-    <span class="key">R</span> restarts, <span class="key">F</span> goes fullscreen &mdash;
-    <b>fullscreen is optional</b>, maximising the window works just as well, and some
-    browsers refuse it outright.
+    <b>Recording cut &mdash; 4:34.</b> Press <b>Render video</b> and the browser records
+    itself. In the share dialog choose <b>this tab</b> and tick <b>share tab audio</b> &mdash;
+    that second part is what puts the voiceover in the file. Then leave it alone for
+    4:34; the finished video lands in Downloads with the sound already on it, so there
+    is nothing to edit and nothing to line up.
     <br>
-    A 3-2-1 slate runs first and its last frame is a white flash &mdash; line your voice-over
-    up to that flash in the edit and everything after it lands on the timecodes.
+    Needs Chrome. In Safari, use <b>Roll silently</b> and capture with QuickTime instead.
     <br>
-    Record with <b>QuickTime &rarr; New Screen Recording</b>, dragging a selection around the
-    black-edged 9:16 frame only. Nothing on this bar is in shot &mdash; it disappears when you roll.
+    <b>Roll silently</b> plays the deck with no audio and no capture &mdash; for checking.
+    <span class="key">1</span>&ndash;<span class="key">8</span> parks on a single card,
+    <span class="key">R</span> restarts, <span class="key">F</span> is fullscreen (optional).
+    Nothing on this bar is in shot; it disappears the moment a roll starts.
   </div>
   <span id="tc">0:00 / 4:34</span>
-  <button id="go">Roll</button>
+  <button id="render">Render video</button>
+  <button id="go" class="ghost">Roll silently</button>
   <button id="full" class="ghost">Fullscreen</button>
   <button id="again" class="ghost">Restart</button>
 </div>
@@ -351,7 +356,8 @@ body{font-family:var(--ui);color:var(--cream)}
   resize();
 
   // ---- transport ----------------------------------------------------------
-  var t0 = null, raf = null, running = false;
+  var t0 = null, raf = null, running = false, withAudio = false;
+  var vo = document.getElementById('vo');
 
   function show(i) {
     cards.forEach(function (c, n) {
@@ -375,8 +381,10 @@ body{font-family:var(--ui);color:var(--cream)}
   }
 
   function frame(now) {
-    var t = (now - t0) / 1000;
-    if (t >= RUNTIME) { stop(); return; }
+    // When the voiceover is playing, it is the clock — the picture cannot then
+    // drift against the sound, whatever the frame rate does under capture.
+    var t = withAudio ? vo.currentTime : (now - t0) / 1000;
+    if (t >= RUNTIME || (withAudio && vo.ended)) { stop(); return; }
 
     var idx = 0;
     for (var i = 0; i < MARKS.length; i++) if (t >= MARKS[i]) idx = i;
@@ -405,12 +413,14 @@ body{font-family:var(--ui);color:var(--cream)}
   function stop() {
     running = false;
     if (raf) cancelAnimationFrame(raf);
+    vo.pause();
     tc.textContent = '4:34 / 4:34 — done';
   }
 
-  function roll() {
+  function roll(playAudio) {
     if (running) return;
     running = true;
+    withAudio = !!playAudio;
     desk.classList.add('hidden');
     resize();
 
@@ -430,6 +440,7 @@ body{font-family:var(--ui);color:var(--cream)}
         flash.style.opacity = '0';
         show(0);
         t0 = performance.now();
+        if (withAudio) { vo.currentTime = 0; vo.play(); }
         raf = requestAnimationFrame(frame);
       }, 90);
     }, 1000);
@@ -437,6 +448,9 @@ body{font-family:var(--ui);color:var(--cream)}
 
   function restart() {
     stop();
+    withAudio = false;
+    vo.pause();
+    vo.currentTime = 0;
     slate.classList.remove('gone');
     count.textContent = '3';
     flash.style.opacity = '0';
@@ -471,7 +485,79 @@ body{font-family:var(--ui);color:var(--cream)}
     } catch (err) { fullscreenUnavailable(); }
   }
 
-  document.getElementById('go').addEventListener('click', roll);
+  // ---- render straight to a video file -----------------------------------
+  //
+  // The browser records itself, so this needs no screen-recording permission
+  // from macOS and no editing afterwards. The voiceover plays inside the tab,
+  // so a tab capture picks up picture and sound together, already in sync —
+  // there is nothing to line up in an editor because they were never apart.
+
+  function download(blob, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+  }
+
+  function render() {
+    if (running) return;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      tc.textContent = 'this browser cannot record — use Chrome';
+      tc.style.color = '#ff2d6f';
+      return;
+    }
+
+    tc.textContent = 'pick THIS TAB, and tick "share tab audio"';
+    tc.style.color = '#ffc93c';
+
+    navigator.mediaDevices.getDisplayMedia({
+      video: { frameRate: 30 },
+      audio: true,
+      preferCurrentTab: true
+    }).then(function (stream) {
+      if (!stream.getAudioTracks().length) {
+        tc.textContent = 'no tab audio — reshare and tick "share tab audio"';
+        tc.style.color = '#ff2d6f';
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        return;
+      }
+
+      var type = MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4'
+               : 'video/webm;codecs=vp9,opus';
+      var rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 8000000 });
+      var chunks = [];
+
+      rec.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+      rec.onstop = function () {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        var ext = type.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
+        download(new Blob(chunks, { type: type }), 'interval-at-six-2026-08-10.' + ext);
+        desk.classList.remove('hidden');
+        resize();
+        tc.textContent = 'saved to Downloads';
+        tc.style.color = '#a3e635';
+      };
+
+      // If the tab share is cancelled from the browser's own bar, stop cleanly.
+      stream.getVideoTracks()[0].addEventListener('ended', function () {
+        if (rec.state !== 'inactive') rec.stop();
+      });
+
+      rec.start();
+      roll(true);
+      var watch = setInterval(function () {
+        if (!running) { clearInterval(watch); setTimeout(function () { rec.stop(); }, 900); }
+      }, 400);
+    }).catch(function () {
+      tc.textContent = 'screen share cancelled';
+      tc.style.color = '#ff2d6f';
+    });
+  }
+
+  document.getElementById('render').addEventListener('click', render);
+  document.getElementById('go').addEventListener('click', function () { roll(false); });
   document.getElementById('again').addEventListener('click', restart);
   document.getElementById('full').addEventListener('click', toggleFull);
   document.addEventListener('fullscreenchange', function () { setTimeout(resize, 60); });
