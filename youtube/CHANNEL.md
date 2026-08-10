@@ -69,8 +69,8 @@ the next day's edition.
    them: visibility Public, category People & Blogs, "altered content" disclosure
    **off** (the cards are original type and colour, no synthetic likenesses),
    comments on with hold-for-review, licence Standard YouTube.
-   The disclosure setting is conditional — see **Voice** below before changing
-   anything about how the audio is made.
+   Your own cloned voice does not change this — see **Cloning your own voice**
+   below. Anyone else's voice does.
 
 ## Voice — settled, do not relitigate
 
@@ -103,26 +103,77 @@ rule as **no photographs**, applied to audio: nobody's likeness, in any medium.
 
 ### What to use instead
 
-1. **Your own voice.** The right answer for a daily. People subscribe to a
-   person, not a format, and a host is the one thing a competitor cannot copy.
-   Four minutes of reading, off a script already timed to 150wpm.
+1. **Your own voice, cloned from your own recordings.** This is the plan. It is
+   your voice and the consent is yours to give, so none of the above applies.
+   Details in the next section.
 2. **A hired voice artist.** Cheap for a five-minute script on Voice123 or
    Fiverr. Get a **written buyout covering commercial YouTube use**, and keep
    the same artist so the channel has one voice.
 3. **A licensed stock synthetic voice** — a generic voice you hold a licence to,
-   never a clone of a real person. Legal, but see the disclosure rule below, and
-   be aware a synthetic read quietly undercuts the trust you are trading on.
+   never a clone of a real person. Legal, but it sounds like nobody, and a
+   channel whose pitch is trust does better sounding like someone.
 
-### The disclosure rule
+## Cloning your own voice
 
-The upload default in step 5 sets YouTube's **altered content disclosure to
-off**, and that is correct only while the voice is human and the cards are the
-original type and colour they are today.
+Reading four minutes a day, every day, is the thing most likely to kill this
+channel by week six. Cloning your own voice is the fix, and it is a different
+question entirely from the section above — that one is about using a voice that
+is not yours.
 
-**If you ever ship a synthetic voice, that disclosure goes on.** Not disclosing
-is a policy violation on top of whatever else, and it is the kind that gets
-found. If the answer to "is any of this generated" stops being a flat no, the
-toggle changes the same day.
+### Disclosure
+
+YouTube draws the line at **whose** voice it is. Cloning your own voice for
+voiceover is listed as **not** requiring the altered-content disclosure;
+cloning someone else's is. So the upload default stays **off**.
+
+Confirm this on YouTube's own policy page before the first upload rather than
+taking it from here — it was read off secondary sources, and this is a policy
+that has been moving. If it has changed, turn the disclosure on and move on; it
+is a small label, not a penalty.
+
+### Getting a clone that is worth using
+
+ElevenLabs is the obvious tool. It offers two tiers and the difference matters:
+
+- **Instant cloning** wants one to three minutes of audio. Usable tomorrow, and
+  it sounds it — flat, and it drifts on long paragraphs.
+- **Professional cloning** wants around thirty minutes. Materially better, and
+  for a daily where the same voice shows up every day, worth waiting for.
+
+**So read the first six editions yourself.** Six scripts at five minutes each is
+almost exactly the thirty minutes a professional clone wants — and it is thirty
+minutes of you reading *this show*, at the right pace, saying these kinds of
+names. That is far better training data than thirty minutes of anything else,
+and it means the reading you do in week one is not wasted effort, it is the
+thing that buys you the clone in week two.
+
+Recording quality: consistency beats equipment. Same mic, same room, same
+distance from it, every time. A phone in a small room with soft furniture beats
+a good mic in a kitchen.
+
+### Keep two things human, always
+
+Cloning the whole script is a mistake even once the clone is good.
+
+- **The cold open (0:00–0:18).** The first eight seconds are the entire
+  retention game and a synthetic read is audibly flat exactly there.
+- **The quiet card (3:05–3:50).** A machine reading the Partition survivors
+  card is precisely the wrong instrument. This is the same rule as the card
+  having no colour wash and no sound effect.
+
+That is about a minute of real reading a day against four minutes generated —
+which is the whole saving, without giving up the two places delivery matters.
+
+### The hidden cost: proper nouns
+
+Text-to-speech falls over on exactly the words this show is made of. *Batwara*,
+*Bayangi: Palaychi Nahi, Talaychi*, *Jugal Hansraj*, *Namit Malhotra* — expect
+to check every name and film title in every script and hand-correct with
+phonetic spelling. Keep a running pronunciation list as you go; the same names
+recur, and after a month the list does most of the work.
+
+Getting a name wrong on a Hindi film channel is not a small error to the
+audience. Budget the ten minutes.
 
 ### What stays fine
 
