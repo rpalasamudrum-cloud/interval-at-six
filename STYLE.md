@@ -89,7 +89,9 @@ The verifier fails the build on these, so they are not opinions:
 
 - **No `<img>`. Ever.** No stills, no posters, no paparazzi shots, nobody's
   likeness. This is a legal position, not a taste one. Every visual is type,
-  colour and CSS.
+  colour and CSS. The same rule applies to the video's audio — no cloned or
+  synthesised celebrity voice, ever; see `youtube/CHANNEL.md`. Quoting someone's
+  **words**, with attribution and a source link, is the thing that is allowed.
 - **No emoji.** The chips and badges do that job and do it without looking
   cheap.
 - **Every story card carries a `.src` link** to the outlet that reported it.

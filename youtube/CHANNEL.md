@@ -69,6 +69,66 @@ the next day's edition.
    them: visibility Public, category People & Blogs, "altered content" disclosure
    **off** (the cards are original type and colour, no synthetic likenesses),
    comments on with hold-for-review, licence Standard YouTube.
+   The disclosure setting is conditional — see **Voice** below before changing
+   anything about how the audio is made.
+
+## Voice — settled, do not relitigate
+
+**No celebrity voice. Not cloned, not synthesised, not "just for the intro".**
+This was decided on 9 August 2026 and the reasons do not expire.
+
+### The legal position
+
+Delhi High Court has been granting *ex parte* injunctions covering actors'
+voices against AI cloning — Anil Kapoor (2023), Aishwarya Rai Bachchan (2025),
+Allu Arjun and Ravi Kishan (2026). In the Ravi Kishan matter the court directed
+**YouTube specifically** to take down cloned-voice content. *Ex parte* means the
+order arrives before you have been heard.
+
+A Hindi film news channel using a Hindi film star's voice is maximally visible
+to exactly the people and the law firms who bring these. This is not a grey
+area, and it is not one of those risks that is small because the channel is
+small — the takedown is cheap for them to obtain.
+
+### The commercial position, which matters more
+
+The only thing this channel has is that it does not make things up. Every card
+sourced, forecasts labelled as forecasts, corrections at the top of the next
+edition. That is the whole differentiator against Filmygyan and the hundred
+others.
+
+A synthesised star voice makes it a deepfake channel from video one, and no
+amount of careful sourcing underneath will matter after that. It is the same
+rule as **no photographs**, applied to audio: nobody's likeness, in any medium.
+
+### What to use instead
+
+1. **Your own voice.** The right answer for a daily. People subscribe to a
+   person, not a format, and a host is the one thing a competitor cannot copy.
+   Four minutes of reading, off a script already timed to 150wpm.
+2. **A hired voice artist.** Cheap for a five-minute script on Voice123 or
+   Fiverr. Get a **written buyout covering commercial YouTube use**, and keep
+   the same artist so the channel has one voice.
+3. **A licensed stock synthetic voice** — a generic voice you hold a licence to,
+   never a clone of a real person. Legal, but see the disclosure rule below, and
+   be aware a synthetic read quietly undercuts the trust you are trading on.
+
+### The disclosure rule
+
+The upload default in step 5 sets YouTube's **altered content disclosure to
+off**, and that is correct only while the voice is human and the cards are the
+original type and colour they are today.
+
+**If you ever ship a synthetic voice, that disclosure goes on.** Not disclosing
+is a policy violation on top of whatever else, and it is the kind that gets
+found. If the answer to "is any of this generated" stops being a flat no, the
+toggle changes the same day.
+
+### What stays fine
+
+**Quoting.** A celebrity's words, in text, with attribution and a source link —
+card five of edition one does exactly this with Jugal Hansraj, and that is the
+model. Words are quotable. Voices and faces are not.
 
 ## Recording the video
 
